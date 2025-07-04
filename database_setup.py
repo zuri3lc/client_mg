@@ -9,7 +9,7 @@ DB_PASSWORD = "RettkeStysi@k208"
 DB_HOST = "192.168.1.113"
 DB_PORT = "5433"
 
-#-- CADENA DE CONEXION --
+#-- CADENA DE CONEXION (esta linea conecta a la base de datos) --
 conn_string = f"dbname={DB_NAME} user={DB_USER} password={DB_PASSWORD} host={DB_HOST} port={DB_PORT}"
 
 #--CREAMOS UNA FUNCION PARA CREAR LA BASE DE DATOS--
@@ -22,10 +22,10 @@ def crear_tabla_clientes():
     try:
         #codigo de conexion a la DB
         print(f"INTENTANDO CONECTAR A LA DB '{DB_NAME}' EN {DB_HOST}:{DB_PORT}...")
-        conn = psycopg.connect(conn_string)
+        conn = psycopg.connect(conn_string) #esto hace que el objeto conn representa la conexion a la base de datos
         print(f"CONEXION EXITOSA A {DB_NAME} PostgreSQL")
 
-        cur = conn.cursor()  
+        cur = conn.cursor() #este actua como un cursor 'literal' es el que envia las sentencias sql y recibe los resultados  
 
         create_table_sql = """
         CREATE TABLE IF NOT EXISTS clientes(
@@ -40,7 +40,7 @@ def crear_tabla_clientes():
             estado_cliente VARCHAR(50) DEFAULT 'regular',
             usuario_sistema_id INTEGER NOT NULL
         );
-        """
+        """ #esta es la 'sentencia' le decimos que columnas queremos crear y con que parametros
         print("CREANDO TABLA 'CLIENTES'...")
         cur.execute(create_table_sql)
         conn.commit()
