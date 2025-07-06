@@ -87,6 +87,8 @@ def crud_test():
         obtain_clients(ID_2_PRUEBA)
     else:
         print("NO SE PUEDE INICIALIZAR LA DB, NO SE REALIZARON CAMBIOS")
+#  /////--------aqui termina la funcion de prueba---------////////
 
 if __name__ == "__main__":
     crud_test()
+    # ////----con esta linea llamamos a la funcion que creamos----////
