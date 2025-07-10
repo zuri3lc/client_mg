@@ -25,7 +25,7 @@ def db_conection():
     except psycopg.Error as e: # 'atrapamos' los errores y los guardamos en una variable llamada e
         print(f"ERROR AL CONECTAR A LA DB: {e}")
         return None #terminamos la conexión nueva
-    
+
 #---------------/////////////////EMPIEZA DEFINICION DE FUNCIONES///////////------------------
 
 #--CREAMOS UNA FUNCION PARA CREAR LA BASE DE DATOS--
@@ -45,8 +45,8 @@ def crear_tabla_clientes():
         CREATE TABLE IF NOT EXISTS clientes(
             id SERIAL PRIMARY KEY,
             nombre VARCHAR(255) NOT NULL,
-            ubicacion_aproximada TEXT,
             telefono VARCHAR(50),
+            ubicacion_aproximada TEXT,
             foto_domicilio VARCHAR(255),
             comentario TEXT,
             fecha_adquisicion DATE,
@@ -79,7 +79,8 @@ def crear_tabla_clientes():
 #####----------------------//////FUNCIONES/////-------------------######
 
 #---------////////  funcion para agregar clientes a la DB   /////////--------
-def agregar_cliente(nombre, ubicacion, telefono, foto_domicilio, comentario, usuario_sistema_id):
+def agregar_cliente(nombre, telefono, ubicacion, foto_domicilio, comentario, usuario_sistema_id
+    ):
     """
     Agrega un nuevo cliente a la DB, sin duplicados por id
     """
@@ -89,12 +90,18 @@ def agregar_cliente(nombre, ubicacion, telefono, foto_domicilio, comentario, usu
     
     cur = None
     try:
+        user = None
+        if usuario_sistema_id == 1:
+            user = "Zuriel"
+        elif usuario_sistema_id == 2:
+            user = "Sergio"
+        
         cur = conn.cursor()
         # 'sentencia' para hacer el insert
         insert_sql = """
         INSERT INTO clientes (nombre,
-        ubicacion_aproximada,
         telefono,
+        ubicacion_aproximada,
         foto_domicilio,
         comentario,
         fecha_adquisicion,
@@ -103,14 +110,14 @@ def agregar_cliente(nombre, ubicacion, telefono, foto_domicilio, comentario, usu
         RETURNING id; -- OBTENEMOS EL id DEL CLIENTE INSERTADO
         """
         # con date.today() añadimos la fecha de adquisicion por defecto
-        cur.execute(insert_sql, (nombre, ubicacion, telefono, foto_domicilio, comentario, date.today(), usuario_sistema_id)) #aqui le pedimos al cursor que ejecute la sentencia sql, con los valores que le indicamos
+        cur.execute(insert_sql, (nombre, telefono, ubicacion, foto_domicilio, comentario, date.today(), usuario_sistema_id)) #aqui le pedimos al cursor que ejecute la sentencia sql, con los valores que le indicamos
         cliente_id = cur.fetchone()[0] # type: ignore
         conn.commit()
         print(f'Cliente "{nombre}" ah sido agregado con exito, id: {cliente_id}')
         return cliente_id # devuelve el id del nuevo cliente
     #----////CON ESTE BLOQUE CAPTURAMOS EL ERROR DE Unique.Violaton/////-----
     except UniqueViolation as e: # capturamos el error especifico de unicidad
-        print(f"ERROR: El cliente '{nombre}' para el Usuario '{usuario_sistema_id}' ya existe, no se agrego.\nDetalle: \n {e}")
+        print(f"ERROR: El cliente '{nombre}' para el Usuario '{user}' ya existe, no se agrego.\nDetalle: \n {e}") # type: ignore
         if conn:
             conn.rollback() #el rollback es obligatorio para regresar la conexion a su estado original
         return False
@@ -139,6 +146,11 @@ def obtain_clients(usuario_sistema_id):
     cur = None
     clientes = []
     try:
+        user = None
+        if usuario_sistema_id == 1:
+            user = "Zuriel"
+        elif usuario_sistema_id == 2:
+            user = "Sergio"
         cur = conn.cursor()
         # seleccionamos todas las columnas (*) y filtramos por usuario del sistema
         select_sql = "SELECT * FROM clientes WHERE usuario_sistema_id = %s ORDER BY ID;" #creamos una variable con la sentencia de busqueda
@@ -146,7 +158,7 @@ def obtain_clients(usuario_sistema_id):
 
         #obtenemos los nombres de las columnas para mejor legibilidad
         column_names = [desc[0] for desc in cur.description] # type: ignore
-        print(f"Clientes del usuario con el ID: {usuario_sistema_id}")
+        print(f"\nObteniendo clientes del usuario {user}\n")
         print("|".join(column_names))
         print("-" * (len("|".join(column_names))))
 
@@ -170,6 +182,8 @@ def obtain_clients(usuario_sistema_id):
 
 #####------------------////// FUNCION PARA ACTUALIZAR UNA FILA/////----------------------
 def client_update(cliente_id, usuario_sistema_id, **kwargs):
+    
+    
     """
     ACTUALIZA LOS DATOS DE UN CLIENTE ESPECIFICO, FILTRADO POR SU ID Y EL ID DEL PROPIETARIO DEL CLIENTE
     utiliza **kwargs para recibir de forma flexible los campos
@@ -192,6 +206,11 @@ def client_update(cliente_id, usuario_sistema_id, **kwargs):
     
     cur = None
     try:
+        user = None
+        if usuario_sistema_id == 1:
+            user = "Zuriel"
+        elif usuario_sistema_id == 2:
+            user = "Sergio"
         cur = conn.cursor()
         #construimos dinamicamente la parte SET de la consulta SQL
         #set_clauses, sera una lista de cadenas ej: "telefono = %s", "comentario = %s" etc
@@ -226,11 +245,11 @@ def client_update(cliente_id, usuario_sistema_id, **kwargs):
         #cur.rowcount para obtener las filas afectadas
         if cur.rowcount > 0:
             conn.commit() #guardamos
-            print(f"Cliente con id {cliente_id} (usuario {usuario_sistema_id}) actualizado")
+            print(f"Cliente con id {cliente_id} (usuario {user}) actualizado")
             return True
         else:
             conn.rollback() #si no funciona, deshacemos
-            print(f"Cliente con id {cliente_id} (usuario {usuario_sistema_id}) no se encontro o no se realizaron cambios")
+            print(f"Cliente con id {cliente_id} (usuario {user}) no se encontro o no se realizaron cambios")
             return False
     except UniqueViolation as e:
         #capturamos si se intenta crear un duplicado nombre/usuario_sistema_id
@@ -248,7 +267,37 @@ def client_update(cliente_id, usuario_sistema_id, **kwargs):
             cur.close()
         if conn:
             conn.close()
-#----------------///////// Finalizamos la funcion de actualizacion ///////----------------------
+#----------------///////// FUNCION PARA LISTAR UN SOLO CLIENTE ///////----------------------
+def list_client(cliente_id, usuario_sistema_id):
+    conn = db_conection()
+    if conn is None:
+        return [] #Devuelve una lista vacia si hay algun problema con la conexion
+    
+    cur = None
+    try:
+        user = None
+        if usuario_sistema_id == 1:
+            user = "Zuriel"
+        elif usuario_sistema_id == 2:
+            user = "Sergio"
+        cur = conn.cursor()
+        
+        #seleccionamos la columna y la fila
+        select_sql = "SELECT * FROM clientes WHERE id = %s AND usuario_sistema_id = %s;"
+        cur.execute(select_sql, (cliente_id, usuario_sistema_id))
+
+        encontrado = cur.fetchone()
+        if encontrado:
+            print(f"//--ID: {encontrado[0]}, Nombre: {encontrado[1]}, Telefono: {encontrado[2]}, Saldo: ${encontrado[7]}--//\n")
+        else:
+            print("No se encontraros datos para ese ID")
+    except (Exception, psycopg.Error) as e:
+        print(f"ERROR, no se puede conectar ni consultar con la DB\nDetalles: {e}")
+    finally:
+        if conn:
+            conn.close()
+        if cur:
+            cur.close()
 
 #----------------///////// FUNCION PARA ELIMINAR CLIENTES ///////----------------------
 
@@ -270,6 +319,11 @@ def eliminar_cliente(cliente_id, usuario_sistema_id):
     
     cur = None
     try:
+        user = None
+        if usuario_sistema_id == 1:
+            user = "Zuriel"
+        elif usuario_sistema_id == 2:
+            user = "Sergio"
         cur = conn.cursor()
         #armamos la sentencia añadiendo ambos IDs a la clausula para asegurar que solo el propietario pueda eliminar
         delete_sql = "DELETE FROM clientes WHERE id = %s AND usuario_sistema_id = %s;"
@@ -279,11 +333,11 @@ def eliminar_cliente(cliente_id, usuario_sistema_id):
         #si es > 0 significa que al menos una fila fue eliminada
         if cur.rowcount > 0:
             conn.commit() #solo guardamos si rowcount nos confirma que se elemino alguna fila
-            print(f"Cliente con ID: {cliente_id} (Usuario: {usuario_sistema_id}) eliminado ")
+            print(f"Cliente con ID: {cliente_id} (Usuario: {user}) eliminado ")
             return True
         else:
             conn.rollback() #si el rowcount es 0, el cliente no se encontro o no existe y deshacemos
-            print(f"---ERROR---\nCliente con ID {cliente_id} (Usuario {usuario_sistema_id}) no encontrado")
+            print(f"---ERROR---\nCliente con ID {cliente_id} (Usuario {user}) no encontrado")
             return False
     except ForeignKeyViolation as e:
         #capturamos el error si el cliente esta en otra tabla
@@ -302,5 +356,61 @@ def eliminar_cliente(cliente_id, usuario_sistema_id):
         if conn:
             conn.close()
 
+#----------------///////// FUNCION PARA BUSQUEDA DE CLIENTES ///////----------------------
+def client_search(nombre_buscado, usuario_sistema_id):
 
-#####-------////// FIN FUNCIONES/////--------######
+    # Bucle principal para permitir múltiples búsquedas o salir
+    while True: # Bucle para repetir la búsqueda si no hay resultados
+        while True:
+            nombre_buscado_limpio = nombre_buscado.strip()
+            if not nombre_buscado_limpio:
+                print("-ERROR- El nombre a buscar no puede estar vacio")
+                nombre_buscado = input("Ingrese el nombre a buscar: ")
+            else:
+                break
+
+        conn = db_conection()
+        if conn is None:
+            return False
+        
+        cur = None
+
+        # Bloque try-except para manejar errores durante la ejecución de la consulta
+        try:
+            cur = conn.cursor()
+            sql_search = """
+                SELECT id, --0
+                nombre, --1
+                telefono, --2
+                ubicacion_aproximada, --3
+                foto_domicilio, --4
+                comentario, --5
+                fecha_adquisicion, --6
+                saldo_actual, --7
+                estado_cliente, --8
+                usuario_sistema_id --9
+                FROM clientes
+                WHERE TRIM(nombre) ILIKE TRIM(%s) AND usuario_sistema_id = (%s);
+                """
+            patron_busqueda = f"{nombre_buscado.strip()}%"
+            cur.execute(sql_search, (patron_busqueda, usuario_sistema_id))
+            filas = cur.fetchall() #con fetchall se listan todas las filas encontradas y damos paso a la logica para que tenga que haber un nombre
+
+            if filas: # Si se encontraron resultados
+                print(f"\nResultados para '{nombre_buscado}' \n")
+                for fila in filas:
+                    print(f"ID: {fila[0]}, Nombre: {fila[1]}, Telefono: {fila[2]}, Ubicacion: {fila[3]}, Comentario: {fila[5]}, Saldo: ${fila[7]}.")
+                break # Salir del bucle si se encontraron resultados
+            else: # Si no se encontraron resultados, se le da la opción al usuario de intentar de nuevo o salir
+                print(f"No se encontraron resultados para '{nombre_buscado}'. Intente de nuevo.")
+                nombre_buscado = input("Ingrese el nombre a buscar: ")
+            
+            cur.close() # Cerrar el cursor después de cada ejecución
+        except (Exception, psycopg.Error) as e:
+            print(f"ERROR, no se puede conectar ni consultar con la DB\nDetalles: {e}")
+            break # Salir del bucle en caso de error de DB
+        finally:
+            if conn:
+                conn.close()
+            if cur:
+                cur.close()
