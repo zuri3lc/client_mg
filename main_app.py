@@ -32,6 +32,35 @@ def menu():
     print("7. Salir")
     print("-------------------------------\n")
 
+#////---- Funcion principal de la CLI ----////
+def main_cli():
+    #creamos la tabla siempre al inciar
+    if not crear_tabla_clientes():
+        print("\n-/- ERROR -/-\n-/-NO SE PUDO INICIALIZAR LA BASE DE DATOS-/-/\n-/-/-SALIENDO-/-/\n")
+        return
+    
+    while True:
+        menu()
+        opcion = input("\nIngrese una opcion: 1 - 7\n").strip()
+        
+        if opcion == '1':
+            new_client()
+        elif opcion == '2':
+            busqueda()
+        elif opcion == '3':
+            manejo_actualizacion()
+        elif opcion == '4':
+            ver_clientes()
+        elif opcion == '5':
+            manejo_delete()
+        elif opcion == '6':
+            manejo_saldo()
+        elif opcion == '7':
+            print("\nSALIENDO DEL PROGRAMA...\n")
+            break
+        else:
+            print("--OPCION NO VALIDA--\n--NGRESE UN NUMERO DEL 1 AL 6--\n")
+
 #funcion para obtener un id de cliente valido
 def obtener_client_id():
     while True:
@@ -44,6 +73,17 @@ def obtener_client_id():
         except ValueError: #atrapamos el error si no es un numero y reinciamos el bucle
             print("Entrada invalida. Por favor, ingrese un numero entero para el ID.\n")
     return client_id
+
+#-------- VALIDAR QUE EL CLIENTE EXISTA  O LE PERTENEZCA AL USUARIO ------
+def validar_cliente():
+    while True:
+        client_id = obtener_client_id()
+        cliente_existente = list_client(client_id, USER_ID)
+        if cliente_existente:
+            break #si el cliente existe salimos del bucle
+        else:
+            print("--ERROR--\n--El cliente no existe o no pertenece a tu usuario--\n--Intenta de Nuevo--\n")
+    return client_id #fuera del bucle retornamos el id para usarlo en otras funciones
 
 #////---- FUNCION PARA SOLICITAR DATOS ----////
 def info_data(): #de esta variable obtenemos los datos para añadir clientes o modificarlos
@@ -117,17 +157,8 @@ def manejo_actualizacion():
     """Manejo de la logica para modificar clientes"""
     print("\n---ACTUALIZANDO DATOS DE CLIENTE---\n")
     busqueda() #mostramos los clientes para que el usuario sepa que ID elegir
-    client_id = obtener_client_id()
-    # while True:
-    #     try:
-    #         client_id = int(input("\nIngrese el ID del cliente a actualizar: \n")) #pedimos el ID validando que sea un numero
-    #         if client_id <= 0: #validamos que mayor a cero
-    #             print("\nEl ID no puede ser negativo o cero. Intente de nuevo.\n")
-    #         else:
-    #             break #salimos del bucle si el ID es valido
-    #     except ValueError: #atrapamos el error si no es un numero y reinciamos el bucle
-    #         print("Entrada invalida. Por favor, ingrese un numero entero para el ID.\n")
-    
+    client_id = validar_cliente()
+
     print("\nINGRESE LOS NUEVOS VALORES PARA LOS CAMPOS A ACTUALIZAR (DEJE EN BLANCO PARA NO ACTUALIZAR, ESCRIBA 'NULL' PARA BORRAR VALOR ACTUAL)\n")
     updates = {} #creamos un diccionario vacio para almacenar los valores
     
@@ -177,19 +208,20 @@ def manejo_actualizacion():
         return
     
     client_update(client_id, USER_ID, **updates)
+    list_client(client_id, USER_ID)
 
 #////---- Funcion para actualizar saldo del cliente ----////
 def manejo_saldo():
     """Manejo de la logica para modifica saldo del cliente"""
     print("\n---ACTUALIZANDO SALDO DE CLIENTE---\n")
     busqueda()
-    client_id = obtener_client_id()
-    print(f"Mostrando saldo actual")
-    list_client(client_id, USER_ID)
+    client_id = validar_cliente()
+    print(f"SALDO ACTUAL")
+    # list_client(client_id, USER_ID)
 
     #solicitamos el monto a restar o sumar y toca validarlo
     while True:
-        monto_str = input("Ingrese el monto\npara añadir saldo solo escriba el monto seguido de 2 decimales\nEj: 00.00\npara restar al saldo escriba el signo '-' seguido del monto\nEj: -00.00\n\n")
+        monto_str = input("\nIngrese el monto\npara añadir saldo solo escriba el monto seguido de 2 decimales\nEj: 00.00\npara restar al saldo escriba el signo '-' seguido del monto\nEj: -00.00\n\n")
         try:
             monto = Decimal(monto_str) #convertimos a decimal
             break
@@ -209,16 +241,7 @@ def manejo_delete():
     """Manejo de la logica para eliminar clientes"""
     print("\n---ELIMINANDO CLIENTE---\n")
     busqueda() #mostramos los clientes para que el usuario sepa que ID elegir
-    client_id =obtener_client_id()
-    # while True:
-    #     try:
-    #         client_id = int(input("\nIngrese el ID del cliente a eliminar: \n")) #pedimos el ID validando que sea un numero
-    #         if client_id <= 0: #validamos que mayor a cero
-    #             print("\nEl ID no puede ser negativo o cero. Intente de nuevo.\n")
-    #         else:
-    #             break #salimos del bucle si el ID es valido
-    #     except ValueError: #atrapamos el error si no es un numero y reinciamos el bucle
-    #         print("Entrada invalida. Por favor, ingrese un numero entero para el ID.\n")
+    client_id = validar_cliente()
 
     #confirmamos si el cliente es correcto
     list_client(client_id, USER_ID)
@@ -228,39 +251,11 @@ def manejo_delete():
             print("Omitiendo eliminacion -- Operacion cancelada\n---   NO SE ELIMINARON DATOS  ---")
             break
         elif confirmacion:
-            print("SE ELIMINO EL CLIENTE")
+            print("SE ELIMINO EL CLIENTE CON ID: {client_id}")
             list_client(client_id, USER_ID)
             eliminar_cliente(client_id, USER_ID)
             break
 
-#////---- Funcion principal de la CLI ----////
-def main_cli():
-    #creamos la tabla siempre al inciar
-    if not crear_tabla_clientes():
-        print("\n-/- ERROR -/-\n-/-NO SE PUDO INICIALIZAR LA BASE DE DATOS-/-/\n-/-/-SALIENDO-/-/\n")
-        return
-    
-    while True:
-        menu()
-        opcion = input("\nIngrese una opcion: 1 - 6\n").strip()
-        
-        if opcion == '1':
-            new_client()
-        elif opcion == '2':
-            busqueda()
-        elif opcion == '3':
-            manejo_actualizacion()
-        elif opcion == '4':
-            ver_clientes()
-        elif opcion == '5':
-            manejo_delete()
-        elif opcion == '6':
-            manejo_saldo()
-        elif opcion == '7':
-            print("\nSALIENDO DEL PROGRAMA...\n")
-            break
-        else:
-            print("--OPCION NO VALIDA--\n--NGRESE UN NUMERO DEL 1 AL 6--\n")
 
 
 

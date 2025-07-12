@@ -3,6 +3,7 @@ import psycopg #importamos la libreria para 'hablar' con la DB
 from datetime import date #esto es para la fecha de adquisicion
 from psycopg.errors import UniqueViolation, ForeignKeyViolation # importamos el error especifico
 from decimal import Decimal #importamos decimal para uso con saldos
+import logging
 
 
 #-------configuracion de la conexion a PostgreSQL----------
@@ -16,6 +17,20 @@ DB_PORT = "5433"
 #-- CADENA DE CONEXION (esta linea conecta a la base de datos) --
 conn_string = f"dbname={DB_NAME} user={DB_USER} password={DB_PASSWORD} host={DB_HOST} port={DB_PORT}"
 
+#---------------/////////////////CONFIGURACION LOGGER///////////------------------
+logging.basicConfig(
+    level=logging.INFO, #definimos la severidad del log
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', #define el formato del log
+    handlers=[
+        logging.FileHandler("app_log.log"), #guarda los logs en el archivo app_log.log
+        #logging.StreamHandler() #imprime los logs en la consola
+    ]
+)
+logger = logging.getLogger(__name__) #creamos un logger para este modulo
+
+#---------------/////////////////EMPIEZA DEFINICION DE FUNCIONES///////////------------------
+#####----------------------//////FUNCIONES/////-------------------######
+
 #creamos una funcion para establecer y devolver una conexion nueva a la DB
 def db_conection():
     """
@@ -23,13 +38,11 @@ def db_conection():
     """
     try:
         conn = psycopg.connect(conn_string) #nos conectamos a la DB
+        logger.info("Conexion a la DB establecida con exito")
         return conn
     except psycopg.Error as e: # 'atrapamos' los errores y los guardamos en una variable llamada e
-        print(f"ERROR AL CONECTAR A LA DB: {e}")
+        logger.critical(f"ERROR AL CONECTAR A LA DB: {e}")
         return None #terminamos la conexión nueva
-
-#---------------/////////////////EMPIEZA DEFINICION DE FUNCIONES///////////------------------
-#####----------------------//////FUNCIONES/////-------------------######
 
 #funcion para definir el nombre del usuario del sistema actual
 def sys_usr(usuario_sistema_id):
@@ -69,14 +82,14 @@ def crear_tabla_clientes():
         );
         """ #esta es la 'sentencia' le decimos que columnas queremos crear y con que parametros
             #añadimos la restriccion al final de la sentencia
-        print("CREANDO TABLA 'CLIENTES'...")
+        logger.info("INTENTANDO CREAR TABLA 'CLIENTES'...")
         cur.execute(create_table_sql) #le indicamos al 'cursor' que ejecute la sentencia create_table_sql
         conn.commit() #hacemos 'commit' o guardamos los cambios de forma permanente
-        print("TABLA 'CLIENTES' CREADA O YA EXISTENTE...")
+        logger.info("TABLA 'CLIENTES' CREADA O YA EXISTENTE...")
         return True #indicamos que fue exitoso
 
     except psycopg.Error as e:
-        print(f"/// ERROR AL CONECTAR O CREAR TABLA: {e} ///")
+        logger.error(f"/// ERROR AL CONECTAR O CREAR TABLA: {e} ///")
         if conn:
             conn.rollback()
         return False
@@ -86,7 +99,7 @@ def crear_tabla_clientes():
             cur.close()
         if conn:
             conn.close()
-            print("\n/// CONEXION A LA BASE DE DATOS CERRADA ///")
+            logger.info("/// CONEXION A LA BASE DE DATOS CERRADA ///")
 
 #---------////////  funcion para agregar clientes a la DB   /////////--------
 def agregar_cliente(nombre, telefono, ubicacion, foto_domicilio, comentario, usuario_sistema_id
@@ -101,12 +114,6 @@ def agregar_cliente(nombre, telefono, ubicacion, foto_domicilio, comentario, usu
     cur = None
     try:
         user = sys_usr(usuario_sistema_id)
-        # user = None
-        # if usuario_sistema_id == 1:
-        #     user = "Zuriel"
-        # elif usuario_sistema_id == 2:
-        #     user = "Sergio"
-        
         cur = conn.cursor()
         # 'sentencia' para hacer el insert
         insert_sql = """
@@ -124,18 +131,19 @@ def agregar_cliente(nombre, telefono, ubicacion, foto_domicilio, comentario, usu
         cur.execute(insert_sql, (nombre, telefono, ubicacion, foto_domicilio, comentario, date.today(), usuario_sistema_id)) #aqui le pedimos al cursor que ejecute la sentencia sql, con los valores que le indicamos
         cliente_id = cur.fetchone()[0] # type: ignore
         conn.commit()
+        logger.info(f'Cliente "{nombre}" ah sido agregado con exito, id: {cliente_id}')
         print(f'Cliente "{nombre}" ah sido agregado con exito, id: {cliente_id}')
         return cliente_id # devuelve el id del nuevo cliente
     #----////CON ESTE BLOQUE CAPTURAMOS EL ERROR DE Unique.Violaton/////-----
     except UniqueViolation as e: # capturamos el error especifico de unicidad
-        print(f"ERROR: El cliente '{nombre}' para el Usuario '{user}' ya existe, no se agrego.\nDetalle: \n {e}") # type: ignore
+        logger.warning(f"ERROR: El cliente '{nombre}' para el Usuario '{user}' ya existe, no se agrego.\nDetalle: \n {e}") # type: ignore
         if conn:
             conn.rollback() #el rollback es obligatorio para regresar la conexion a su estado original
         return False
     #----////AQUI CERRAMOS EL BLOQUE DE CAPTURA DEL ERROR Unique.Violaton/////-----
     
     except psycopg.Error as e: #manejo de errores si psycopg tiene algun error
-        print(f"Error al agregar cliente: {e}")
+        logger.error(f"Error al agregar cliente {nombre}: {e}")
         if conn:
             conn.rollback()
         return False
@@ -165,6 +173,8 @@ def obtain_clients(usuario_sistema_id):
 
         #obtenemos los nombres de las columnas para mejor legibilidad
         column_names = [desc[0] for desc in cur.description] # type: ignore
+        logger.info(f"\nObteniendo clientes del usuario {user}\n")
+        #los prints para la cli se mantienen
         print(f"\nObteniendo clientes del usuario {user}\n")
         print("|".join(column_names))
         print("-" * (len("|".join(column_names))))
@@ -178,7 +188,7 @@ def obtain_clients(usuario_sistema_id):
         return clientes
 
     except psycopg.Error as e:
-        print(f'Error al obtener clientes: {e}')
+        logger.error(f'Error al obtener clientes: {e}')
         return [] # regresamos a la lista vacia
     finally:
         if cur:
@@ -204,6 +214,7 @@ def client_update(cliente_id, usuario_sistema_id, **kwargs):
     """
     # 1ro verificamos si se pasaron campos para actualizar
     if not kwargs:
+        logger.info("No se proporcionaron datos para actualizar")
         print("--ADVERTENCIA-- No se proporcionaron datos para actualizar")
         return False
     
@@ -248,19 +259,23 @@ def client_update(cliente_id, usuario_sistema_id, **kwargs):
         #cur.rowcount para obtener las filas afectadas
         if cur.rowcount > 0:
             conn.commit() #guardamos
+            logger.info(f"Cliente con id {cliente_id} (usuario {user}) actualizado")
             print(f"Cliente con id {cliente_id} (usuario {user}) actualizado")
             return True
         else:
             conn.rollback() #si no funciona, deshacemos
+            logger.warning(f"Cliente con id {cliente_id} (usuario {user}) no se encontro o no se realizaron cambios")
             print(f"Cliente con id {cliente_id} (usuario {user}) no se encontro o no se realizaron cambios")
             return False
     except UniqueViolation as e:
         #capturamos si se intenta crear un duplicado nombre/usuario_sistema_id
+        logger.warning(f"--ERROR--\nNo se pudo actualizar cliente con ID {cliente_id}, la combinacion Nombre/Usuario ya existe")
         print(f"--ERROR--\nNo se pudo actualizar cliente con ID {cliente_id}, la combinacion Nombre/Usuario ya existe")
         if conn:
             conn.rollback()
         return False
     except psycopg.Error as e:
+        logger.error(f"--ERROR--\nNo se pudo actualizar el cliente con ID {cliente_id} (general ERROR): {e}")
         print(f"--ERROR--\nNo se pudo actualizar el cliente con ID {cliente_id} (general ERROR): {e}")
         if conn:
             conn.rollback()
@@ -304,14 +319,17 @@ def actualizar_saldo(cliente_id, usuario_sistema_id, nuevo_saldo):
         #usamos rowcount para verificar si realmente se hizo algun movimiento
         if cur.rowcount > 0:
             conn.commit() #guardamos cambios
+            logger.info(f"Saldo cliente ID {cliente_id} (usuario {user}) actualizado) con {nuevo_saldo}")
             print(f"\nSaldo del cliente actualizado")
             return True
         else:
             conn.rollback() #si no se puede devolvemos al estado inicial
+            logger.warning(f"No se pudo actualizar el saldo del cliente con ID {cliente_id} (usuario {user})")
             print(f"No se pudo actualizar el saldo del cliente con ID {cliente_id} (usuario {user})")
             list_client(cliente_id, usuario_sistema_id)
             return False
     except psycopg.Error as e:
+        logger.error(f"ERROR al actualizar el saldo del cliente con ID {cliente_id} (general ERROR): {e}")
         print(f"ERROR al actualizar el saldo del cliente con ID {cliente_id} (general ERROR): {e}")
         if conn:
             conn.rollback()
@@ -324,31 +342,38 @@ def actualizar_saldo(cliente_id, usuario_sistema_id, nuevo_saldo):
 
 #----------------///////// FUNCION PARA LISTAR UN SOLO CLIENTE ///////----------------------
 def list_client(cliente_id, usuario_sistema_id):
-    conn = db_conection()
-    if conn is None:
-        return [] #Devuelve una lista vacia si hay algun problema con la conexion
-    
-    cur = None
-    try:
-        user = sys_usr(usuario_sistema_id)
-        cur = conn.cursor()
+    while True:
+        conn = db_conection()
+        if conn is None:
+            return None #Devuelve None si hay algun problema con la conexion
         
-        #seleccionamos la columna y la fila
-        select_sql = "SELECT * FROM clientes WHERE id = %s AND usuario_sistema_id = %s;"
-        cur.execute(select_sql, (cliente_id, usuario_sistema_id))
+        cur = None
+        try:
+            user = sys_usr(usuario_sistema_id)
+            cur = conn.cursor()
+            
+            #seleccionamos la columna y la fila
+            select_sql = "SELECT * FROM clientes WHERE id = %s AND usuario_sistema_id = %s;"
+            cur.execute(select_sql, (cliente_id, usuario_sistema_id))
 
-        encontrado = cur.fetchone()
-        if encontrado:
-            print(f"//--ID: {encontrado[0]}, Nombre: {encontrado[1]}, Telefono: {encontrado[2]}, Saldo: ${encontrado[7]}--//\n")
-        else:
-            print("No se encontraros datos para ese ID")
-    except (Exception, psycopg.Error) as e:
-        print(f"ERROR, no se puede conectar ni consultar con la DB\nDetalles: {e}")
-    finally:
-        if conn:
-            conn.close()
-        if cur:
-            cur.close()
+            encontrado = cur.fetchone()
+            if encontrado:
+                logger.debug(f"Cliente ID {cliente_id} listado con exito")
+                print(f"\n//--ID: {encontrado[0]}, Nombre: {encontrado[1]}, Telefono: {encontrado[2]}, Saldo: ${encontrado[7]}--//")
+                return encontrado # RETORNA EL CLIENTE ENCONTRADO Y SALE DEL BUCLE
+            else:
+                logger.info(f"\nNo se encontraron datos para el ID {cliente_id} (usuario {user})")
+                # print("No se encontraron datos para ese ID, intenta de nuevo.")
+                return None #retornamos None para indicarle que no se encontro el id
+        except (Exception, psycopg.Error) as e:
+            logger.error(f"ERROR al listar el cliente con ID {cliente_id} (general ERROR): {e}")
+            print(f"ERROR, no se puede conectar ni consultar con la DB\n")
+            return None # Sale del bucle en caso de error de DB
+        finally:
+            if conn:
+                conn.close()
+            if cur:
+                cur.close()
 
 #----------------///////// FUNCION PARA ELIMINAR CLIENTES ///////----------------------
 def eliminar_cliente(cliente_id, usuario_sistema_id):
@@ -379,19 +404,23 @@ def eliminar_cliente(cliente_id, usuario_sistema_id):
         #si es > 0 significa que al menos una fila fue eliminada
         if cur.rowcount > 0:
             conn.commit() #solo guardamos si rowcount nos confirma que se elemino alguna fila
-            print(f"Cliente con ID: {cliente_id} (Usuario: {user}) eliminado ")
+            logger.info(f"Cliente con ID: {cliente_id} (Usuario: {user}) eliminado con exito")
+            print(f"Cliente con ID: {cliente_id} (Usuario: {user}) eliminado")
             return True
         else:
             conn.rollback() #si el rowcount es 0, el cliente no se encontro o no existe y deshacemos
+            logger.warning(f"Cliente con ID {cliente_id} (Usuario {user}) no encontrado")
             print(f"---ERROR---\nCliente con ID {cliente_id} (Usuario {user}) no encontrado")
             return False
     except ForeignKeyViolation as e:
         #capturamos el error si el cliente esta en otra tabla
+        logger.error(f"ERROR de clave foranea al eliminar cliente con ID {cliente_id}.\nDetalle\n{e}")
         print(f"No se pudo eliminar cliente con ID {cliente_id}, debido a deoendencia en otra tabla.\nDetalle\n{e}")
         if conn:
             conn.rollback()
             return False
     except psycopg.Error as e:
+        logger.error(f"ERROR general el eliminar cliente ID {cliente_id}.\n(GENERAL - ERROR)\n{e}")
         print(f"ERROR al eliminar cliente con ID {cliente_id}.\n(GENERAL - ERROR)\n{e}")
         if conn:
             conn.rollback()
@@ -410,6 +439,7 @@ def client_search(nombre_buscado, usuario_sistema_id):
         while True:
             nombre_buscado_limpio = nombre_buscado.strip()
             if not nombre_buscado_limpio:
+                logger.warning("Intento de busqueda con nombre cliente vacio")
                 print("-ERROR- El nombre a buscar no puede estar vacio")
                 nombre_buscado = input("Ingrese el nombre a buscar: ")
             else:
@@ -439,20 +469,24 @@ def client_search(nombre_buscado, usuario_sistema_id):
                 WHERE TRIM(nombre) ILIKE TRIM(%s) AND usuario_sistema_id = (%s);
                 """
             patron_busqueda = f"{nombre_buscado.strip()}%"
+            logger.info(f"Buscando clientes con nombre '{nombre_buscado_limpio}' para el usuario {sys_usr(usuario_sistema_id)}")
             cur.execute(sql_search, (patron_busqueda, usuario_sistema_id))
             filas = cur.fetchall() #con fetchall se listan todas las filas encontradas y damos paso a la logica para que tenga que haber un nombre
 
             if filas: # Si se encontraron resultados
+                logger.info(f"Se encontraron {len(filas)} resultados para '{nombre_buscado_limpio}'")
                 print(f"\nResultados para '{nombre_buscado}' \n")
                 for fila in filas:
                     print(f"ID: {fila[0]}, Nombre: {fila[1]}, Telefono: {fila[2]}, Ubicacion: {fila[3]}, Comentario: {fila[5]}, Saldo: ${fila[7]}.")
                 break # Salir del bucle si se encontraron resultados
             else: # Si no se encontraron resultados, se le da la opción al usuario de intentar de nuevo o salir
+                logger.info(f"No se encontraron resultados para '{nombre_buscado_limpio}'")
                 print(f"No se encontraron resultados para '{nombre_buscado}'. Intente de nuevo.")
                 nombre_buscado = input("Ingrese el nombre a buscar: ")
             
             cur.close() # Cerrar el cursor después de cada ejecución
         except (Exception, psycopg.Error) as e:
+            logger.error(f"ERROR al buscar el cliente '{nombre_buscado_limpio}': {e}")
             print(f"ERROR, no se puede conectar ni consultar con la DB\nDetalles: {e}")
             break # Salir del bucle en caso de error de DB
         finally:
@@ -460,4 +494,3 @@ def client_search(nombre_buscado, usuario_sistema_id):
                 conn.close()
             if cur:
                 cur.close()
-

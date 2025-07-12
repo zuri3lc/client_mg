@@ -1,0 +1,1967 @@
+2025-07-12 13:27:55,763 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 13:27:55,763 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 13:27:55,765 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 13:27:55,765 - db.operations - INFO - 
+/// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 13:28:40,563 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 13:28:40,563 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 13:28:40,564 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 13:28:40,564 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 13:28:53,805 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 13:29:00,672 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 13:29:34,573 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 13:29:34,581 - db.operations - INFO - Saldo cliente ID 6 (usuario ZURIEL) actualizado) con 300
+2025-07-12 13:29:34,590 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 13:31:59,712 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 13:31:59,712 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 13:31:59,713 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 13:31:59,713 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 13:32:04,439 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 13:32:07,281 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 13:32:17,725 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 13:47:22,900 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 13:47:22,901 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 13:47:22,902 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 13:47:22,902 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 13:48:10,931 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 13:48:10,938 - db.operations - INFO - Cliente "Zara Tun" ah sido agregado con exito, id: 13
+2025-07-12 13:49:00,913 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 13:49:00,913 - db.operations - INFO - Buscando clientes con nombre 'zara' para el usuario ZURIEL
+2025-07-12 13:49:00,917 - db.operations - INFO - Se encontraron 1 resultados para 'zara'
+2025-07-12 13:49:25,142 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 13:49:25,143 - db.operations - INFO - Buscando clientes con nombre 'zara' para el usuario ZURIEL
+2025-07-12 13:49:25,146 - db.operations - INFO - Se encontraron 1 resultados para 'zara'
+2025-07-12 13:49:56,616 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 13:49:56,623 - db.operations - INFO - Cliente con id 13 (usuario ZURIEL) actualizado
+2025-07-12 13:50:41,346 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 13:50:41,346 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 13:50:41,348 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 13:50:41,348 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 13:50:47,370 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 13:50:47,370 - db.operations - INFO - Buscando clientes con nombre 'za' para el usuario ZURIEL
+2025-07-12 13:50:47,374 - db.operations - INFO - Se encontraron 1 resultados para 'za'
+2025-07-12 13:51:01,150 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 13:51:32,131 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 13:51:32,132 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 13:51:32,133 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 13:51:32,133 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 13:51:39,549 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 13:51:39,549 - db.operations - INFO - Buscando clientes con nombre 'zar' para el usuario ZURIEL
+2025-07-12 13:51:39,553 - db.operations - INFO - Se encontraron 1 resultados para 'zar'
+2025-07-12 13:51:45,719 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 13:51:59,680 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 13:51:59,688 - db.operations - INFO - Saldo cliente ID 13 (usuario ZURIEL) actualizado) con 235
+2025-07-12 13:51:59,697 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 13:53:11,409 - db.operations - CRITICAL - ERROR AL CONECTAR A LA DB: connection failed: connection to server at "192.168.1.113", port 433 failed: server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+2025-07-12 13:53:45,916 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 13:53:45,917 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 13:53:45,918 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 13:53:45,918 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 13:53:51,443 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 13:53:51,443 - db.operations - INFO - Buscando clientes con nombre '1' para el usuario ZURIEL
+2025-07-12 13:53:51,450 - db.operations - INFO - No se encontraron resultados para '1'
+2025-07-12 13:54:03,086 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 13:54:03,086 - db.operations - INFO - Buscando clientes con nombre 'agua' para el usuario ZURIEL
+2025-07-12 13:54:03,089 - db.operations - INFO - No se encontraron resultados para 'agua'
+2025-07-12 13:54:10,567 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 13:54:10,567 - db.operations - INFO - Buscando clientes con nombre 'juan' para el usuario ZURIEL
+2025-07-12 13:54:10,570 - db.operations - INFO - No se encontraron resultados para 'juan'
+2025-07-12 13:54:16,491 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 13:54:16,491 - db.operations - INFO - Buscando clientes con nombre 'j' para el usuario ZURIEL
+2025-07-12 13:54:16,494 - db.operations - INFO - No se encontraron resultados para 'j'
+2025-07-12 13:55:08,776 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 13:55:08,776 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 13:55:08,778 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 13:55:08,778 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 13:55:18,595 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 13:55:18,595 - db.operations - INFO - Buscando clientes con nombre 'ahb34567' para el usuario ZURIEL
+2025-07-12 13:55:18,599 - db.operations - INFO - No se encontraron resultados para 'ahb34567'
+2025-07-12 13:55:22,808 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 13:55:22,809 - db.operations - INFO - Buscando clientes con nombre 'ca' para el usuario ZURIEL
+2025-07-12 13:55:22,812 - db.operations - INFO - Se encontraron 1 resultados para 'ca'
+2025-07-12 13:55:53,854 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 13:55:53,854 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 13:55:53,858 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 13:56:01,343 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 13:56:01,347 - db.operations - INFO - No se encontraron datos para el ID 333 (usuario ZURIEL)
+2025-07-12 14:00:07,047 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 14:00:07,047 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 14:00:07,048 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 14:00:07,048 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 14:00:14,591 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 14:00:14,591 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 14:00:14,595 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 14:00:51,296 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 14:00:51,296 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 14:00:51,300 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 14:31:20,490 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 14:31:20,490 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 14:31:20,491 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 14:31:20,491 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 14:31:29,868 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 14:31:29,868 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 14:31:29,873 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 14:31:43,649 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 14:31:43,649 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 14:31:43,653 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 14:31:48,701 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 14:31:48,704 - db.operations - INFO - No se encontraron datos para el ID 111 (usuario ZURIEL)
+2025-07-12 14:32:28,226 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 14:32:28,226 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 14:32:28,227 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 14:32:28,227 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 14:32:34,470 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 14:32:34,470 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 14:32:34,474 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 14:32:37,095 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 14:32:37,099 - db.operations - INFO - No se encontraron datos para el ID 999 (usuario ZURIEL)
+2025-07-12 15:11:40,771 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:11:40,772 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 15:11:40,775 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 15:11:42,974 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:11:42,977 - db.operations - INFO - No se encontraron datos para el ID 2222 (usuario ZURIEL)
+2025-07-12 15:12:15,632 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:12:15,632 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 15:12:15,636 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 15:12:17,580 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:12:17,584 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:12:18,592 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:29:32,885 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:29:32,885 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 15:29:32,890 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 15:29:38,410 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:29:38,413 - db.operations - INFO - No se encontraron datos para el ID 999 (usuario ZURIEL)
+2025-07-12 15:29:46,491 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:19,778 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:19,779 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 15:30:19,783 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 15:30:22,184 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:22,188 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:28,332 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:39,907 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:39,907 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 15:30:39,911 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 15:30:42,388 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,392 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,401 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,404 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,412 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,415 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,424 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,427 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,437 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,440 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,449 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,452 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,461 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,464 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,473 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,476 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,485 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,488 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,496 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,499 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,507 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,510 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,518 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,521 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,530 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,533 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,541 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,545 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,553 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,556 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,565 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,568 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,575 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,578 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,586 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,589 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,598 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,601 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,609 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,612 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,620 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,623 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,631 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,633 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,641 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,644 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,652 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,655 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,663 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,666 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,674 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,677 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,686 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,688 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,696 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,699 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,707 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,710 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,718 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,721 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,729 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,732 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,740 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,743 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,752 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,754 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,762 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,765 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,773 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,776 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,784 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,787 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,795 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,798 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,806 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,809 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,817 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,820 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,828 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,831 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,839 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,842 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,850 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,853 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,861 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,864 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,872 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,875 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,883 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,886 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,894 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,897 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,905 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,908 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,916 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,919 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,927 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,930 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,938 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,941 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,950 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,953 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,961 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,964 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,972 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,975 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,983 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,986 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:42,994 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:42,997 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,005 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,008 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,016 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,019 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,027 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,030 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,038 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,041 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,049 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,052 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,060 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,063 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,071 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,074 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,082 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,085 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,093 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,096 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,105 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,108 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,116 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,119 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,127 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,130 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,138 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,141 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,149 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,152 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,160 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,163 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,171 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,174 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,182 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,185 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,193 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,196 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,204 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,207 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,215 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,218 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,226 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,229 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,237 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,240 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,248 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,251 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,260 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,262 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,270 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,273 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,281 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,284 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,292 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,295 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,303 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,306 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,314 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,317 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,325 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,328 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,336 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,339 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,347 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,350 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,358 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,361 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,369 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,372 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,380 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,383 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,391 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,394 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,402 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,405 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,413 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,416 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,424 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,427 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,434 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,437 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,446 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,449 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,457 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,460 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,468 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,471 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,479 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,482 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,490 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,493 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,501 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,504 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,512 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,515 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,522 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,525 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,533 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,536 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,545 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,548 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,556 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,559 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,567 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,570 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,579 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,582 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,589 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,592 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,600 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,603 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,612 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,614 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,622 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,625 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,633 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,636 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,644 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,647 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,656 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,659 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,667 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,671 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,679 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,682 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,690 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,693 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,702 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,704 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,712 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,715 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,724 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,726 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,735 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,738 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,746 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,749 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,757 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,759 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,767 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,770 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,778 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,780 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,788 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,791 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,799 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,801 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,809 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,812 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,819 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,821 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,829 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,832 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,840 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,843 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,850 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,853 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,861 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,863 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,871 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,874 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,882 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,884 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,892 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,895 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,903 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,906 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,914 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,916 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,924 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,926 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,934 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,937 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,944 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,947 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,954 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,957 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,964 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,967 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,974 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,977 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,984 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,986 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:43,994 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:43,996 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,004 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,006 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,014 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,016 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,023 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,026 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,033 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,036 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,043 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,046 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,053 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,056 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,063 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,066 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,073 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,076 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,083 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,085 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,093 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,095 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,103 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,105 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,113 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,115 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,123 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,125 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,133 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,136 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,143 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,145 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,153 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,155 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,163 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,166 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,173 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,175 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,182 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,185 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,192 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,195 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,202 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,205 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,212 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,215 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,222 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,225 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,232 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,235 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,242 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,245 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,252 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,255 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,262 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,265 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,272 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,275 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,282 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,285 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,292 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,295 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,302 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,305 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,312 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,315 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,323 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,326 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,333 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,336 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,343 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,346 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,353 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,356 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,364 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,366 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,374 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,377 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,385 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,388 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,396 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,399 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,407 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,410 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,418 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,420 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,429 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,431 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,439 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,442 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,449 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,452 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,459 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,462 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,470 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,473 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,481 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,484 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,491 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,494 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,502 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,505 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,512 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,515 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,523 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,526 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,533 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,536 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,544 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,546 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,554 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,557 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,564 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,567 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,574 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,577 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,585 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,588 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,596 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,598 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,606 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,609 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,616 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,619 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,627 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,629 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,637 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,640 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,648 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,650 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,658 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,661 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,668 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,671 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,679 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,682 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,689 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,692 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,700 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,702 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,710 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,713 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,721 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,723 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,731 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,734 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,741 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,744 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,752 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,755 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,762 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,765 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,773 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,775 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,783 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,785 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,793 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,796 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,803 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,806 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,814 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,817 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,825 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,828 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,835 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,838 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,846 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,849 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,857 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,860 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,867 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,870 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,878 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,880 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,888 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,891 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,898 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,901 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,908 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,911 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,919 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,922 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,929 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,932 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,939 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,942 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,949 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,952 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,960 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,962 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,970 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,973 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,981 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,984 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:44,991 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:44,994 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,002 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,004 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,012 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,015 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,023 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,025 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,033 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,036 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,043 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,046 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,054 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,057 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,064 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,067 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,075 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,077 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,085 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,088 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,096 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,098 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,106 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,109 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,116 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,119 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,127 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,129 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,137 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,140 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,148 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,151 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,158 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,161 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,169 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,171 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,179 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,182 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,189 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,192 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,199 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,202 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,210 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,212 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,221 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,223 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,231 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,234 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,241 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,244 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,252 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,255 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,263 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,266 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,274 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,276 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,284 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,287 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,295 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,298 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,306 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,308 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,316 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,319 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,326 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,329 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,337 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,340 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,348 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,350 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,358 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,361 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,369 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,371 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,379 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,381 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,389 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,392 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,399 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,402 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,409 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,412 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,419 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,422 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,429 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,432 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,440 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,443 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,451 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,454 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,461 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,465 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,472 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,475 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,482 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,485 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,493 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,496 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,504 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,506 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,514 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,517 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,524 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,527 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,535 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,537 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,545 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,548 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,556 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,558 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,566 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,569 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,576 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,579 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,587 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,590 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,597 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,600 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,609 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,611 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,619 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,622 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,629 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,632 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,640 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,643 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,651 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,654 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,661 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,664 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,672 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,675 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 15:30:45,682 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 15:30:45,685 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 16:15:17,511 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:15:17,512 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 16:15:17,516 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 16:15:19,519 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:15:19,523 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 16:15:23,455 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:15:23,455 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 16:15:23,459 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 16:16:14,728 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:16:14,728 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 16:16:14,732 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 16:16:16,556 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:16:16,559 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 16:16:19,412 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:16:19,412 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 16:16:19,416 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 16:16:20,754 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:16:45,015 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:16:45,016 - db.operations - INFO - Buscando clientes con nombre '1' para el usuario ZURIEL
+2025-07-12 16:16:45,020 - db.operations - INFO - No se encontraron resultados para '1'
+2025-07-12 16:16:46,626 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:16:46,626 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 16:16:46,630 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 16:16:48,365 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:16:48,368 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 16:16:49,887 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:16:49,887 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 16:16:49,891 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 16:16:58,666 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:18:14,463 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:18:14,463 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 16:18:14,467 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 16:18:16,216 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:18:16,219 - db.operations - INFO - No se encontraron datos para el ID 111 (usuario ZURIEL)
+2025-07-12 16:18:18,788 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:18:18,788 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 16:18:18,791 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 16:18:19,948 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:33,560 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:33,560 - db.operations - INFO - Buscando clientes con nombre 'zuriel' para el usuario ZURIEL
+2025-07-12 16:20:33,564 - db.operations - INFO - Se encontraron 4 resultados para 'zuriel'
+2025-07-12 16:20:42,809 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:42,813 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:42,821 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:42,825 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:42,833 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:42,836 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:42,844 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:42,847 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:42,856 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:42,859 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:42,867 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:42,870 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:42,878 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:42,881 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:42,889 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:42,892 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:42,900 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:42,903 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:42,912 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:42,914 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:42,923 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:42,926 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:42,934 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:42,937 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:42,945 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:42,948 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:42,956 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:42,959 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:42,967 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:42,970 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:42,978 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:42,981 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:42,990 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:42,993 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,001 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,003 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,012 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,015 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,023 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,026 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,034 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,036 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,044 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,047 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,055 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,058 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,066 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,069 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,077 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,079 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,088 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,091 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,099 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,102 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,109 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,112 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,120 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,123 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,131 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,134 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,142 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,145 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,153 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,156 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,163 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,166 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,174 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,177 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,185 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,188 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,196 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,199 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,207 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,210 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,218 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,221 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,229 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,232 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,239 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,242 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,250 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,253 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,261 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,264 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,272 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,274 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,282 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,285 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,293 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,296 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,304 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,307 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,315 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,318 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,326 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,329 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,337 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,340 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,348 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,351 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,359 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,362 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,370 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,373 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,381 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,384 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,392 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,395 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,403 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,405 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,413 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,416 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,424 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,427 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,435 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,438 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,445 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,448 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,456 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,459 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,467 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,470 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,477 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,480 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,488 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,490 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,498 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,501 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,509 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,511 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,519 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,522 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,529 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,532 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,540 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,543 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,551 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,553 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,562 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,564 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,572 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,575 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,583 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,585 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,593 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,596 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,604 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,607 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,615 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,617 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,625 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,628 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,636 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,639 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,646 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,649 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,657 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,660 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,668 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,671 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,679 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,681 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,689 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,692 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,700 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,702 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,710 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,713 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,721 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,724 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,732 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,734 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,742 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,745 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,753 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,756 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,763 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,766 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,774 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,776 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,784 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,787 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,795 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,797 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,805 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,808 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,816 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,819 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,826 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,829 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,837 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,840 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,848 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,851 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,859 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,861 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,869 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,872 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,880 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,883 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,891 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,893 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,901 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,904 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,912 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,915 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,923 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,925 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,933 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,937 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,945 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,948 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,956 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,959 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,966 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,969 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,977 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,980 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,988 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:43,991 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:43,999 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,002 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,010 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,012 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,020 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,023 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,031 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,034 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,041 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,044 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,052 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,055 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,062 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,065 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,073 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,076 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,083 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,086 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,094 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,097 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,104 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,107 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,115 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,118 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,126 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,129 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,136 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,139 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,147 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,150 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,158 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,160 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,168 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,171 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,179 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,182 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,190 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,193 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,201 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,204 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,211 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,215 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,222 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,225 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,233 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,236 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,243 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,245 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,253 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,255 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,263 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,265 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,273 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,276 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,283 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,286 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,293 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,296 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,304 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,306 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,314 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,316 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,324 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,327 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,335 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,338 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,346 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,348 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,356 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,359 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,366 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,369 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,377 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,379 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,387 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,390 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,398 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,400 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,408 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,411 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,419 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,421 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,429 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,432 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,440 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,442 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,450 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,453 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,461 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,464 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,471 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,474 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,482 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,484 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,492 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,495 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,502 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,505 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,513 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,515 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,523 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,526 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,533 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,536 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,544 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,547 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,554 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,557 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,565 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,567 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,575 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,578 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,586 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,589 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,596 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,599 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,607 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,609 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,617 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,619 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,627 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,630 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,638 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,640 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,648 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,651 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,658 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,661 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,669 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,671 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,679 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,681 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,689 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,692 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,700 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,702 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,710 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,713 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,720 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,723 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,730 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,733 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,740 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,743 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,751 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,753 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,761 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,764 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,772 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,774 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,782 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,784 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,792 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,795 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,802 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,805 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,813 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,815 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,823 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,826 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,834 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,836 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,844 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,847 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,855 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,857 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,865 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,868 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,876 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,878 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,886 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,889 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,896 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,899 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,907 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,910 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,918 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,920 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,929 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,931 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,939 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,942 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,949 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,952 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,960 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,963 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,970 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,973 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,981 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,983 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:44,991 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:44,994 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,002 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,004 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,012 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,015 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,022 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,025 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,033 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,035 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,043 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,046 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,054 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,056 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,064 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,067 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,075 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,077 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,085 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,088 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,095 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,098 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,106 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,108 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,116 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,119 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,126 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,129 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,137 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,139 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,147 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,150 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,158 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,160 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,168 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,171 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,178 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,181 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,189 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,192 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,199 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,202 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,210 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,212 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,220 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,222 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,230 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,233 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,241 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,243 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,251 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,254 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,262 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,264 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,272 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,275 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,282 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,285 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,293 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,295 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,303 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,306 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,313 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,316 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,323 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,326 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,334 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,337 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,345 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,347 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,355 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,358 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,366 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,368 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,376 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,379 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,387 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,389 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,397 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,400 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,408 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,411 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,418 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,421 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,429 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,431 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,439 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,442 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,449 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,452 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,460 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,462 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,470 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,472 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,480 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,483 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,490 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,493 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,500 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,503 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,511 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,513 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,521 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,524 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,532 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,534 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,542 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,545 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,553 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,555 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,563 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,566 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,573 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,576 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,584 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,586 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,594 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,597 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,605 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,608 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,615 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,618 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,626 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,629 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,637 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,640 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,648 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,651 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,658 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,661 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,669 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,672 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,679 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,682 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,690 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,693 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,700 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,703 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,711 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,714 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,721 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,724 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,732 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,734 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,742 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,745 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,752 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,755 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,763 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,765 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,773 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,775 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,783 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,786 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,794 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,796 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,804 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,807 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,815 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,817 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,825 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,828 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,836 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,838 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,846 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,849 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,856 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,859 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,867 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,869 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,877 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,880 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,887 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,890 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,898 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,900 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,908 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,911 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,919 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,922 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,930 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,932 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,940 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,943 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,951 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,954 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,961 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,964 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,972 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,975 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,982 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,985 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:45,993 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:45,996 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,003 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,006 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,014 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,017 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,024 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,027 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,035 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,037 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,045 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,048 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,056 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,059 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,066 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,069 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,077 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,079 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,088 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,090 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,098 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,101 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,109 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,112 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,119 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,122 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,130 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,133 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,140 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,143 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,151 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,154 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,161 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,164 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,172 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,175 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,182 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,185 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,193 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,196 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,203 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,206 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,213 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,216 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,224 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,227 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,234 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,237 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,245 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,248 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,256 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,259 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,267 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,270 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,278 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,281 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,288 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,291 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,299 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,302 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,309 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,312 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,320 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,323 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,330 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,334 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,341 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,344 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,351 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,354 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,362 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,365 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,372 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,375 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,383 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,385 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,393 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,396 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,403 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,406 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,413 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,416 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,424 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,426 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,434 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,437 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,444 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,447 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,454 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,457 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,465 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,467 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,475 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,478 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,486 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,489 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,496 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,499 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,507 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,510 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,517 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,520 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,527 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,530 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,538 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,540 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,548 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,551 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,558 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,561 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,569 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,571 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,579 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,582 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,590 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,592 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,600 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,603 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,611 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,613 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,621 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,624 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,632 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,635 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,643 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,645 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,653 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,656 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,664 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,667 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,675 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,677 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,685 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,688 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,696 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,698 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,706 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,709 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,717 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,720 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,727 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,730 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,738 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,740 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,748 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,751 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,759 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,762 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,770 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,772 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,781 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,783 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,792 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,795 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,802 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,805 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,813 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,815 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,823 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,826 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,834 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,837 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,845 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,848 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,855 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,858 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,866 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,869 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,876 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,879 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,887 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,889 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,897 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,900 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,908 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,910 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,918 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,921 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,929 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,932 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,940 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,943 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,951 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,953 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,961 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,964 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,972 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,975 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,983 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,986 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:46,993 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:46,996 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,004 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,007 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,015 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,018 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,025 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,028 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,036 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,038 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,046 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,049 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,056 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,059 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,067 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,070 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,078 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,081 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,088 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,097 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,105 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,108 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,116 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,119 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,127 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,130 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,138 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,140 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,148 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,151 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,159 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,161 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,169 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,172 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,180 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,183 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,190 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,193 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,201 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,204 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,212 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,214 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,222 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,225 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,233 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,236 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,244 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,246 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,254 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,257 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,265 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,268 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,276 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,279 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,287 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,290 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,298 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,300 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,308 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,311 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,319 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,322 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,330 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,332 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,340 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,343 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,351 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,353 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,361 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,364 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,372 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,375 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,383 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,386 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,394 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,396 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,405 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,408 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,416 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,419 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,427 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,430 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,438 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,440 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,448 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,451 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,459 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,461 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,470 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,472 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,480 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,483 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,491 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,494 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,501 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,504 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,512 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,515 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,522 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,525 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,533 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,536 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,544 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,546 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:20:47,554 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:20:47,557 - db.operations - INFO - No se encontraron datos para el ID 9999 (usuario ZURIEL)
+2025-07-12 16:21:11,187 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:21:11,187 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 16:21:11,191 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 16:21:13,524 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:21:13,527 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 16:21:41,601 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:21:41,601 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 16:21:41,605 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 16:21:44,974 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:22:27,745 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:22:27,745 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 16:22:27,750 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 16:22:29,288 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:22:29,292 - db.operations - INFO - No se encontraron datos para el ID 1111 (usuario ZURIEL)
+2025-07-12 16:25:52,685 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:25:52,685 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 16:25:52,686 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 16:25:52,686 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 16:26:02,035 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:26:02,035 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 16:26:02,039 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 16:33:21,876 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:33:21,877 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 16:33:21,878 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 16:33:21,878 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 16:33:28,965 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:33:28,965 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 16:33:28,969 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 16:34:04,155 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:34:04,155 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 16:34:04,156 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 16:34:04,156 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 16:35:33,942 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:35:33,942 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 16:35:33,943 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 16:35:33,943 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 16:35:38,490 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:35:38,490 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 16:35:38,494 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 16:35:41,518 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:35:48,349 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:35:48,349 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 16:35:48,350 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 16:35:48,350 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 16:35:53,649 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:35:53,649 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 16:35:53,653 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 16:38:05,389 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:38:05,389 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 16:38:05,391 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 16:38:05,391 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 16:38:13,445 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:38:13,445 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 16:38:13,449 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 16:42:10,845 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:42:10,845 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 16:42:10,846 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 16:42:10,846 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 16:42:17,965 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:42:17,965 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 16:42:17,969 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 16:42:19,914 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:42:19,922 - db.operations - INFO - 
+Obteniendo clientes del usuario ZURIEL
+
+2025-07-12 16:43:12,127 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:43:12,127 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 16:43:12,129 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 16:43:12,129 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 16:43:14,859 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:43:14,860 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 16:43:14,864 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 16:43:14,873 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:43:14,877 - db.operations - INFO - 
+Obteniendo clientes del usuario ZURIEL
+
+2025-07-12 16:43:47,640 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:43:47,641 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 16:43:47,642 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 16:43:47,642 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 16:43:50,215 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:43:50,215 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 16:43:50,220 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 16:45:01,453 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:45:01,453 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 16:45:01,454 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 16:45:01,454 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 16:45:03,902 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:45:03,902 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 16:45:03,906 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 16:45:06,085 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:45:06,089 - db.operations - INFO - 
+Obteniendo clientes del usuario ZURIEL
+
+2025-07-12 16:48:01,453 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:48:01,453 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 16:48:01,454 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 16:48:01,454 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 16:48:05,292 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:48:05,292 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 16:48:05,296 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 16:50:54,231 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:50:54,232 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 16:50:54,233 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 16:50:54,233 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 16:50:56,590 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 16:50:56,591 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 16:50:56,595 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 17:07:07,793 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:07:07,793 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 17:07:07,795 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 17:07:07,795 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 17:07:12,809 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:07:12,809 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 17:07:12,813 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 17:07:14,856 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:07:14,859 - db.operations - INFO - No se encontraron datos para el ID 111 (usuario ZURIEL)
+2025-07-12 17:08:47,660 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:08:47,660 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 17:08:47,661 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 17:08:47,661 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 17:08:50,150 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:08:50,150 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 17:08:50,154 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 17:08:54,064 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:09:31,109 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:09:31,109 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 17:09:31,110 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 17:09:31,110 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 17:09:33,309 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:09:33,309 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 17:09:33,313 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 17:09:35,394 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:09:35,398 - db.operations - INFO - 
+No se encontraron datos para el ID 7 (usuario ZURIEL)
+2025-07-12 17:12:15,868 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:12:15,869 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 17:12:15,870 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 17:12:15,870 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 17:12:18,093 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:12:18,093 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 17:12:18,097 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 17:12:20,410 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:12:20,413 - db.operations - INFO - 
+No se encontraron datos para el ID 111 (usuario ZURIEL)
+2025-07-12 17:12:22,231 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:13:13,639 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:13:13,640 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 17:13:13,641 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 17:13:13,641 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 17:13:18,061 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:13:18,061 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 17:13:18,065 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 17:13:20,333 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:14:24,711 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:14:24,711 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 17:14:24,712 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 17:14:24,713 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 17:14:29,028 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:14:29,028 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 17:14:29,032 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 17:14:29,994 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:14:47,120 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:14:47,120 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 17:14:47,122 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 17:14:47,122 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 17:14:49,959 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:14:49,959 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 17:14:49,963 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 17:14:50,589 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:14:50,601 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:14:50,607 - db.operations - INFO - 
+No se encontraron datos para el ID None (usuario ZURIEL)
+2025-07-12 17:15:15,467 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:15:15,467 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 17:15:15,468 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 17:15:15,468 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 17:15:19,483 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:15:19,483 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 17:15:19,487 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 17:15:20,891 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:15:20,894 - db.operations - INFO - 
+No se encontraron datos para el ID 111 (usuario ZURIEL)
+2025-07-12 17:15:36,272 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:15:36,272 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 17:15:36,273 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 17:15:36,273 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 17:15:39,694 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:15:39,694 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 17:15:39,698 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 17:15:40,262 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:15:42,652 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:15:42,652 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 17:15:42,654 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 17:15:42,654 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 17:15:45,474 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:15:45,474 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 17:15:45,478 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 17:15:46,891 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:15:49,633 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:15:49,633 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 17:15:49,635 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 17:15:49,635 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 17:15:52,634 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:15:52,634 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 17:15:52,638 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 17:15:53,706 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:15:53,710 - db.operations - INFO - 
+No se encontraron datos para el ID 111 (usuario ZURIEL)
+2025-07-12 17:15:55,677 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:15:55,680 - db.operations - INFO - 
+No se encontraron datos para el ID 111 (usuario ZURIEL)
+2025-07-12 17:16:03,605 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:16:03,606 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 17:16:03,607 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 17:16:03,607 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 17:16:12,366 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:16:12,366 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 17:16:12,370 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 17:16:13,213 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:16:13,225 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:16:48,578 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:16:48,579 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 17:16:48,580 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 17:16:48,580 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 17:16:53,464 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:16:53,464 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 17:16:53,468 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 17:16:57,010 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:16:57,014 - db.operations - INFO - 
+No se encontraron datos para el ID 123 (usuario ZURIEL)
+2025-07-12 17:17:15,112 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:17:15,112 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 17:17:15,114 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 17:17:15,114 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 17:17:18,653 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:17:18,654 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 17:17:18,658 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 17:17:20,918 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:17:20,922 - db.operations - INFO - 
+No se encontraron datos para el ID 123 (usuario ZURIEL)
+2025-07-12 17:17:22,627 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:17:22,639 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:17:46,449 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:17:46,449 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 17:17:46,451 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 17:17:46,451 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 17:17:59,032 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:17:59,033 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 17:17:59,037 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 17:17:59,760 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:20:05,286 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:20:05,286 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 17:20:05,287 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 17:20:05,287 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 17:20:08,693 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:20:08,693 - db.operations - INFO - Buscando clientes con nombre 'z' para el usuario ZURIEL
+2025-07-12 17:20:08,698 - db.operations - INFO - Se encontraron 5 resultados para 'z'
+2025-07-12 17:20:09,397 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:22:31,896 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 17:22:31,897 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 17:22:31,898 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 17:22:31,898 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
