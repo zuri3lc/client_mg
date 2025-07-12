@@ -6,10 +6,11 @@ from db.operations import (
     client_update,
     eliminar_cliente,
     client_search,
-    list_client
+    list_client,
+    actualizar_saldo
 )
 from datetime import date #importamos fecha
-from decimal import Decimal #importamos decimal para uso futuro con saldos
+from decimal import Decimal, InvalidOperation #importamos decimal para uso futuro con saldos
 
 
 #####-------//////INICIO DE LA LOGICA DE PRUEBA/////--------######
@@ -25,8 +26,22 @@ def menu():
     print("3. Modificar cliente existente")
     print("4. Obtener todos los clientes")
     print("5. Eliminar cliente")
-    print("6. Salir")
+    print("6. Actualizar Saldo")
+    print("7. Salir")
     print("-------------------------------\n")
+
+#funcion para obtener un id de cliente valido
+def obtener_client_id():
+    while True:
+        try:
+            client_id = int(input("\nIngrese el ID del cliente seleccionado: \n")) #pedimos el ID validando que sea un numero
+            if client_id <= 0: #validamos que mayor a cero
+                print("\nEl ID no puede ser negativo o cero. Intente de nuevo.\n")
+            else:
+                break #salimos del bucle si el ID es valido
+        except ValueError: #atrapamos el error si no es un numero y reinciamos el bucle
+            print("Entrada invalida. Por favor, ingrese un numero entero para el ID.\n")
+    return client_id
 
 #////---- FUNCION PARA SOLICITAR DATOS ----////
 def info_data(): #de esta variable obtenemos los datos para añadir clientes o modificarlos
@@ -88,7 +103,7 @@ def new_client():
 
 #////---- Funcion para buscar un cliente, obtener el id y los datos ----////
 def busqueda():
-    search_name = input("Ingresa el nombre que deseas buscar, solo ingresa el primer nombre : \n")
+    search_name = input("Ingresa el cliente para buscar, solo ingresa el primer nombre : \n")
     client_search(search_name, USER_ID)
 
 #////---- Funcion para obtener todos los clientes de un usuario ----////
@@ -100,16 +115,16 @@ def manejo_actualizacion():
     """Manejo de la logica para modificar clientes"""
     print("\n---ACTUALIZANDO DATOS DE CLIENTE---\n")
     busqueda() #mostramos los clientes para que el usuario sepa que ID elegir
-
-    while True:
-        try:
-            client_id = int(input("\nIngrese el ID del cliente a actualizar: \n")) #pedimos el ID validando que sea un numero
-            if client_id <= 0: #validamos que mayor a cero
-                print("\nEl ID no puede ser negativo o cero. Intente de nuevo.\n")
-            else:
-                break #salimos del bucle si el ID es valido
-        except ValueError: #atrapamos el error si no es un numero y reinciamos el bucle
-            print("Entrada invalida. Por favor, ingrese un numero entero para el ID.\n")
+    client_id = obtener_client_id()
+    # while True:
+    #     try:
+    #         client_id = int(input("\nIngrese el ID del cliente a actualizar: \n")) #pedimos el ID validando que sea un numero
+    #         if client_id <= 0: #validamos que mayor a cero
+    #             print("\nEl ID no puede ser negativo o cero. Intente de nuevo.\n")
+    #         else:
+    #             break #salimos del bucle si el ID es valido
+    #     except ValueError: #atrapamos el error si no es un numero y reinciamos el bucle
+    #         print("Entrada invalida. Por favor, ingrese un numero entero para el ID.\n")
     
     print("\nINGRESE LOS NUEVOS VALORES PARA LOS CAMPOS A ACTUALIZAR (DEJE EN BLANCO PARA NO ACTUALIZAR, ESCRIBA 'NULL' PARA BORRAR VALOR ACTUAL)\n")
     updates = {} #creamos un diccionario vacio para almacenar los valores
@@ -155,26 +170,53 @@ def manejo_actualizacion():
     
     #si no hay cambios ingresados
     if not updates: #si no hay datos almacenados en updates{}
-        print("No se ingresaron datos para actualizar\n")
+        print("No se ingresaron datos para actualizar\nNo se actualizó el cliente\n")
+        list_client(client_id, USER_ID)
         return
     
     client_update(client_id, USER_ID, **updates)
+
+#////---- Funcion para actualizar saldo del cliente ----////
+def manejo_saldo():
+    """Manejo de la logica para modifica saldo del cliente"""
+    print("\n---ACTUALIZANDO SALDO DE CLIENTE---\n")
+    busqueda()
+    client_id = obtener_client_id()
+    print(f"Mostrando saldo actual")
+    list_client(client_id, USER_ID)
+
+    #solicitamos el monto a restar o sumar y toca validarlo
+    while True:
+        monto_str = input("Ingrese el monto\npara añadir saldo solo escriba el monto seguido de 2 decimales\nEj: 00.00\npara restar al saldo escriba el signo '-' seguido del monto\nEj: -00.00\n\n")
+        try:
+            monto = Decimal(monto_str) #convertimos a decimal
+            break
+        except InvalidOperation: #atrapamos el error
+            print("Monto Invalido, intente de nuevo.\nEj: 00.00 para añadir al saldo\n  -00.00 para restar al saldo")
+        except Exception as e:
+            print(f"Ocurrio un error inesperado al actualizar el monto:\n{e}, intente de nuevo\n Ej: 00.00 para añadir al saldo\n  -00.00 para restar al saldo")
+    #una vez validado el monto, llamamos a la funcion con la sentencia
+    if actualizar_saldo(client_id, USER_ID, monto):
+        print(f"Saldo Actual:\n")
+        list_client(client_id, USER_ID)
+    else:
+        print("No se pudo actualizar el saldo")
 
 #////---- Funcion para eliminar los clientes de un usuario ----////
 def manejo_delete():
     """Manejo de la logica para eliminar clientes"""
     print("\n---ELIMINANDO CLIENTE---\n")
     busqueda() #mostramos los clientes para que el usuario sepa que ID elegir
-
-    while True:
-        try:
-            client_id = int(input("\nIngrese el ID del cliente a eliminar: \n")) #pedimos el ID validando que sea un numero
-            if client_id <= 0: #validamos que mayor a cero
-                print("\nEl ID no puede ser negativo o cero. Intente de nuevo.\n")
-            else:
-                break #salimos del bucle si el ID es valido
-        except ValueError: #atrapamos el error si no es un numero y reinciamos el bucle
-            print("Entrada invalida. Por favor, ingrese un numero entero para el ID.\n")
+    client_id =obtener_client_id()
+    # while True:
+    #     try:
+    #         client_id = int(input("\nIngrese el ID del cliente a eliminar: \n")) #pedimos el ID validando que sea un numero
+    #         if client_id <= 0: #validamos que mayor a cero
+    #             print("\nEl ID no puede ser negativo o cero. Intente de nuevo.\n")
+    #         else:
+    #             break #salimos del bucle si el ID es valido
+    #     except ValueError: #atrapamos el error si no es un numero y reinciamos el bucle
+    #         print("Entrada invalida. Por favor, ingrese un numero entero para el ID.\n")
 
     #confirmamos si el cliente es correcto
     list_client(client_id, USER_ID)
@@ -211,6 +253,8 @@ def main_cli():
         elif opcion == '5':
             manejo_delete()
         elif opcion == '6':
+            manejo_saldo()
+        elif opcion == '7':
             print("\nSALIENDO DEL PROGRAMA...\n")
             break
         else:
@@ -220,5 +264,5 @@ def main_cli():
 
 
 if __name__ == "__main__":
-    
+
     main_cli()

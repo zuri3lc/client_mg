@@ -2,6 +2,8 @@
 import psycopg #importamos la libreria para 'hablar' con la DB
 from datetime import date #esto es para la fecha de adquisicion
 from psycopg.errors import UniqueViolation, ForeignKeyViolation # importamos el error especifico
+from decimal import Decimal #importamos decimal para uso con saldos
+
 
 #-------configuracion de la conexion a PostgreSQL----------
 # --Datos de la BD--
@@ -134,7 +136,7 @@ def agregar_cliente(nombre, telefono, ubicacion, foto_domicilio, comentario, usu
         if conn:
             conn.close()
 
-#--------/////    funcion para obtener todos los clientes para un usuario especifico   /////////----------
+#------///// funcion para obtener todos los clientes para un usuario especifico /////////------
 def obtain_clients(usuario_sistema_id):
     """
     OBTIENE Y MUESTRA TODOS LOS CLIENTES DE UN USUARIO ESPECIFICO
@@ -267,6 +269,62 @@ def client_update(cliente_id, usuario_sistema_id, **kwargs):
             cur.close()
         if conn:
             conn.close()
+
+#####------------------////// FUNCION PARA ACTUALIZAR SALDOS/////----------------------
+def actualizar_saldo(cliente_id, usuario_sistema_id, nuevo_saldo):
+    """
+    ACTUALIZA EL SALDO DE UN CLIENTE ESPECIFICO, FILTRADO POR SU ID Y EL ID DEL PROPIETARIO DEL CLIENTE
+
+    Args:
+        cliente_id (int): El ID del cliente a actualizar.
+        usuario_sistema_id (int): el ID del usuario al que pertenece el cliente.
+        monto (Decimal): El saldo a sumar si es positivo, restar si es negativo.
+        returs:
+            bool: True si se actualizo con exito, False en caso contrario
+    """
+    conn = db_conection()
+    if conn is None:
+        return False
+    
+    cur = None
+    try:
+        user = None
+        if usuario_sistema_id == 1:
+            user = "Zuriel"
+        elif usuario_sistema_id == 2:
+            user = "Sergio"
+    
+        cur = conn.cursor()
+        #sentencia SQL para sumar/restar al saldo actual
+        update_saldo_sql = """
+        UPDATE clientes
+        SET saldo_actual = saldo_actual + %s
+        WHERE id = %s AND usuario_sistema_id = %s;
+        """
+        
+        #ejecutamos la sentencia, debemos pasar los valores tal como definimos la sentencia psycopg convierte automaticamente Decimal a NUMERIC
+        cur.execute(update_saldo_sql, (nuevo_saldo, cliente_id, usuario_sistema_id))
+        #usamos rowcount para verificar si realmente se hizo algun movimiento
+        if cur.rowcount > 0:
+            conn.commit() #guardamos cambios
+            print(f"\nSaldo del cliente actualizado")
+            return True
+        else:
+            conn.rollback() #si no se puede devolvemos al estado inicial
+            print(f"No se pudo actualizar el saldo del cliente con ID {cliente_id} (usuario {user})")
+            list_client(cliente_id, usuario_sistema_id)
+            return False
+    except psycopg.Error as e:
+        print(f"ERROR al actualizar el saldo del cliente con ID {cliente_id} (general ERROR): {e}")
+        if conn:
+            conn.rollback()
+        return False
+    finally:
+        if cur:
+            cur.close()
+        if conn:
+            conn.close()
+
 #----------------///////// FUNCION PARA LISTAR UN SOLO CLIENTE ///////----------------------
 def list_client(cliente_id, usuario_sistema_id):
     conn = db_conection()
@@ -300,7 +358,6 @@ def list_client(cliente_id, usuario_sistema_id):
             cur.close()
 
 #----------------///////// FUNCION PARA ELIMINAR CLIENTES ///////----------------------
-
 def eliminar_cliente(cliente_id, usuario_sistema_id):
     """
     ELIMINA UN CLIENTE ESPECIFICO BASANDOSE EN SU ID Y EL ID USUARIO PROPIETARIO
@@ -414,3 +471,4 @@ def client_search(nombre_buscado, usuario_sistema_id):
                 conn.close()
             if cur:
                 cur.close()
+
