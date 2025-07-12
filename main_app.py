@@ -7,7 +7,8 @@ from db.operations import (
     eliminar_cliente,
     client_search,
     list_client,
-    actualizar_saldo
+    actualizar_saldo,
+    sys_usr
 )
 from datetime import date #importamos fecha
 from decimal import Decimal, InvalidOperation #importamos decimal para uso futuro con saldos
@@ -21,6 +22,7 @@ USER_ID = 1
 def menu():
     """Muestra las opciones del menú"""
     print("\nMENU DEL GESTOR DE CLIENTES\n")
+    print(f"BIENVENIDO  {sys_usr(USER_ID)}, Que deseas hacer?\n")
     print("1. Agregar nuevo cliente")
     print("2. Buscar cliente")
     print("3. Modificar cliente existente")
@@ -65,7 +67,7 @@ def info_data(): #de esta variable obtenemos los datos para añadir clientes o m
             break
         
     while True:
-        telefono = input("Telefono: (Deje vacio para omitir): ").strip()
+        telefono = input("Telefono: (Deje vacio para omitir): \n").strip()
         telefono_sin_espacios = telefono.replace(" ", "")
         if not telefono_sin_espacios: #esta es la forma de validar si una cadena esta vacia
             break #si esta vacio, rompemos el bucle
@@ -76,8 +78,8 @@ def info_data(): #de esta variable obtenemos los datos para añadir clientes o m
 
     #solicitamos las entradas pero no agregamos mucha validacion
     ubicacion = input("Ubicacion Aproximada: \n").strip()
-    foto_domicilio = input("ingrese la ruta a la foto del domicilio").strip()
-    comentario = input("Comentario").strip()
+    foto_domicilio = input("ingrese la ruta a la foto del domicilio: \n").strip()
+    comentario = input("Comentario: \n").strip()
 
     return {
         "nombre": nombre,

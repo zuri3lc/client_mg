@@ -29,6 +29,16 @@ def db_conection():
         return None #terminamos la conexión nueva
 
 #---------------/////////////////EMPIEZA DEFINICION DE FUNCIONES///////////------------------
+#####----------------------//////FUNCIONES/////-------------------######
+
+#funcion para definir el nombre del usuario del sistema actual
+def sys_usr(usuario_sistema_id):
+    user = None
+    if usuario_sistema_id == 1:
+        user = "ZURIEL"
+    elif usuario_sistema_id == 2:
+        user = "SERGIO"
+    return user
 
 #--CREAMOS UNA FUNCION PARA CREAR LA BASE DE DATOS--
 def crear_tabla_clientes():
@@ -78,8 +88,6 @@ def crear_tabla_clientes():
             conn.close()
             print("\n/// CONEXION A LA BASE DE DATOS CERRADA ///")
 
-#####----------------------//////FUNCIONES/////-------------------######
-
 #---------////////  funcion para agregar clientes a la DB   /////////--------
 def agregar_cliente(nombre, telefono, ubicacion, foto_domicilio, comentario, usuario_sistema_id
     ):
@@ -92,11 +100,12 @@ def agregar_cliente(nombre, telefono, ubicacion, foto_domicilio, comentario, usu
     
     cur = None
     try:
-        user = None
-        if usuario_sistema_id == 1:
-            user = "Zuriel"
-        elif usuario_sistema_id == 2:
-            user = "Sergio"
+        user = sys_usr(usuario_sistema_id)
+        # user = None
+        # if usuario_sistema_id == 1:
+        #     user = "Zuriel"
+        # elif usuario_sistema_id == 2:
+        #     user = "Sergio"
         
         cur = conn.cursor()
         # 'sentencia' para hacer el insert
@@ -148,11 +157,7 @@ def obtain_clients(usuario_sistema_id):
     cur = None
     clientes = []
     try:
-        user = None
-        if usuario_sistema_id == 1:
-            user = "Zuriel"
-        elif usuario_sistema_id == 2:
-            user = "Sergio"
+        user = sys_usr(usuario_sistema_id)
         cur = conn.cursor()
         # seleccionamos todas las columnas (*) y filtramos por usuario del sistema
         select_sql = "SELECT * FROM clientes WHERE usuario_sistema_id = %s ORDER BY ID;" #creamos una variable con la sentencia de busqueda
@@ -208,11 +213,7 @@ def client_update(cliente_id, usuario_sistema_id, **kwargs):
     
     cur = None
     try:
-        user = None
-        if usuario_sistema_id == 1:
-            user = "Zuriel"
-        elif usuario_sistema_id == 2:
-            user = "Sergio"
+        user = sys_usr(usuario_sistema_id)
         cur = conn.cursor()
         #construimos dinamicamente la parte SET de la consulta SQL
         #set_clauses, sera una lista de cadenas ej: "telefono = %s", "comentario = %s" etc
@@ -288,11 +289,7 @@ def actualizar_saldo(cliente_id, usuario_sistema_id, nuevo_saldo):
     
     cur = None
     try:
-        user = None
-        if usuario_sistema_id == 1:
-            user = "Zuriel"
-        elif usuario_sistema_id == 2:
-            user = "Sergio"
+        user = sys_usr(usuario_sistema_id)
     
         cur = conn.cursor()
         #sentencia SQL para sumar/restar al saldo actual
@@ -333,11 +330,7 @@ def list_client(cliente_id, usuario_sistema_id):
     
     cur = None
     try:
-        user = None
-        if usuario_sistema_id == 1:
-            user = "Zuriel"
-        elif usuario_sistema_id == 2:
-            user = "Sergio"
+        user = sys_usr(usuario_sistema_id)
         cur = conn.cursor()
         
         #seleccionamos la columna y la fila
@@ -376,11 +369,7 @@ def eliminar_cliente(cliente_id, usuario_sistema_id):
     
     cur = None
     try:
-        user = None
-        if usuario_sistema_id == 1:
-            user = "Zuriel"
-        elif usuario_sistema_id == 2:
-            user = "Sergio"
+        user = sys_usr(usuario_sistema_id)
         cur = conn.cursor()
         #armamos la sentencia añadiendo ambos IDs a la clausula para asegurar que solo el propietario pueda eliminar
         delete_sql = "DELETE FROM clientes WHERE id = %s AND usuario_sistema_id = %s;"
