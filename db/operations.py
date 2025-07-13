@@ -101,6 +101,54 @@ def crear_tabla_clientes():
             conn.close()
             logger.info("/// CONEXION A LA BASE DE DATOS CERRADA ///")
 
+#---------////////  Verifica si el nombre existe en la DB   /////////--------
+def check_client_name_exist(nombre, usuario_sistema_id):
+    """
+    El unico trabajo de esta funcion es verificar si el nombre del cliente ya existe en la DB ligado al usuario actual
+    
+    Args:
+        nombre (str): El nombre del cliente a verificar
+        usuario_sistema_id (int): El ID del usuario al que pertenece el cliente
+    Returs:
+        bool: True si el nombre existe, False en caso contrario
+    """
+    conn = db_conection()
+    if conn is None:
+        logger.error("No se pudo conectar a la DB")
+        return False
+    
+    cur = None
+    try:
+        cur = conn.cursor()
+        # usamos ILIKE para busqueda insensible de mayusculas y minusculas
+        select_sql = """
+        SELECT COUNT(*) FROM clientes
+        WHERE TRIM(nombre) ILIKE TRIM(%s) AND usuario_sistema_id = (%s);
+        """
+        #la sentencia le dice que busque y seleccione en la tabla clientes todos las filas 
+        # que encuente que sean iguales independiente de mayusculas y minusculas y 
+        # pertenezcan al mismo usuario
+        logger.debug(f"Verficando si el nombre '{nombre}' ya existe para el usuario {usuario_sistema_id}")
+        cur.execute(select_sql, (nombre, usuario_sistema_id))
+        count = cur.fetchone()[0] #type: ignore
+        #cur.fetchone solo devolvera 1 valor, porque en este caso tiene la directiva UNIQUE
+        #ese valor lo tomamos con el indice 0 y se lo asignamos a la variable count
+        
+        if count > 0:
+            logger.info(f"El nombre {nombre} ya existe para el usuario {usuario_sistema_id}")
+            return True #indica que si existe un duplicado
+        else:
+            logger.debug(f"El nombre del cliente {nombre} es unico para el usuario {usuario_sistema_id}")
+            return False #esto indica que no existe
+    except psycopg.Error as e:
+        logger.error(f"Error al verificar el nombre del cliente {nombre}: {e}")
+        return True #indicamos que si existe aunque no sepamos, para evitar duplicados
+    finally:
+        if cur:
+            cur.close()
+        if conn:
+            conn.close()
+
 #---------////////  funcion para agregar clientes a la DB   /////////--------
 def agregar_cliente(nombre, telefono, ubicacion, foto_domicilio, comentario, usuario_sistema_id
     ):

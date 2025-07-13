@@ -1965,3 +1965,67 @@ No se encontraron datos para el ID 123 (usuario ZURIEL)
 2025-07-12 17:22:31,897 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
 2025-07-12 17:22:31,898 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
 2025-07-12 17:22:31,898 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 19:30:53,303 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 19:30:53,303 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 19:30:53,307 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 19:30:53,307 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 19:31:44,905 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 19:31:44,905 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 19:31:44,907 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 19:31:44,907 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 19:31:48,762 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 19:31:48,774 - db.operations - INFO - El nombre zuriel canche ya existe para el usuario 1
+2025-07-12 19:32:02,526 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 19:36:44,373 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 19:36:44,373 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 19:36:44,375 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 19:36:44,375 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 19:36:50,599 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 19:37:15,277 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 19:37:15,285 - db.operations - INFO - Cliente "Cinthia Chan" ah sido agregado con exito, id: 14
+2025-07-12 19:37:15,299 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 19:37:15,303 - db.operations - WARNING - ERROR: El cliente 'Cinthia Chan' para el Usuario 'ZURIEL' ya existe, no se agrego.
+Detalle: 
+ duplicate key value violates unique constraint "uq_nombre_id_usuario"
+DETAIL:  Key (nombre, usuario_sistema_id)=(Cinthia Chan, 1) already exists.
+2025-07-12 19:37:15,312 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 19:38:09,622 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 19:38:09,622 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 19:38:09,623 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 19:38:09,623 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 19:38:15,959 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 19:38:55,859 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 19:38:55,867 - db.operations - INFO - Cliente "Sergio Canche" ah sido agregado con exito, id: 16
+2025-07-12 19:38:55,876 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 19:39:08,594 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 19:39:08,601 - db.operations - INFO - 
+Obteniendo clientes del usuario ZURIEL
+
+2025-07-12 23:09:17,099 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 23:09:17,100 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 23:09:17,104 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 23:09:17,104 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 23:09:23,627 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 23:09:23,627 - db.operations - INFO - INTENTANDO CREAR TABLA 'CLIENTES'...
+2025-07-12 23:09:23,628 - db.operations - INFO - TABLA 'CLIENTES' CREADA O YA EXISTENTE...
+2025-07-12 23:09:23,629 - db.operations - INFO - /// CONEXION A LA BASE DE DATOS CERRADA ///
+2025-07-12 23:09:47,911 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 23:09:47,919 - db.operations - INFO - El nombre zuriel canche ya existe para el usuario 1
+2025-07-12 23:10:23,642 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 23:10:46,553 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 23:10:46,562 - db.operations - INFO - Cliente "Karin Canche" ah sido agregado con exito, id: 17
+2025-07-12 23:10:46,571 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 23:12:54,481 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 23:12:54,481 - db.operations - INFO - Buscando clientes con nombre 'ka' para el usuario ZURIEL
+2025-07-12 23:12:54,485 - db.operations - INFO - Se encontraron 1 resultados para 'ka'
+2025-07-12 23:13:01,400 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 23:13:01,404 - db.operations - INFO - 
+No se encontraron datos para el ID 171 (usuario ZURIEL)
+2025-07-12 23:13:05,173 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 23:14:58,661 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 23:14:58,670 - db.operations - INFO - Cliente con id 17 (usuario ZURIEL) actualizado
+2025-07-12 23:14:58,678 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 23:17:11,169 - db.operations - INFO - Conexion a la DB establecida con exito
+2025-07-12 23:17:11,174 - db.operations - INFO - 
+Obteniendo clientes del usuario ZURIEL
+
