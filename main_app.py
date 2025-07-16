@@ -83,9 +83,9 @@ def clean_input(promt, min_len=0, max_len=255, allow_empty=True, to_none_on_empt
         min_len (int): longitud minima (sin espacios)
         max_len (int): longitud maxima (sin espacios)
         allow_empty (bool): Si es True la entrada esta vacia o es None, retorna None
-                            util para campos opcionales
+                    util para campos opcionales
         special_null_keyword (str, opcional): una palabra clave que el usuario puede escribir
-                                            para que se interprete como None
+                                para que se interprete como None
                                             
         returns:
             str or None: La entrada limpia y valida o None si esta vacia o nula
