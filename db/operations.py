@@ -302,6 +302,7 @@ def client_update(cliente_id, usuario_sistema_id, **kwargs):
         """
 
         #ejecutamos la consulta, pero hay que convertir los valores en values a una tupla, porque execute espera una tupla
+        # pyrefly: ignore  # bad-argument-type
         cur.execute(update_sql, tuple(values))
 
         #cur.rowcount para obtener las filas afectadas

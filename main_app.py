@@ -286,6 +286,7 @@ def manejo_actualizacion():
     #Nombre
     #------------------------------------------------------------------
     nombre = clean_input(
+        # pyrefly: ignore  # bad-specialization
         f"Nuevo nombre (actual: {cliente_existente[1]}): formato 'Nombre Apellido' min 3 caracteres, max 255\n",
         min_len=3,
         max_len=255,
@@ -293,6 +294,7 @@ def manejo_actualizacion():
         to_none_on_empty=False,
         special_null_keyword=None
         )
+    # pyrefly: ignore  # bad-specialization
     if nombre and nombre.strip() != "" and nombre.strip() != cliente_existente[1].strip():
         #1. si el usuario ingreso un nombre (no esta vacio ni es none)
         #2. and el nuevo nombre es diferente al actual
@@ -305,6 +307,7 @@ def manejo_actualizacion():
     #Telefono
     #------------------------------------------------------------------
     telefono = clean_input(
+        # pyrefly: ignore  # bad-specialization
         f"Nuevo telefono (actual: {cliente_existente[2] if cliente_existente[2] else 'N/A'}): (Deje vacio omitir, escriba 'NULL' para borrar)\n",
         min_len=0,
         max_len=10,
@@ -323,6 +326,7 @@ def manejo_actualizacion():
     #Caso 3. El usuario ingreso un valor diferente a NULL y no vacio
     else:
         #primero verificamos que el  numero no sea igual
+        # pyrefly: ignore  # bad-specialization
         if telefono.strip() == cliente_existente[2]:
             print(f"El numero {telefono} es el mismo que el actual\nNo se actualizo el telefono\n")
         #si no es igual validamos que sea un numero
@@ -337,6 +341,7 @@ def manejo_actualizacion():
     #Ubicacion
     #----------------------------------------------------------------------------
     ubicacion = clean_input(
+        # pyrefly: ignore  # bad-specialization
         f"Nueva ubicacion aproximada (actual: {cliente_existente[3] if cliente_existente[3] else 'N/A'})\n",
         allow_empty=True,
         to_none_on_empty=False,
@@ -350,6 +355,7 @@ def manejo_actualizacion():
     # Foto Domicilio
     #----------------------------------------------------------------------------
     foto_domicilio = clean_input(
+        # pyrefly: ignore  # bad-specialization
         f"URL de la foto (actual: {cliente_existente[4] if cliente_existente[4] else 'N/A'})\n",
         allow_empty=True,
         to_none_on_empty=False,
@@ -363,6 +369,7 @@ def manejo_actualizacion():
     #Comentario
     #--------------------------------------------------------------------------------
     comentario = clean_input(
+        # pyrefly: ignore  # bad-specialization
         f"Nuevo comentario (actual: {cliente_existente[5] if cliente_existente[5] else 'N/A'})\n",
         allow_empty=True,
         to_none_on_empty=False,
@@ -385,13 +392,12 @@ def manejo_actualizacion():
     else: #si no hay datos almacenados en updates{}
         print("No se ingresaron datos para actualizar\nOperacion cancelada\n")
         list_client(client_id, USER_ID)
-    
 
 #////---- Funcion para actualizar saldo del cliente ----////
 def manejo_saldo():
     """Manejo de la logica para modifica saldo del cliente"""
     print("\n---ACTUALIZANDO SALDO DE CLIENTE---\n")
-    busqueda()
+    busqueda() #mostramos los clientes para que el usuario sepa que ID elegir
     client_id = validar_cliente()
     print(f"SALDO ACTUAL")
     # list_client(client_id, USER_ID)
@@ -414,22 +420,25 @@ def manejo_saldo():
         print("No se pudo actualizar el saldo")
 
 #////---- Funcion para eliminar los clientes de un usuario ----////
-def manejo_delete():
+def manejo_delete() -> None:
     """Manejo de la logica para eliminar clientes"""
     print("\n---ELIMINANDO CLIENTE---\n")
     print("\n---VERIFIQUE DOS VECES EL CLIENTE A ELIMINAR---\n")
     busqueda() #mostramos los clientes para que el usuario sepa que ID elegir
     client_id, cliente_existente = validar_cliente()
     #confirmamos si el cliente es correcto
+    # pyrefly: ignore  # bad-specialization
     print(f"Datos del cliente seleccionado: ID: {client_id}, Nombre: {cliente_existente[1]}, Telefono: {cliente_existente[2]}, Ubicacion: {cliente_existente[3]}, Saldo: {cliente_existente[7]}")
     
     while True:
+        # pyrefly: ignore  # bad-specialization
         confirmacion = input(f"Seguro que desea eliminar el cliente con ID: {client_id} (Nombre{cliente_existente[1]})\n//--   S/N   --//\n").strip().upper()
         if confirmacion == 'N':
             print("Omitiendo eliminacion -- Operacion cancelada\n---   NO SE ELIMINARON DATOS  ---")
             break
         elif confirmacion == 'S':
             if eliminar_cliente(client_id, USER_ID): #llamamos a la funcion para eliminar, si retona True se ejecuta lo siguiente
+                # pyrefly: ignore  # bad-specialization
                 print(f"SE ELIMINO EL CLIENTE CON ID: {client_id} (Nombre: {cliente_existente[1]})")
                 break
             else:
@@ -446,3 +455,4 @@ def manejo_delete():
 if __name__ == "__main__":
 
     main_cli()
+    
