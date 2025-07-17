@@ -1,4 +1,5 @@
 # conectar la base de datos
+from asyncio.exceptions import LimitOverrunError
 import psycopg #importamos la libreria para 'hablar' con la DB
 from datetime import date #esto es para la fecha de adquisicion
 from psycopg.errors import UniqueViolation, ForeignKeyViolation # importamos el error especifico
@@ -29,9 +30,9 @@ logging.basicConfig(
 logger = logging.getLogger(__name__) #creamos un logger para este modulo
 
 #---------------/////////////////EMPIEZA DEFINICION DE FUNCIONES///////////------------------
-#####----------------------//////FUNCIONES/////-------------------######
+#----------------------//////FUNCIONES/////-------------------
 
-#creamos una funcion para establecer y devolver una conexion nueva a la DB
+#  ESTABLECE UNA CONEXION A LA DB
 def db_conection():
     """
     ESTABLECE Y DEVUELVE UNA NUEVA CONEXIÓN A LA DB
@@ -44,7 +45,7 @@ def db_conection():
         logger.critical(f"ERROR AL CONECTAR A LA DB: {e}")
         return None #terminamos la conexión nueva
 
-#funcion para definir el nombre del usuario del sistema actual
+#  DEFINE EL NOMBRE DEL USUARIO DE LA SESION ACTUAL
 def sys_usr(usuario_sistema_id):
     user = None
     if usuario_sistema_id == 1:
@@ -53,10 +54,11 @@ def sys_usr(usuario_sistema_id):
         user = "SERGIO"
     return user
 
-#--CREAMOS UNA FUNCION PARA CREAR LA BASE DE DATOS--
-def crear_tabla_clientes():
+#  CREACION DE LAS TABLAS DE LA DB
+def crear_tablas():
     """
-    CONECTAMOS LA BASE DE DATOS Y CREAMOS LA TABLA CLIENTES
+    CONECTAMOS LA BASE DE DATOS Y CREAMOS LA TABLA CLIENTES Y MOVIMIENTOS
+    Retorna True si todo sale bien, False si hay algun error
     """
     conn = db_conection()
     if conn is None: #definimos que si hubo un error al tratar de conectar nos devuelva
@@ -65,7 +67,8 @@ def crear_tabla_clientes():
     cur = None #esta la variable cursor, asi nos aseguramos que siempre existan
 
     try:
-        cur = conn.cursor() 
+        cur = conn.cursor()
+        #creamos la tabla
         create_table_sql = """
         CREATE TABLE IF NOT EXISTS clientes(
             id SERIAL PRIMARY KEY,
@@ -74,7 +77,8 @@ def crear_tabla_clientes():
             ubicacion_aproximada TEXT,
             foto_domicilio VARCHAR(255),
             comentario TEXT,
-            fecha_adquisicion DATE,
+            fecha_adquisicion DATE NOT NULL DEFAULT CURRENT_DATE,  -- Fecha cuando se agregó el cliente
+            fecha_ultima_modificacion DATE NOT NULL DEFAULT CURRENT_DATE,  -- Última modificacion saldo
             saldo_actual NUMERIC(10, 2) DEFAULT 0.00,
             estado_cliente VARCHAR(50) DEFAULT 'regular',
             usuario_sistema_id INTEGER NOT NULL,
@@ -82,14 +86,36 @@ def crear_tabla_clientes():
         );
         """ #esta es la 'sentencia' le decimos que columnas queremos crear y con que parametros
             #añadimos la restriccion al final de la sentencia
+            
+            
+        create_movimientos_sql = """
+        CREATE TABLE IF NOT EXISTS movimientos(
+            id SERIAL PRIMARY KEY,
+            cliente_id INTEGER NOT NULL,
+            fecha_movimiento DATE NOT NULL DEFAULT CURRENT_DATE,
+            tipo_movimiento VARCHAR(50) NOT NULL CHECK (tipo_movimiento IN ('deuda_inicial', 'abono', 'actualizacion')),
+            monto NUMERIC(10, 2) NOT NULL,
+            saldo_anterior NUMERIC(10, 2) NOT NULL,
+            saldo_final NUMERIC(10, 2) NOT NULL,
+            usuario_sistema_id INTEGER NOT NULL,
+            CONSTRAINT fk_cliente_movimiento FOREIGN KEY (cliente_id) REFERENCES clientes(id) ON DELETE CASCADE
+        );
+        """
+        
+        
+        
         logger.info("INTENTANDO CREAR TABLA 'CLIENTES'...")
         cur.execute(create_table_sql) #le indicamos al 'cursor' que ejecute la sentencia create_table_sql
+        
+        logger.info("INTENTANDO CREAR TABLA 'MOVIMIENTOS'...")
+        cur.execute(create_movimientos_sql)
+        
         conn.commit() #hacemos 'commit' o guardamos los cambios de forma permanente
-        logger.info("TABLA 'CLIENTES' CREADA O YA EXISTENTE...")
+        logger.info("TABLAS CREADAS EXITOSAMENTE O YA EXISTENTE...")
         return True #indicamos que fue exitoso
 
     except psycopg.Error as e:
-        logger.error(f"/// ERROR AL CONECTAR O CREAR TABLA: {e} ///")
+        logger.error(f"/// ERROR AL CONECTAR O CREAR LAS TABLAS: {e} ///")
         if conn:
             conn.rollback()
         return False
@@ -101,7 +127,7 @@ def crear_tabla_clientes():
             conn.close()
             logger.info("/// CONEXION A LA BASE DE DATOS CERRADA ///")
 
-#---------////////  Verifica si el nombre existe en la DB   /////////--------
+#  VERIFICAMOS SI EL NOMBRE EXISTE EN LA DB
 def check_client_name_exist(nombre, usuario_sistema_id):
     """
     El unico trabajo de esta funcion es verificar si el nombre del cliente ya existe en la DB ligado al usuario actual
@@ -116,7 +142,7 @@ def check_client_name_exist(nombre, usuario_sistema_id):
     if conn is None:
         logger.error("No se pudo conectar a la DB")
         return False
-    
+
     cur = None
     try:
         cur = conn.cursor()
@@ -128,17 +154,17 @@ def check_client_name_exist(nombre, usuario_sistema_id):
         #la sentencia le dice que busque y seleccione en la tabla clientes todos las filas 
         # que encuente que sean iguales independiente de mayusculas y minusculas y 
         # pertenezcan al mismo usuario
-        logger.debug(f"Verficando si el nombre '{nombre}' ya existe para el usuario {usuario_sistema_id}")
+        logger.info(f"Verficando si el nombre '{nombre}' ya existe para el usuario {usuario_sistema_id}")
         cur.execute(select_sql, (nombre, usuario_sistema_id))
         count = cur.fetchone()[0] #type: ignore
         #cur.fetchone solo devolvera 1 valor, porque en este caso tiene la directiva UNIQUE
         #ese valor lo tomamos con el indice 0 y se lo asignamos a la variable count
         
         if count > 0:
-            logger.info(f"El nombre {nombre} ya existe para el usuario {usuario_sistema_id}")
+            logger.warning(f"El nombre {nombre} ya existe para el usuario {usuario_sistema_id}")
             return True #indica que si existe un duplicado
         else:
-            logger.debug(f"El nombre del cliente {nombre} es unico para el usuario {usuario_sistema_id}")
+            logger.info(f"El nombre del cliente {nombre} es unico para el usuario {usuario_sistema_id}")
             return False #esto indica que no existe
     except psycopg.Error as e:
         logger.error(f"Error al verificar el nombre del cliente {nombre}: {e}")
@@ -149,8 +175,8 @@ def check_client_name_exist(nombre, usuario_sistema_id):
         if conn:
             conn.close()
 
-#---------////////  funcion para agregar clientes a la DB   /////////--------
-def agregar_cliente(nombre, telefono, ubicacion, foto_domicilio, comentario, usuario_sistema_id
+#  AGREGAR CLIENTES
+def agregar_cliente(nombre, telefono, ubicacion, foto_domicilio, comentario, saldo_incial, usuario_sistema_id
     ):
     """
     Agrega un nuevo cliente a la DB, sin duplicados por id
@@ -161,27 +187,65 @@ def agregar_cliente(nombre, telefono, ubicacion, foto_domicilio, comentario, usu
     
     cur = None
     try:
-        user = sys_usr(usuario_sistema_id)
         cur = conn.cursor()
-        # 'sentencia' para hacer el insert
+        
+        # paso 1
+        # insertar el cliente
         insert_sql = """
-        INSERT INTO clientes (nombre,
-        telefono,
-        ubicacion_aproximada,
-        foto_domicilio,
-        comentario,
-        fecha_adquisicion,
-        usuario_sistema_id)
-        VALUES(%s, %s, %s, %s, %s, %s, %s)
+        INSERT INTO clientes (
+            nombre,
+            telefono,
+            ubicacion_aproximada,
+            foto_domicilio,
+            comentario,
+            fecha_adquisicion,
+            saldo_actual,
+            usuario_sistema_id
+        ) VALUES(%s, %s, %s, %s, %s, %s, %s, %s)
         RETURNING id; -- OBTENEMOS EL id DEL CLIENTE INSERTADO
         """
         # con date.today() añadimos la fecha de adquisicion por defecto
-        cur.execute(insert_sql, (nombre, telefono, ubicacion, foto_domicilio, comentario, date.today(), usuario_sistema_id)) #aqui le pedimos al cursor que ejecute la sentencia sql, con los valores que le indicamos
+        cur.execute(insert_sql, (
+            nombre,
+            telefono,
+            ubicacion,
+            foto_domicilio,
+            comentario,
+            date.today(),
+            saldo_incial,
+            usuario_sistema_id
+        )) #aqui le pedimos al cursor que ejecute la sentencia sql, con los valores que le indicamos
+        
         cliente_id = cur.fetchone()[0] # type: ignore
+        
+        #paso 2 insertamos el cliente si tiene saldo inicial
+        if saldo_incial > 0:
+            insertar_movimiento_sql = """
+            INSERT INTO movimientos (
+                cliente_id,
+                tipo_movimiento,
+                monto,
+                saldo_anterior,
+                saldo_final,
+                usuario_sistema_id
+            ) VALUES (
+                %s, %s, %s, %s, %s, %s)
+            """
+            cur.execute(insertar_movimiento_sql, (
+                cliente_id,
+                'deuda_inicial',
+                saldo_incial, #en este contexto exclusivamente saldo_incial es lo mismo que saldo final
+                0.00,
+                saldo_incial,
+                usuario_sistema_id
+            ))
+        
         conn.commit()
+        user = sys_usr(usuario_sistema_id)
         logger.info(f'Cliente "{nombre}" ah sido agregado con exito, id: {cliente_id}')
-        print(f'Cliente "{nombre}" ah sido agregado con exito, id: {cliente_id}')
+        print(f'\nCliente "{nombre}" ah sido agregado con exito, id: {cliente_id}')
         return cliente_id # devuelve el id del nuevo cliente
+    
     #----////CON ESTE BLOQUE CAPTURAMOS EL ERROR DE Unique.Violaton/////-----
     except UniqueViolation as e: # capturamos el error especifico de unicidad
         logger.warning(f"ERROR: El cliente '{nombre}' para el Usuario '{user}' ya existe, no se agrego.\nDetalle: \n {e}") # type: ignore
@@ -201,7 +265,7 @@ def agregar_cliente(nombre, telefono, ubicacion, foto_domicilio, comentario, usu
         if conn:
             conn.close()
 
-#------///// funcion para obtener todos los clientes para un usuario especifico /////////------
+#  OBTENEMOS TODOS LOS CLIENTES DE UN USUARIO
 def obtain_clients(usuario_sistema_id):
     """
     OBTIENE Y MUESTRA TODOS LOS CLIENTES DE UN USUARIO ESPECIFICO
@@ -222,15 +286,19 @@ def obtain_clients(usuario_sistema_id):
         #obtenemos los nombres de las columnas para mejor legibilidad
         column_names = [desc[0] for desc in cur.description] # type: ignore
         logger.info(f"\nObteniendo clientes del usuario {user}\n")
-        #los prints para la cli se mantienen
+        
         print(f"\nObteniendo clientes del usuario {user}\n")
-        print("|".join(column_names))
-        print("-" * (len("|".join(column_names))))
+        # print(f"\n{column_names[0].upper()} | {column_names[1].upper()} | {column_names[2].upper()} | {column_names[5].upper()} | {column_names[7].upper()} | {column_names[8].upper()} | {column_names[9].upper()}")
+        # #los prints para la cli se mantienen
+
+        # print(" | ".join(column_names))
+        print("=" * 80) #imprimimos una linea de separacion
 
         for row in cur.fetchall():
+            print(f"\n| ID: {row[0]}\n| NOMBRE: {row[1]}\n| TELEFONO: {row[2]} \n| COMENTARIO: {row[5]}\n| ULTIMA MODIFICACION: {row[7]}\n| SALDO: {row[8]}\n| ESTADO: {row[9].upper()}")
             #Formateamos la fila
-            formated_row = [str(col) if col is not None else "N/A" for col in row]
-            print("|".join(formated_row)) #imprimimos como fila formateada
+            # formated_row = [str(col) if col is not None else "N/A" for col in row]
+            # print("|".join(formated_row)) #imprimimos como fila formateada
             clientes.append(row) # Tambien podemos guardar las tuplas en una lista
         
         return clientes
@@ -245,7 +313,7 @@ def obtain_clients(usuario_sistema_id):
             conn.close()
         #cerramos cursor y conexion
 
-#####------------------////// FUNCION PARA ACTUALIZAR UNA FILA/////----------------------
+#  ACTUALIZAR UNA FILA/CLIENTE
 def client_update(cliente_id, usuario_sistema_id, **kwargs):
     
     
@@ -335,8 +403,8 @@ def client_update(cliente_id, usuario_sistema_id, **kwargs):
         if conn:
             conn.close()
 
-#####------------------////// FUNCION PARA ACTUALIZAR SALDOS/////----------------------
-def actualizar_saldo(cliente_id, usuario_sistema_id, nuevo_saldo):
+#  ACTUALIZAR SALDOS
+def actualizar_saldo(cliente_id, usuario_sistema_id, monto):
     """
     ACTUALIZA EL SALDO DE UN CLIENTE ESPECIFICO, FILTRADO POR SU ID Y EL ID DEL PROPIETARIO DEL CLIENTE
 
@@ -353,22 +421,77 @@ def actualizar_saldo(cliente_id, usuario_sistema_id, nuevo_saldo):
     
     cur = None
     try:
-        user = sys_usr(usuario_sistema_id)
-    
         cur = conn.cursor()
-        #sentencia SQL para sumar/restar al saldo actual
-        update_saldo_sql = """
+        
+        # Paso 1: obtener el saldo actual del cliente
+        obtener_saldo_sql = """
+        SELECT saldo_actual FROM clientes WHERE id = %s AND usuario_sistema_id = %s;
+        """
+        
+        cur.execute(obtener_saldo_sql, (
+            cliente_id,
+            usuario_sistema_id))
+        
+        resultado = cur.fetchone()
+        
+        if not resultado:
+            logger.warning(f"Cliente con ID {cliente_id} no encontrado")
+            return False
+        
+        saldo_anterior = resultado[0] #type: ignore
+        saldo_final = saldo_anterior + monto
+        
+        # Paso 2: Actualizar saldo del cliente
+        actualizar_saldo_sql = """
         UPDATE clientes
-        SET saldo_actual = saldo_actual + %s
+            SET 
+                saldo_actual = %s,
+                fecha_ultima_modificacion = %s
         WHERE id = %s AND usuario_sistema_id = %s;
         """
         
-        #ejecutamos la sentencia, debemos pasar los valores tal como definimos la sentencia psycopg convierte automaticamente Decimal a NUMERIC
-        cur.execute(update_saldo_sql, (nuevo_saldo, cliente_id, usuario_sistema_id))
-        #usamos rowcount para verificar si realmente se hizo algun movimiento
+        cur.execute(actualizar_saldo_sql, (
+            saldo_final,
+            date.today(), #actualizamos la fecha de ultima modificacion
+            cliente_id,
+            usuario_sistema_id))
+        
+        # Paso 3: Determinar el tipo de movimiento
+        if monto > 0:
+            tipo_movimiento = 'actualizacion' # agregar deuda
+        else:
+            tipo_movimiento = 'abono' # pagar deuda
+            
+        # Paso 4: registrar el movimiento
+        registrar_movimiento_sql = """
+        INSERT INTO movimientos (
+            cliente_id,
+            tipo_movimiento,
+            monto,
+            saldo_anterior,
+            saldo_final,
+            usuario_sistema_id
+        ) VALUES (
+            %s, %s, %s, %s, %s, %s
+        )
+        """
+        
+        cur.execute(registrar_movimiento_sql, (
+            cliente_id,
+            tipo_movimiento,
+            monto,
+            saldo_anterior,
+            saldo_final,
+            usuario_sistema_id
+        ))
+        
+        conn.commit() #guardamos los cambios
+
+        user = sys_usr(usuario_sistema_id)
+        
         if cur.rowcount > 0:
             conn.commit() #guardamos cambios
-            logger.info(f"Saldo cliente ID {cliente_id} (usuario {user}) actualizado) con {nuevo_saldo}")
+            logger.info(f"Saldo cliente ID {cliente_id} (usuario {user}) actualizado) con {saldo_final}")
             print(f"\nSaldo del cliente actualizado")
             return True
         else:
@@ -388,8 +511,9 @@ def actualizar_saldo(cliente_id, usuario_sistema_id, nuevo_saldo):
             cur.close()
         if conn:
             conn.close()
+            logger.info("/// CONEXION A LA BASE DE DATOS CERRADA ///")
 
-#----------------///////// FUNCION PARA LISTAR UN SOLO CLIENTE ///////----------------------
+#  LISTAR UN SOLO CLIENTE
 def list_client(cliente_id, usuario_sistema_id):
     while True:
         conn = db_conection()
@@ -407,11 +531,16 @@ def list_client(cliente_id, usuario_sistema_id):
 
             encontrado = cur.fetchone()
             if encontrado:
-                logger.debug(f"Cliente ID {cliente_id} listado con exito")
-                print(f"\n//--ID: {encontrado[0]}, Nombre: {encontrado[1]}, Telefono: {encontrado[2]}, Saldo: ${encontrado[7]}--//")
+                logger.info(f"\nCliente ID {cliente_id} listado con exito")
+                print('=' * 80)
+                print(" " * 30, "DETALLES DEL CLIENTE")
+                print('=' * 80)
+                print(f"| ID: {encontrado[0]}\n| Nombre: {encontrado[1]}\n| Telefono: {encontrado[2]}\n| Ultima modificacion: {encontrado[7]}\n| Saldo: ${encontrado[8]}\n| Estado: --{encontrado[9].upper()}--")
+                print('=' * 80)
+                print('=' * 80)
                 return encontrado # RETORNA EL CLIENTE ENCONTRADO Y SALE DEL BUCLE
             else:
-                logger.info(f"\nNo se encontraron datos para el ID {cliente_id} (usuario {user})")
+                logger.warning(f"\nNo se encontraron datos para el ID {cliente_id} (usuario {user})")
                 # print("No se encontraron datos para ese ID, intenta de nuevo.")
                 return None #retornamos None para indicarle que no se encontro el id
         except (Exception, psycopg.Error) as e:
@@ -424,7 +553,7 @@ def list_client(cliente_id, usuario_sistema_id):
             if cur:
                 cur.close()
 
-#----------------///////// FUNCION PARA ELIMINAR CLIENTES ///////----------------------
+#  ELIMINAR CLIENTES
 def eliminar_cliente(cliente_id, usuario_sistema_id):
     """
     ELIMINA UN CLIENTE ESPECIFICO BASANDOSE EN SU ID Y EL ID USUARIO PROPIETARIO
@@ -454,23 +583,25 @@ def eliminar_cliente(cliente_id, usuario_sistema_id):
         if cur.rowcount > 0:
             conn.commit() #solo guardamos si rowcount nos confirma que se elemino alguna fila
             logger.info(f"Cliente con ID: {cliente_id} (Usuario: {user}) eliminado con exito")
+            print('=' * 80)
             print(f"Cliente con ID: {cliente_id} (Usuario: {user}) eliminado")
+            print('=' * 80)
             return True
         else:
             conn.rollback() #si el rowcount es 0, el cliente no se encontro o no existe y deshacemos
             logger.warning(f"Cliente con ID {cliente_id} (Usuario {user}) no encontrado")
-            print(f"---ERROR---\nCliente con ID {cliente_id} (Usuario {user}) no encontrado")
+            print(f"\n---ERROR---\nCliente con ID {cliente_id} (Usuario {user}) no encontrado")
             return False
     except ForeignKeyViolation as e:
         #capturamos el error si el cliente esta en otra tabla
         logger.error(f"ERROR de clave foranea al eliminar cliente con ID {cliente_id}.\nDetalle\n{e}")
-        print(f"No se pudo eliminar cliente con ID {cliente_id}, debido a deoendencia en otra tabla.\nDetalle\n{e}")
+        print(f"\nNo se pudo eliminar cliente con ID {cliente_id}, debido a deoendencia en otra tabla.\nDetalle\n{e}")
         if conn:
             conn.rollback()
             return False
     except psycopg.Error as e:
         logger.error(f"ERROR general el eliminar cliente ID {cliente_id}.\n(GENERAL - ERROR)\n{e}")
-        print(f"ERROR al eliminar cliente con ID {cliente_id}.\n(GENERAL - ERROR)\n{e}")
+        print(f"\nERROR al eliminar cliente con ID {cliente_id}.\n(GENERAL - ERROR)\n{e}")
         if conn:
             conn.rollback()
             return False
@@ -480,7 +611,7 @@ def eliminar_cliente(cliente_id, usuario_sistema_id):
         if conn:
             conn.close()
 
-#----------------///////// FUNCION PARA BUSQUEDA DE CLIENTES ///////----------------------
+#  BUSQUEDA DE CLIENTES
 def client_search(nombre_buscado, usuario_sistema_id):
 
     # Bucle principal para permitir múltiples búsquedas o salir
@@ -504,20 +635,22 @@ def client_search(nombre_buscado, usuario_sistema_id):
         try:
             cur = conn.cursor()
             sql_search = """
-                SELECT id, --0
-                nombre, --1
-                telefono, --2
-                ubicacion_aproximada, --3
-                foto_domicilio, --4
-                comentario, --5
-                fecha_adquisicion, --6
-                saldo_actual, --7
-                estado_cliente, --8
-                usuario_sistema_id --9
+                SELECT 
+                    id, -- 0
+                    nombre, -- 1
+                    telefono, -- 2
+                    ubicacion_aproximada, -- 3
+                    foto_domicilio, -- 4
+                    comentario, -- 5
+                    fecha_adquisicion,  -- 6
+                    fecha_ultima_modificacion,  -- 7
+                    saldo_actual, -- 8
+                    estado_cliente, -- 9
+                    usuario_sistema_id -- 10
                 FROM clientes
                 WHERE TRIM(nombre) ILIKE TRIM(%s) AND usuario_sistema_id = (%s);
                 """
-            patron_busqueda = f"{nombre_buscado.strip()}%"
+            patron_busqueda = f"%{nombre_buscado.strip()}%"
             logger.info(f"Buscando clientes con nombre '{nombre_buscado_limpio}' para el usuario {sys_usr(usuario_sistema_id)}")
             cur.execute(sql_search, (patron_busqueda, usuario_sistema_id))
             filas = cur.fetchall() #con fetchall se listan todas las filas encontradas y damos paso a la logica para que tenga que haber un nombre
@@ -526,7 +659,7 @@ def client_search(nombre_buscado, usuario_sistema_id):
                 logger.info(f"Se encontraron {len(filas)} resultados para '{nombre_buscado_limpio}'")
                 print(f"\nResultados para '{nombre_buscado}' \n")
                 for fila in filas:
-                    print(f"ID: {fila[0]}, Nombre: {fila[1]}, Telefono: {fila[2]}, Ubicacion: {fila[3]}, Comentario: {fila[5]}, Saldo: ${fila[7]}.")
+                    print(f"| ID: {fila[0]}\n| Nombre: {fila[1]}\n| Telefono: {fila[2]}\n| Ultima modificacion: {fila[7]}\n| Saldo: ${fila[8]}\n| Estado: --{fila[9].upper()}--")
                 break # Salir del bucle si se encontraron resultados
             else: # Si no se encontraron resultados, se le da la opción al usuario de intentar de nuevo o salir
                 logger.info(f"No se encontraron resultados para '{nombre_buscado_limpio}'")
@@ -543,3 +676,129 @@ def client_search(nombre_buscado, usuario_sistema_id):
                 conn.close()
             if cur:
                 cur.close()
+
+#  LISTAR LOS MOVIMIENTOS
+def historial_movimientos(cliente_id, usuario_sistema_id, limite=10):
+    """
+    Obtiene el historial de movimientos de la tabla movimientos, de un cliente especifico, basandose en el id del cliente y el user id, el limite es para establecer cuantos movimientos se quieren consultar
+    
+    devuelve la lista de movimientos o una lista vacia si no hay movimientos
+    """
+    conn = db_conection()
+    if conn is None:
+        return False
+    
+    cur = None
+    try:
+        cur = conn.cursor()
+        #sentencia para seleccionar movimientos, ordenarlos por fecha y id de forma descendente y opcionalmente limitarlos
+        sql_movimientos = """
+        SELECT
+            mv.id,
+            mv.fecha_movimiento,
+            mv.tipo_movimiento,
+            mv.monto,
+            mv.saldo_anterior,
+            mv.saldo_final,
+            c.nombre AS nombre_cliente
+        FROM
+            movimientos mv
+        INNER JOIN
+            clientes c ON mv.cliente_id = c.id
+        WHERE
+            mv.cliente_id = %s AND mv.usuario_sistema_id = %s
+        ORDER BY
+            mv.fecha_movimiento DESC, mv.id DESC
+        LIMIT %s;
+        """
+        # parametros = [cliente_id, usuario_sistema_id]
+        
+        # if limite is not None and isinstance(limite, int) and limite > 0: #si limite no es None, y es un numero entero, y es mayor a cero
+        #     sql_movimientos += "LIMIT %s" #agregamos a la sentencia, el limite con su placeholder
+        #     parametros.append(limite) #añadimos limite a los parametros
+        logger.info(f"Intentando obtener historial de movimientos para el cliente ID: {cliente_id}")
+        cur.execute(sql_movimientos, (cliente_id, usuario_sistema_id, limite))
+        movimientos = cur.fetchall() #asignamos a la variable movimientos lo que hemos obtenido de la consulta
+        
+        if movimientos: #si no esta vacio
+            logger.info(f"Se encontraron {len(movimientos)} movimientos para el cliente ID: {cliente_id}")
+            return movimientos #retorna los valores obtenidos de la consulta
+        else:
+            logger.info(f"No se encontraron movimientos para el cliente ID: {cliente_id}")
+            print(f"No se encontraron movimientos para el cliente ID: {cliente_id}")
+            return [] #devolvemos una lista vacia
+    
+    except psycopg.Error as e: #capturamos errores generales
+        logger.error(f"ERROR al obtener historial de movimientos para {cliente_id}: {e}")
+        return None
+    finally:
+        if cur:
+            cur.close()
+        if conn:
+            conn.close()
+            logger.info("/// CONEXION A LA BASE DE DATOS CERRADA ///")
+
+#  REGISTRAMOS EL MOVIMIENTO EN LA DB
+def registrar_movimiento(cliente_id, tipo_movimiento, monto, saldo_anterior, saldo_final, usuario_sistema_id):
+    """
+    REGISTRA UN MOVIMIENTO EN LA TABLA MOVIMIENTOS
+    
+    Args:
+        cliente_id (int) ID del cliente que tuvo el movimiento
+        tipo_movimiento (str) Tipo de movimiento ('deuda_inicial', 'abono', 'actualizacion')
+        monto (Decimal) Monto del movimiento
+        saldo_anterior (Decimal) Saldo anterior del cliente
+        saldo_final (Decimal) Saldo final del cliente
+        usuario_sistema_id (int) ID del usuario que realizo el movimiento
+    Returns:
+        bool: True si se registro con exito, False en caso contrario
+    """
+    conn = db_conection()
+    if conn is None:
+        return False
+    
+    cur = None
+    try:
+        cur = conn.cursor()
+        
+        #sentencia SQL para insertar el movimiento
+        insertar_movimiento_sql = """
+        INSERT INTO movimientos (
+            cliente_id,
+            tipo_movimiento,
+            monto,
+            saldo_anterior,
+            saldo_final,
+            usuario_sistema_id
+        ) VALUES (
+            %s, %s, %s, %s, %s, %s)
+        RETURNING id;
+        """
+        
+        #ejecutamos la insercion
+        cur.execute(insertar_movimiento_sql, (
+            cliente_id,
+            tipo_movimiento,
+            monto,
+            saldo_anterior,
+            saldo_final,
+            usuario_sistema_id
+        ))
+        
+        movimiento_id = cur.fetchone()[0] #type: ignore
+        #obtenemos el id del movimiento 
+        conn.commit()
+        
+        logger.info(f"Movimiento registrado con ID: {movimiento_id}")
+        return True
+    except psycopg.Error as e:
+        logger.error(f"ERROR al registrar movimiento: {e}")
+        if conn: conn.rollback()
+        return False
+    finally:
+        if cur:
+            cur.close()
+        if conn:
+            conn.close()
+            logger.info("/// CONEXION A LA BASE DE DATOS CERRADA ///")
+
