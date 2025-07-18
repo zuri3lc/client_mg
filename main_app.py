@@ -14,6 +14,7 @@ from db.operations import (
     sys_usr,
     check_client_name_exist,
     historial_movimientos,
+    ultimo_movimiento
 )
 from datetime import date #importamos fecha
 from decimal import Decimal, InvalidOperation #importamos decimal para uso futuro con saldos
@@ -21,7 +22,7 @@ from decimal import Decimal, InvalidOperation #importamos decimal para uso futur
 
 #####-------//////INICIO DE LA LOGICA DE PRUEBA/////--------######
 #Establecemos los id del usuario actual fijo temporalmente    
-USER_ID = 2
+USER_ID = 1
 
 #////---- FUNCION PARA EL MENU ----////
 def menu():
@@ -138,7 +139,7 @@ def validar_cliente():
     return client_id, cliente_existente #fuera del bucle retornamos el id para usarlo en otras funciones
 
 #////---- FUNCION PARA SOLICITAR DATOS ----////
-def info_data(initial_name=None): #de esta variable obtenemos los datos para añadir clientes o modificarlos
+def info_data(initial_name=None):
     """Solicita la informacion del cliente al usuario.
     Retorna un diccionario con los datos o None si la validacion falla"""
 
@@ -259,11 +260,24 @@ def new_client():
 #////---- Funcion para buscar un cliente, obtener el id y los datos ----////
 def busqueda():
     search_name = input(" Ingresa el cliente para buscar, solo ingresa el primer nombre : \n")
-    client_search(search_name, USER_ID)
+    filas, nombre_buscado = client_search(search_name, USER_ID) #type: ignore
+    print(f"\nResultados para '{nombre_buscado}' \n")
+    for fila in filas: #iteramos en cada fila obtenida de client_search
+        print(f"| ID: {fila[0]}\n| Nombre: {fila[1]}\n| Telefono: {fila[2]}\n| Ultima modificacion: {fila[7]}\n| Saldo: ${fila[8]}\n| Estado: --{fila[9].upper()}--")
+        print("-" * 80)
 
 #////---- Funcion para obtener todos los clientes de un usuario ----////
 def ver_clientes():
-    obtain_clients(USER_ID)
+    clientes = obtain_clients(USER_ID)
+    
+    total_saldo = Decimal(0) #inicializamos el total del saldo en 0
+    
+    for row in clientes: #type: ignore
+        # iteramos en cada fila obtenida de obtain_clients
+        print(f"\n| ID: {row[0]}\n| NOMBRE: {row[1]}\n| TELEFONO: {row[2]} \n| COMENTARIO: {row[5]}\n| ULTIMA MODIFICACION: {row[7]}\n| SALDO: {row[8]}\n| ESTADO: {row[9].upper()}")
+        print("=" * 80) #imprimimos una linea de separacion
+        total_saldo += row[8] #sumamos el saldo de cada cliente al total
+    print(f"\n--- Total de clientes: {len(clientes)}, Saldo Global: ${total_saldo} ---\n") #type: ignore
 
 #////---- Funcion para actualizar los clientes de un usuario ----////
 def manejo_actualizacion():
@@ -399,9 +413,8 @@ def manejo_saldo():
     print("\n---ACTUALIZANDO SALDO DE CLIENTE---\n")
     busqueda() #mostramos los clientes para que el usuario sepa que ID elegir
     client_id, cliente_existente = validar_cliente()
+    ultimo_movimiento(client_id, USER_ID)
     print(f" SALDO ACTUAL")
-    # list_client(client_id, USER_ID)
-
     #solicitamos el monto a restar o sumar y toca validarlo
     while True:
         monto_str = input("\n Ingrese el monto\n para añadir saldo solo escriba el monto seguido de 2 decimales\n Ej: 00.00\n para restar al saldo escriba el signo '-' seguido del monto\n Ej: -00.00\n\n")
@@ -414,7 +427,7 @@ def manejo_saldo():
             print(f" Ocurrio un error inesperado al actualizar el monto:\n{e}, intente de nuevo\n Ej: 00.00 para añadir al saldo\n  -00.00 para restar al saldo")
     #una vez validado el monto, llamamos a la funcion con la sentencia
     if actualizar_saldo(client_id, USER_ID, monto):
-        print(f" Saldo Actual:\n")
+        #print(f" Saldo Actual:\n")
         list_client(client_id, USER_ID)
     else:
         print(" No se pudo actualizar el saldo")
@@ -435,7 +448,6 @@ def manejo_delete():
             break
         elif confirmacion == 'S':
             if eliminar_cliente(client_id, USER_ID): #llamamos a la funcion para eliminar, si retona True se ejecuta lo siguiente
-                # pyrefly: ignore  # bad-specialization
                 print(f" SE ELIMINO EL CLIENTE CON ID: {client_id} ({cliente_existente[1]})")
                 break
             else:
@@ -444,7 +456,7 @@ def manejo_delete():
         else: # si ingresan algo diferente a S o N
             print(" Entrada Invalida, ingrese S para eliminar o N para cancelar\n")
 
-#  MANJA EL HISTORIAL DE MOVIMIENTOS
+#  MANEJA EL HISTORIAL DE MOVIMIENTOS
 def manejo_historial():
     """
     Logica para mostrar el historial de movimientos de un cliente
@@ -476,5 +488,16 @@ def manejo_historial():
             print("-" * 40)
 
 if __name__ == "__main__":
+    
+    """Punto de entrada principal del programa"""
+    try:
+        main_cli() #llamamos a la funcion principal
+    except KeyboardInterrupt: #capturamos Ctrl+C para salir del programa
+        print("\n\nSALIENDO DEL PROGRAMA...\n")
+    except Exception as e: #capturamos cualquier otro error inesperado
+        print(f"\n Ocurrio un error inesperado: {e}\n Saliendo del programa...\n")
+        import sys
+        sys.exit(1) #salimos con codigo de error 1
+    finally:
+        print("\n=== PROGRAMA FINALIZADO ===\n")
 
-    main_cli()

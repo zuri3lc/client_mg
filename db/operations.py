@@ -282,26 +282,18 @@ def obtain_clients(usuario_sistema_id):
         # seleccionamos todas las columnas (*) y filtramos por usuario del sistema
         select_sql = "SELECT * FROM clientes WHERE usuario_sistema_id = %s ORDER BY ID;" #creamos una variable con la sentencia de busqueda
         cur.execute(select_sql, (usuario_sistema_id,)) #la comma es necesaria si solo hay un elemento en la tupla
-
-        #obtenemos los nombres de las columnas para mejor legibilidad
-        column_names = [desc[0] for desc in cur.description] # type: ignore
-        logger.info(f"\nObteniendo clientes del usuario {user}\n")
-        
-        print(f"\nObteniendo clientes del usuario {user}\n")
-        # print(f"\n{column_names[0].upper()} | {column_names[1].upper()} | {column_names[2].upper()} | {column_names[5].upper()} | {column_names[7].upper()} | {column_names[8].upper()} | {column_names[9].upper()}")
-        # #los prints para la cli se mantienen
-
-        # print(" | ".join(column_names))
+        # ejecutamos la consulta y obtenemos los resultados
+        logger.info(f"\nObteniendo clientes del usuario {user}")
+        print(f"\nObteniendo clientes del usuario {user}")
         print("=" * 80) #imprimimos una linea de separacion
-
-        for row in cur.fetchall():
-            print(f"\n| ID: {row[0]}\n| NOMBRE: {row[1]}\n| TELEFONO: {row[2]} \n| COMENTARIO: {row[5]}\n| ULTIMA MODIFICACION: {row[7]}\n| SALDO: {row[8]}\n| ESTADO: {row[9].upper()}")
-            #Formateamos la fila
-            # formated_row = [str(col) if col is not None else "N/A" for col in row]
-            # print("|".join(formated_row)) #imprimimos como fila formateada
-            clientes.append(row) # Tambien podemos guardar las tuplas en una lista
+        clientes = cur.fetchall()
         
-        return clientes
+        if not clientes:
+            logger.warning(f"No se encontraron clientes para el usuario {user}")
+            print(f"No se encontraron clientes para el usuario {user}")
+        else:
+            logger.info(f"Se encontraron {len(clientes)} clientes para el usuario {user}")
+            return clientes #retornamos la lista de clientes obtenidos
 
     except psycopg.Error as e:
         logger.error(f'Error al obtener clientes: {e}')
@@ -492,7 +484,7 @@ def actualizar_saldo(cliente_id, usuario_sistema_id, monto):
         if cur.rowcount > 0:
             conn.commit() #guardamos cambios
             logger.info(f"Saldo cliente ID {cliente_id} (usuario {user}) actualizado) con {saldo_final}")
-            print(f"\nSaldo del cliente actualizado")
+            #print(f"\nSaldo del cliente actualizado")
             return True
         else:
             conn.rollback() #si no se puede devolvemos al estado inicial
@@ -535,8 +527,7 @@ def list_client(cliente_id, usuario_sistema_id):
                 print('=' * 80)
                 print(" " * 30, "DETALLES DEL CLIENTE")
                 print('=' * 80)
-                print(f"| ID: {encontrado[0]}\n| Nombre: {encontrado[1]}\n| Telefono: {encontrado[2]}\n| Ultima modificacion: {encontrado[7]}\n| Saldo: ${encontrado[8]}\n| Estado: --{encontrado[9].upper()}--")
-                print('=' * 80)
+                print(f"| ID: {encontrado[0]}\n| Nombre: {encontrado[1]}\n| Telefono: {encontrado[2]}\n| Fecha de creacion: {encontrado[6]}\n| Ultima modificacion: {encontrado[7]}\n| Saldo: ${encontrado[8]}\n| Estado: --{encontrado[9].upper()}--")
                 print('=' * 80)
                 return encontrado # RETORNA EL CLIENTE ENCONTRADO Y SALE DEL BUCLE
             else:
@@ -657,10 +648,7 @@ def client_search(nombre_buscado, usuario_sistema_id):
 
             if filas: # Si se encontraron resultados
                 logger.info(f"Se encontraron {len(filas)} resultados para '{nombre_buscado_limpio}'")
-                print(f"\nResultados para '{nombre_buscado}' \n")
-                for fila in filas:
-                    print(f"| ID: {fila[0]}\n| Nombre: {fila[1]}\n| Telefono: {fila[2]}\n| Ultima modificacion: {fila[7]}\n| Saldo: ${fila[8]}\n| Estado: --{fila[9].upper()}--")
-                break # Salir del bucle si se encontraron resultados
+                return filas, nombre_buscado # Retorna las filas encontradas y el nombre y sale del bucle
             else: # Si no se encontraron resultados, se le da la opción al usuario de intentar de nuevo o salir
                 logger.info(f"No se encontraron resultados para '{nombre_buscado_limpio}'")
                 print(f"No se encontraron resultados para '{nombre_buscado}'. Intente de nuevo.")
@@ -801,4 +789,19 @@ def registrar_movimiento(cliente_id, tipo_movimiento, monto, saldo_anterior, sal
         if conn:
             conn.close()
             logger.info("/// CONEXION A LA BASE DE DATOS CERRADA ///")
+
+# OBTENEMOS EL ULTIMO MOVIMIENTO DE UN CLIENTE
+def ultimo_movimiento(cliente_id, usuario_sistema_id, limite=3):
+    ultimomovimiento = historial_movimientos(cliente_id, usuario_sistema_id, limite)
+    if ultimomovimiento:
+        for fila in ultimomovimiento:
+            fecha = fila[1].strftime("%d/%m/%y")
+            tipo = fila[2].replace('_', ' ')
+            monto = fila[3]
+            saldo_anterior = fila[4]
+            saldo_final = fila[5]
+            print(f"| {fecha} Tipo: --{tipo.upper()}-- Saldo Anterior: {saldo_anterior} Monto: {monto} Saldo Final: {saldo_final}")
+            print('=' * 80)
+    else:
+        print(f"\n No se encontraron movimientos para el cliente ID {cliente_id}")
 
