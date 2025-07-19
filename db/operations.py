@@ -1,10 +1,11 @@
 # conectar la base de datos
-from asyncio.exceptions import LimitOverrunError
+#from asyncio.exceptions import LimitOverrunError
 import psycopg #importamos la libreria para 'hablar' con la DB
 from datetime import date #esto es para la fecha de adquisicion
 from psycopg.errors import UniqueViolation, ForeignKeyViolation # importamos el error especifico
 from decimal import Decimal #importamos decimal para uso con saldos
 import logging
+import bcrypt
 
 
 #-------configuracion de la conexion a PostgreSQL----------
@@ -45,15 +46,6 @@ def db_conection():
         logger.critical(f"ERROR AL CONECTAR A LA DB: {e}")
         return None #terminamos la conexión nueva
 
-#  DEFINE EL NOMBRE DEL USUARIO DE LA SESION ACTUAL
-def sys_usr(usuario_sistema_id):
-    user = None
-    if usuario_sistema_id == 1:
-        user = "ZURIEL"
-    elif usuario_sistema_id == 2:
-        user = "SERGIO"
-    return user
-
 #  CREACION DE LAS TABLAS DE LA DB
 def crear_tablas():
     """
@@ -68,8 +60,20 @@ def crear_tablas():
 
     try:
         cur = conn.cursor()
-        #creamos la tabla
-        create_table_sql = """
+        
+        # ---------------- TABLA USUARIOS DEL SISTEMA ----------------
+        create_usuarios_sql = """
+        CREATE TABLE IF NOT EXISTS usuarios(
+            id SERIAL PRIMARY KEY,
+            username VARCHAR(100) UNIQUE NOT NULL, -- restriccion de unicidad
+            password_hash VARCHAR(255) NOT NULL,
+            nombre VARCHAR(255),
+            fecha_creacion DATE NOT NULL DEFAULT CURRENT_DATE
+        );
+        """
+        
+        # ---------------- TABLA CLIENTES ----------------
+        create_clientes_sql = """
         CREATE TABLE IF NOT EXISTS clientes(
             id SERIAL PRIMARY KEY,
             nombre VARCHAR(255) NOT NULL,
@@ -77,17 +81,20 @@ def crear_tablas():
             ubicacion_aproximada TEXT,
             foto_domicilio VARCHAR(255),
             comentario TEXT,
-            fecha_adquisicion DATE NOT NULL DEFAULT CURRENT_DATE,  -- Fecha cuando se agregó el cliente
-            fecha_ultima_modificacion DATE NOT NULL DEFAULT CURRENT_DATE,  -- Última modificacion saldo
+            fecha_adquisicion DATE NOT NULL DEFAULT CURRENT_DATE,
+            fecha_ultima_modificacion DATE NOT NULL DEFAULT CURRENT_DATE,
             saldo_actual NUMERIC(10, 2) DEFAULT 0.00,
             estado_cliente VARCHAR(50) DEFAULT 'regular',
             usuario_sistema_id INTEGER NOT NULL,
-            CONSTRAINT uq_nombre_id_usuario UNIQUE (nombre, usuario_sistema_id)
+            CONSTRAINT uq_nombre_id_usuario UNIQUE (nombre, usuario_sistema_id),
+            -- relacion con la tabla de usuarios del sistema
+            CONSTRAINT fk_usuario_sistema FOREIGN KEY (usuario_sistema_id) REFERENCES usuarios(id) ON DELETE CASCADE
         );
-        """ #esta es la 'sentencia' le decimos que columnas queremos crear y con que parametros
-            #añadimos la restriccion al final de la sentencia
+        """     #restriccion al final de la sentencia
+                # uq_nombre_id_usuario restriccion de unicidad para evitar duplicados el nombre del cliente y el id del usuario del sistema
+                #fk_usuario_sistema relaciona la tabla clientes con la tabla usuarios del sistema
             
-            
+        # ----------------- TABLA MOVIMIENTOS -----------------
         create_movimientos_sql = """
         CREATE TABLE IF NOT EXISTS movimientos(
             id SERIAL PRIMARY KEY,
@@ -100,12 +107,13 @@ def crear_tablas():
             usuario_sistema_id INTEGER NOT NULL,
             CONSTRAINT fk_cliente_movimiento FOREIGN KEY (cliente_id) REFERENCES clientes(id) ON DELETE CASCADE
         );
-        """
+        """ # fk_cliente_movimiento relaciona la tabla movimientos con la tabla clientes
         
-        
+        logger.info("INTENTANDO CREAR TABLA 'USUARIOS'...")
+        cur.execute(create_usuarios_sql) 
         
         logger.info("INTENTANDO CREAR TABLA 'CLIENTES'...")
-        cur.execute(create_table_sql) #le indicamos al 'cursor' que ejecute la sentencia create_table_sql
+        cur.execute(create_clientes_sql) 
         
         logger.info("INTENTANDO CREAR TABLA 'MOVIMIENTOS'...")
         cur.execute(create_movimientos_sql)
@@ -126,6 +134,126 @@ def crear_tablas():
         if conn:
             conn.close()
             logger.info("/// CONEXION A LA BASE DE DATOS CERRADA ///")
+
+def registrar_usuario(username, password, nombre=None):
+    """
+    Registra un nuevo usuario en la base de datos.
+    """
+    #pasos..
+    # 1. Hashear la contraseña
+    # - password.encode('utf-8') convierte la contraseña de string a bytes
+    #2 - bcrypt.gensalt() genera una sal aleatorio para hacer el hash mas seguro
+    #3 - bcrypt.hashpw() aplica el hash a la contraseña y la sal, creando un hash seguro
+    password_hash = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+    
+    conn = db_conection() #conectamos a la DB
+    if conn is None: #si hay problemas con la conexion
+        return False #devolvemos False
+    
+    cur = None
+    try:
+        cur = conn.cursor()
+        insert_sql = """
+        INSERT INTO usuarios (
+            username,
+            password_hash,
+            nombre)
+        VALUES (
+            %s, %s, %s)
+        RETURNING id;
+        """
+        cur.execute(insert_sql, (username, password_hash.decode('utf-8'), nombre)) 
+        user_id = cur.fetchone()[0] #type: ignore
+        conn.commit() #guardamos los cambios
+        logger.info(f"Usuario '{username}' registrado con exito, ID: {user_id}")
+        return user_id #devolver el ID del nuevo usuario
+    except UniqueViolation:
+        logger.warning(f"El usuario '{username}' ya existe, no se pudo registrar.")
+        if conn:
+            conn.rollback() #deshacemos los cambios si hubo un error
+            return None #None indica que el usuario ya existe
+    except psycopg.Error as e:
+        logger.error(f"Error al registrar el usuario '{username}'\nDetalles: {e}")
+        if conn:
+            conn.rollback()
+        return False #False error general de la DB
+    finally:
+        if cur:
+            cur.close()
+        if conn:
+            conn.close()
+
+# VERIFICA LAS CREDENCIALES DEL USUARIO
+def verificar_credenciales(username, password):
+    """
+    Verifica las credenciales del usuario en la base de datos.
+    Devuelve el ID del usuario si las credenciales son correctas, de lo contrario, devuelve None.
+    """
+    conn = db_conection()
+    if conn is None:
+        return None
+    
+    cur = None
+    try:
+        cur = conn.cursor()
+        select_sql = """
+        SELECT id, password_hash FROM usuarios WHERE username = %s;
+        """
+        cur.execute(select_sql, (username,)) #la coma es necesaria para que sea una tupla
+        user_data = cur.fetchone() #obtenemos una fila de la consulta
+        
+        if user_data: #si hay datos
+            user_id, password_hash = user_data
+            #verificamos si la contraseña coincide con el hash almacenado
+            # bcrypt.checkpw() compara la contraseña ingresada con el hash almacenado
+            if bcrypt.checkpw(password.encode('utf-8'), password_hash.encode('utf-8')):
+                #checkpw => convertimos la contraseña a bytes y el hash a bytes y comparamos
+                logger.info(f"Credenciales correctas {username} (ID: {user_id})")
+                return user_id # PASS devolvemos el user_id
+            else:
+                logger.warning(f"Contraseña incorrecta para el usuario '{username}'")
+                return None # None si la contraseña es incorrecta
+        else:
+            logger.warning(f"Usuario '{username}' no encontrado")
+            return None # Usuario no encontrado
+    except psycopg.Error as e:
+        logger.error(f"Error al verificar las credenciales\nDetalles: {e}")
+        return None
+    finally:
+        if cur:
+            cur.close()
+        if conn:
+            conn.close()
+
+#  DEFINE EL NOMBRE DEL USUARIO DE LA SESION ACTUAL
+def sys_usr(usuario_sistema_id):
+    """"
+    DEVUELVE EL NOMBRE DEL USUARIO DEL SISTEMA
+    """
+    conn = db_conection()
+    if conn is None:
+        return None
+    
+    cur = None
+    try:
+        cur = conn.cursor()
+        select_sql = """
+        SELECT username FROM usuarios WHERE id = %s;
+        """
+        cur.execute(select_sql, (usuario_sistema_id,))
+        resultado = cur.fetchone() #Type: ignore
+        if resultado:
+            return resultado[0].upper() #type: ignore
+        else:
+            return "Usuario Desconocido" # nombre por defecto si no se encuentra el usuario
+    except psycopg.Error as e:
+        logger.error(f"Error al obtener el nombre del usuario: {e}")
+        return "Usuario Desconocido" # nombre por defecto si hay un error
+    finally:
+        if cur:
+            cur.close()
+        if conn:
+            conn.close()
 
 #  VERIFICAMOS SI EL NOMBRE EXISTE EN LA DB
 def check_client_name_exist(nombre, usuario_sistema_id):
