@@ -135,6 +135,7 @@ def crear_tablas():
             conn.close()
             logger.info("/// CONEXION A LA BASE DE DATOS CERRADA ///")
 
+# REGISTRAR UN NUEVO USUARIO
 def registrar_usuario(username, password, nombre=None):
     """
     Registra un nuevo usuario en la base de datos.
@@ -249,6 +250,37 @@ def sys_usr(usuario_sistema_id):
     except psycopg.Error as e:
         logger.error(f"Error al obtener el nombre del usuario: {e}")
         return "Usuario Desconocido" # nombre por defecto si hay un error
+    finally:
+        if cur:
+            cur.close()
+        if conn:
+            conn.close()
+
+# VERIFICA SI EL NOMBRE DE USUARIO YA EXISTE
+def check_username_exist(username):
+    """
+    Verifica si el nombre de usuario ya existe en la base de datos.
+    """
+    conn = db_conection()
+    if conn is None:
+        return False
+    cur = None
+    try:
+        cur = conn.cursor()
+        select_sql = """
+        SELECT COUNT(*) FROM usuarios WHERE username = %s;
+        """
+        cur.execute(select_sql, (username,))
+        count = cur.fetchone()[0] #type: ignore
+        if count > 0:
+            logger.warning(f"El nombre de usuario {username} ya existe")
+            return True
+        else:
+            logger.info(f"El nombre de usuario {username} es unico")
+            return False
+    except psycopg.Error as e:
+        logger.error(f"Error al verificar el nombre de usuario {username}: {e}")
+        return True
     finally:
         if cur:
             cur.close()
@@ -411,9 +443,9 @@ def obtain_clients(usuario_sistema_id):
         select_sql = "SELECT * FROM clientes WHERE usuario_sistema_id = %s ORDER BY ID;" #creamos una variable con la sentencia de busqueda
         cur.execute(select_sql, (usuario_sistema_id,)) #la comma es necesaria si solo hay un elemento en la tupla
         # ejecutamos la consulta y obtenemos los resultados
-        logger.info(f"\nObteniendo clientes del usuario {user}")
-        print(f"\nObteniendo clientes del usuario {user}")
-        print("=" * 80) #imprimimos una linea de separacion
+        logger.info(f"Obteniendo clientes del usuario {user}")
+        print(f"\nObteniendo clientes del usuario {user}\n")
+        print("=" * 80 + '\n') #imprimimos una linea de separacion
         clientes = cur.fetchall()
         
         if not clientes:

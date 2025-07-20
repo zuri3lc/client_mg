@@ -2,6 +2,7 @@
 from ast import Break
 from ast import Continue
 from ast import Return
+import getpass #getpass para manejar contraseñas
 from db.operations import (
     crear_tablas,
     agregar_cliente,
@@ -13,63 +14,157 @@ from db.operations import (
     actualizar_saldo,
     sys_usr,
     check_client_name_exist,
+    check_username_exist,
     historial_movimientos,
-    ultimo_movimiento
+    ultimo_movimiento,
+    verificar_credenciales,
+    registrar_usuario
 )
-from datetime import date #importamos fecha
-from decimal import Decimal, InvalidOperation #importamos decimal para uso futuro con saldos
+from datetime import date #fecha
+from decimal import Decimal, InvalidOperation #decimal para uso con saldos
 
 
 #####-------//////INICIO DE LA LOGICA DE PRUEBA/////--------######
 #Establecemos los id del usuario actual fijo temporalmente    
-USER_ID = 1
+# usuario_sistema_id = 1
 
 #////---- FUNCION PARA EL MENU ----////
-def menu():
-    """Muestra las opciones del menú"""
-    print("\n| MENU DEL GESTOR DE CLIENTES\n")
-    print(f"| BIENVENIDO  {sys_usr(USER_ID)}, Que deseas hacer?\n")
+def menu(usuario_sistema_id):
+    nombre_usuario = sys_usr(usuario_sistema_id) #obtenemos el nombre del usuario actual   
+    print(f"\n| HOLA {nombre_usuario}, Que deseas hacer?\n")
+    print("| MENU DEL GESTOR DE CLIENTES\n")
     print("| 1. Agregar nuevo cliente")
-    print("| 2. Buscar cliente")
+    print("| 2. Actualizar Saldo")
     print("| 3. Modificar cliente existente")
-    print("| 4. Obtener todos los clientes")
-    print("| 5. Eliminar cliente")
-    print("| 6. Actualizar Saldo")
+    print("| 4. Buscar clientes")
+    print("| 5. Obtener todos los clientes")
+    print("| 6. Eliminar cliente")
     print("| 7. Ver historial de movimientos")
-    print("| 8. Salir")
-    print('-' * 80)
+    print("| 8. Cerrar Sesion")
     print('-' * 80)
 
 #////---- Funcion principal de la CLI ----////
 def main_cli():
-    #creamos la tabla siempre al inciar
+    """Funcion principal, maneja el flujo de la aplicacion"""
     if not crear_tablas():
         print("\n-/- ERROR -/-\n-/-NO SE PUDO INICIALIZAR LA BASE DE DATOS-/-/\n-/-/-SALIENDO-/-/\n")
         return
     
-    while True:
-        menu()
-        opcion = input("\n| Ingrese una opcion: 1 - 7\n").strip()
+    usuario_actual_id = None #inicializamos el id del usuario actual como None
+    
+    while usuario_actual_id is None: #mientras no tengamos un usuario logueado
+        print("\n--- BIENVENIDO ---\n")        
+        print("| 1. Iniciar Sesion\n| 2. Registrar nuevo Usuario\n| 3. Salir\n\n")
+        opcion_auth = input("Ingrese una opcion: 1 - 3\n").strip()
         
-        if opcion == '1':
-            new_client()
-        elif opcion == '2':
-            busqueda()
-        elif opcion == '3':
-            manejo_actualizacion()
-        elif opcion == '4':
-            ver_clientes()
-        elif opcion == '5':
-            manejo_delete()
-        elif opcion == '6':
-            manejo_saldo()
-        elif opcion == '7':
-            manejo_historial()
-        elif opcion == '8':
+        if opcion_auth == "1": #opcion de iniciar sesion
+            usuario_actual_id = manejar_login() #llamamos a la funcion de login
+            if usuario_actual_id is None: #si el login fallo, volvemos al inicio
+                continue
+        elif opcion_auth == "2": #opcion de registro
+            usuario_actual_id = manejar_registro() #llamamos a la funcion de registro
+            
+            if usuario_actual_id is None: #si el registro fallo, volvemos al inicio
+                continue
+        elif opcion_auth == "3": #opcion de salir
             print("\nSALIENDO DEL PROGRAMA...\n")
-            break
+            return #salimos del programa
+        else: #opcion invalida
+            print("\n--OPCION NO VALIDA--\n--INGRESE UN NUMERO DEL 1 AL 3--\n")
+            continue #volvemos al inicio del bucle
+        
+        #si llegamos aqui, tenemos un usuario logueado
+        while usuario_actual_id is not None: #mientras tengamos un usuario logueado
+            menu(usuario_actual_id) #mostramos el menu
+            opcion = input("\n| Ingrese una opcion: 1 - 7\n").strip()
+            
+            if opcion == '1':
+                new_client(usuario_actual_id)
+            elif opcion == '2':
+                manejo_saldo(usuario_actual_id)
+            elif opcion == '3':
+                manejo_actualizacion(usuario_actual_id)
+            elif opcion == '4':
+                busqueda(usuario_actual_id)
+            elif opcion == '5':
+                ver_clientes(usuario_actual_id)
+            elif opcion == '6':
+                manejo_delete(usuario_actual_id)
+            elif opcion == '7':
+                manejo_historial(usuario_actual_id)
+            elif opcion == '8':
+                print("\nCERRANDO SESION...\nHasta luego!\n")
+                usuario_actual_id = None #cerramos la sesion e iniciamos de nuevo
+            else:
+                print("--OPCION NO VALIDA--\n--NGRESE UN NUMERO DEL 1 AL 8--\n")
+
+# MANEJO DEL LOGIN
+def manejar_login():
+    """Pide las credenciales al usuario y las valida"""
+    print("\n--- INICIO DE SESION ---\n\n")
+    username = input("Ingrese su nombre de usuario: \n").strip()
+    # pedimos la contraseña de forma segura usando getpass
+    password = getpass.getpass("Ingrese su contraseña: \n")
+    #validamos las credenciales
+    user_id = verificar_credenciales(username, password)
+    
+    if user_id is not None: #si la consulta no devuelve None
+        #print(f"\n--- Bienvenido {sys_usr(user_id).upper()} ---\n") #type: ignore
+        return user_id #retornamos el id del usuario
+    else:
+        print("\n--- ERROR ---\n--- Nombre de usuario o contraseña incorrecta ---\n")
+        return None #retornamos None si las credenciales son invalidas
+
+# MANEJO DEL REGISTRO DE USUARIOS
+def manejar_registro():
+    """Pide los datos para un nuevo usuario y lo registra"""
+    print("\n--- REGISTRO DE NUEVO USUARIO ---\n")
+    while True:
+        username = clean_input(
+            "Ingrese un nombre de usuario (min 5 caracteres, max 50): \n",
+            min_len=5,
+            max_len=50,
+            allow_empty=False
+        )
+        #verificamos que el nombre de usuario no exista
+        if username is False: #si retorna false por algun motivo brincamos el resto del bucle
+            continue
+        if check_username_exist(username):
+            print(f" ERROR: el nombre de usuario '{username}' ya existe\n")
+            continue
         else:
-            print("--OPCION NO VALIDA--\n--NGRESE UN NUMERO DEL 1 AL 8--\n")
+            break
+    #pedimos la contraseña de forma segura usando getpass
+    password = getpass.getpass("Ingrese una contraseña (min 6 caracteres): \n")
+    #confirmacion de la contraseña
+    password_confirm = getpass.getpass("Confirme su contraseña: \n")
+    
+    #verificamos que sean iguales
+    if password != password_confirm:
+        print("\n--- ERROR ---\n--- Las contraseñas no coinciden ---\n")
+        return
+    if len(password) < 6:
+        print("\n--- ERROR ---\n--- La contraseña debe tener al menos 6 caracteres ---\n")
+        return
+    nombre = clean_input(
+        "Ingrese su nombre completo (min 3 caracteres, max 255) (Deje vacio para omitir): \n",
+        min_len=3,
+        max_len=255,
+        allow_empty=True
+    )
+    user_data = registrar_usuario(
+        username=username,
+        password=password,
+        nombre=nombre if nombre else None,  # si el nombre esta vacio lo dejamos None
+    )
+    
+    if user_data:
+        print(f"\n--- Usuario registrado exitosamente ---\n")
+        print(f"--- Bienvenido {sys_usr(user_data)} ---\n")
+        return user_data
+    else:
+        print("\n--- ERROR ---\n--- No se pudo registrar el usuario ---\n")
+        return None
 
 #funcion para obtener un id de cliente valido
 def obtener_client_id():
@@ -128,10 +223,10 @@ def clean_input(promt, min_len=0, max_len=255, allow_empty=True, to_none_on_empt
         return user_input #retorna la entrada limpia y validada
 
 #-------- VALIDAR QUE EL CLIENTE EXISTA  O LE PERTENEZCA AL USUARIO ------
-def validar_cliente():
+def validar_cliente(usuario_sistema_id):
     while True:
         client_id = obtener_client_id()
-        cliente_existente = list_client(client_id, USER_ID)
+        cliente_existente = list_client(client_id, usuario_sistema_id)
         if cliente_existente:
             break #si el cliente existe salimos del bucle
         else:
@@ -139,14 +234,13 @@ def validar_cliente():
     return client_id, cliente_existente #fuera del bucle retornamos el id para usarlo en otras funciones
 
 #////---- FUNCION PARA SOLICITAR DATOS ----////
-def info_data(initial_name=None):
+def info_data(usuario_sistema_id):
     """Solicita la informacion del cliente al usuario.
     Retorna un diccionario con los datos o None si la validacion falla"""
 
     data = {} #creamos un diccionario vacio para almacenar los datos
     
     #--TELEFONO--
-    
     while True:
         telefono = clean_input(
             "\n| Telefono (10 digitos): (Deje vacio para omitir): \n",
@@ -211,12 +305,12 @@ def info_data(initial_name=None):
             to_none_on_empty=True
     )
     
-    data["usuario_sistema_id"] = USER_ID
+    data["usuario_sistema_id"] = usuario_sistema_id
 
     return data
 
 #////---- MANEJO PARA AGREGAR CLIENTES ----////
-def new_client():
+def new_client(usuario_sistema_id):
     """Funcion dependiente de la solicitud de datos, para agregar los clientes"""
     
     client_data = {}
@@ -234,16 +328,15 @@ def new_client():
         
         if nombre is False:
             continue
-        if check_client_name_exist(nombre, USER_ID):
-            print(f" ERROR: el nombre '{nombre}' ya existe para tu usuario {sys_usr(USER_ID)}\n")
+        if check_client_name_exist(nombre, usuario_sistema_id):
+            print(f" ERROR: el nombre '{nombre}' ya existe para tu usuario {sys_usr(usuario_sistema_id)}\n")
             continue
         else:
             client_data['nombre'] = nombre
             break
     
     #2. solicitar los demas datos usando info data
-    #pasamos el dato ya validado para que no lo vuelva a pedir
-    other_data = info_data(initial_name=client_data["nombre"])
+    other_data = info_data(usuario_sistema_id=usuario_sistema_id)
     client_data.update(other_data)
     
     #añadir usuario_sistema_id al diccionario
@@ -253,25 +346,26 @@ def new_client():
         print(f"\n---------------------------------------")
         print(f"            CLIENTE AGREGADO           ")
         print(f"---------------------------------------")
-        list_client(client_id, USER_ID)
+        list_client(client_id, usuario_sistema_id)
     else:
         print(" No se pudo agregar el cliente debido a un error o duplicado")
 
 #////---- Funcion para buscar un cliente, obtener el id y los datos ----////
-def busqueda():
+def busqueda(usuario_sistema_id):
     search_name = input(" Ingresa el cliente para buscar, solo ingresa el primer nombre : \n")
-    filas, nombre_buscado = client_search(search_name, USER_ID) #type: ignore
+    filas, nombre_buscado = client_search(search_name, usuario_sistema_id) #type: ignore
     print(f"\nResultados para '{nombre_buscado}' \n")
     for fila in filas: #iteramos en cada fila obtenida de client_search
         print(f"| ID: {fila[0]}\n| Nombre: {fila[1]}\n| Telefono: {fila[2]}\n| Ultima modificacion: {fila[7]}\n| Saldo: ${fila[8]}\n| Estado: --{fila[9].upper()}--")
         print("-" * 80)
 
 #////---- Funcion para obtener todos los clientes de un usuario ----////
-def ver_clientes():
-    clientes = obtain_clients(USER_ID)
-    
+def ver_clientes(usuario_sistema_id):
+    clientes = obtain_clients(usuario_sistema_id)
+    if not clientes:
+        return #sale de la funcion si retorna una lista vacia
+
     total_saldo = Decimal(0) #inicializamos el total del saldo en 0
-    
     for row in clientes: #type: ignore
         # iteramos en cada fila obtenida de obtain_clients
         print(f"\n| ID: {row[0]}\n| NOMBRE: {row[1]}\n| TELEFONO: {row[2]} \n| COMENTARIO: {row[5]}\n| ULTIMA MODIFICACION: {row[7]}\n| SALDO: {row[8]}\n| ESTADO: {row[9].upper()}")
@@ -280,11 +374,11 @@ def ver_clientes():
     print(f"\n--- Total de clientes: {len(clientes)}, Saldo Global: ${total_saldo} ---\n") #type: ignore
 
 #////---- Funcion para actualizar los clientes de un usuario ----////
-def manejo_actualizacion():
+def manejo_actualizacion(usuario_sistema_id):
     """Manejo de la logica para modificar clientes"""
     print("\n---ACTUALIZANDO DATOS DE CLIENTE---\n")
-    busqueda() #mostramos los clientes para que el usuario sepa que ID elegir
-    client_id, cliente_existente = validar_cliente() #obtenemos los 2 valores que retorna validar_cliente()
+    busqueda(usuario_sistema_id) #mostramos los clientes para que el usuario sepa que ID elegir
+    client_id, cliente_existente = validar_cliente(usuario_sistema_id) #obtenemos los 2 valores que retorna validar_cliente()
 
     print("\n INGRESE LOS NUEVOS VALORES PARA LOS CAMPOS A ACTUALIZAR (DEJE EN BLANCO PARA OMITIR CAMPO, ESCRIBA 'NULL' PARA BORRAR VALOR ACTUAL)\n")
     updates = {} #creamos un diccionario vacio para almacenar los valores
@@ -313,8 +407,8 @@ def manejo_actualizacion():
         #1. si el usuario ingreso un nombre (no esta vacio ni es none)
         #2. and el nuevo nombre es diferente al actual
         #3. and el nombre no es una cadena vacia (alow_empty=True y no queremos actualizar vacio)
-        if check_client_name_exist(nombre, USER_ID): #volvemos a validar unicidad del nombre nuevo
-            print(f"ERROR: el nombre '{nombre}' ya existe para tu usuario {sys_usr(USER_ID)}\nNo se actulizara el nombre\n") #no agregamos a updates{} si ya existe
+        if check_client_name_exist(nombre, usuario_sistema_id): #volvemos a validar unicidad del nombre nuevo
+            print(f"ERROR: el nombre '{nombre}' ya existe para tu usuario {sys_usr(usuario_sistema_id)}\nNo se actulizara el nombre\n") #no agregamos a updates{} si ya existe
         else:
             updates['nombre'] = nombre # -/- insertamos nombre en el diccionario -/-
         
@@ -398,22 +492,22 @@ def manejo_actualizacion():
     
     #si no hay cambios ingresados
     if updates: #Si el diccionario NO esta vacio
-        if client_update(client_id, USER_ID, **updates):
+        if client_update(client_id, usuario_sistema_id, **updates):
             print(f" Cliente actualizado con exito")
-            list_client(client_id, USER_ID)
+            list_client(client_id, usuario_sistema_id)
         else:
             print(" No se pudo actualizar el cliente")
     else: #si no hay datos almacenados en updates{}
         print(" No se ingresaron datos para actualizar\nOperacion cancelada\n")
-        list_client(client_id, USER_ID)
+        list_client(client_id, usuario_sistema_id)
 
 #////---- Funcion para actualizar saldo del cliente ----////
-def manejo_saldo():
+def manejo_saldo(usuario_sistema_id):
     """Manejo de la logica para modifica saldo del cliente"""
     print("\n---ACTUALIZANDO SALDO DE CLIENTE---\n")
-    busqueda() #mostramos los clientes para que el usuario sepa que ID elegir
-    client_id, cliente_existente = validar_cliente()
-    ultimo_movimiento(client_id, USER_ID)
+    busqueda(usuario_sistema_id) #mostramos los clientes para que el usuario sepa que ID elegir
+    client_id, cliente_existente = validar_cliente(usuario_sistema_id)
+    ultimo_movimiento(client_id, usuario_sistema_id)
     print(f" SALDO ACTUAL")
     #solicitamos el monto a restar o sumar y toca validarlo
     while True:
@@ -426,19 +520,19 @@ def manejo_saldo():
         except Exception as e:
             print(f" Ocurrio un error inesperado al actualizar el monto:\n{e}, intente de nuevo\n Ej: 00.00 para añadir al saldo\n  -00.00 para restar al saldo")
     #una vez validado el monto, llamamos a la funcion con la sentencia
-    if actualizar_saldo(client_id, USER_ID, monto):
+    if actualizar_saldo(client_id, usuario_sistema_id, monto):
         #print(f" Saldo Actual:\n")
-        list_client(client_id, USER_ID)
+        list_client(client_id, usuario_sistema_id)
     else:
         print(" No se pudo actualizar el saldo")
 
 #////---- Funcion para eliminar los clientes de un usuario ----////
-def manejo_delete():
+def manejo_delete(usuario_sistema_id):
     """Manejo de la logica para eliminar clientes"""
     print("\n---ELIMINANDO CLIENTE---\n")
     print("\n---VERIFIQUE DOS VECES EL CLIENTE A ELIMINAR---\n")
-    busqueda() #mostramos los clientes para que el usuario sepa que ID elegir
-    client_id, cliente_existente = validar_cliente()
+    busqueda(usuario_sistema_id) #mostramos los clientes para que el usuario sepa que ID elegir
+    client_id, cliente_existente = validar_cliente(usuario_sistema_id)
     
     #confirmamos si el cliente es correcto    
     while True:
@@ -447,7 +541,7 @@ def manejo_delete():
             print(" Omitiendo eliminacion -- Operacion cancelada\n ===  NO SE ELIMINARON DATOS  ===")
             break
         elif confirmacion == 'S':
-            if eliminar_cliente(client_id, USER_ID): #llamamos a la funcion para eliminar, si retona True se ejecuta lo siguiente
+            if eliminar_cliente(client_id, usuario_sistema_id): #llamamos a la funcion para eliminar, si retona True se ejecuta lo siguiente
                 print(f" SE ELIMINO EL CLIENTE CON ID: {client_id} ({cliente_existente[1]})")
                 break
             else:
@@ -457,13 +551,13 @@ def manejo_delete():
             print(" Entrada Invalida, ingrese S para eliminar o N para cancelar\n")
 
 #  MANEJA EL HISTORIAL DE MOVIMIENTOS
-def manejo_historial():
+def manejo_historial(usuario_sistema_id):
     """
     Logica para mostrar el historial de movimientos de un cliente
     """
     print("\n---HISTORIAL DE MOVIMIENTOS---\n")
-    busqueda()
-    client_id, cliente_existente = validar_cliente()
+    busqueda(usuario_sistema_id)
+    client_id, cliente_existente = validar_cliente(usuario_sistema_id)
     
     if not cliente_existente:
         print(f"\nCliente no encontrado o ID invalido, no se puede obtener historial")
@@ -471,7 +565,7 @@ def manejo_historial():
     
     print(f"\n--- Historial de movimientos para: {cliente_existente[1]}, ID {client_id} ---\n")
     
-    movimientos = historial_movimientos(client_id, USER_ID) #asignamos a la varible movimientos, el resultado de la consulta al historial
+    movimientos = historial_movimientos(client_id, usuario_sistema_id) #asignamos a la varible movimientos, el resultado de la consulta al historial
     if movimientos:
         print(f"\n=== HISTORIAL DE MOVIMIENTOS ===\n")
         print(f"Cliente ID: {client_id}, {movimientos[0][6]}")
