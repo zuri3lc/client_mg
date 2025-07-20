@@ -3,7 +3,7 @@ from ast import Break
 from ast import Continue
 from ast import Return
 import getpass #getpass para manejar contraseñas
-from db.operations import (
+from app.database import (
     crear_tablas,
     agregar_cliente,
     obtain_clients,
