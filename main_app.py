@@ -28,20 +28,6 @@ from decimal import Decimal, InvalidOperation #decimal para uso con saldos
 #Establecemos los id del usuario actual fijo temporalmente    
 # usuario_sistema_id = 1
 
-#////---- FUNCION PARA EL MENU ----////
-def menu(usuario_sistema_id):
-    nombre_usuario = sys_usr(usuario_sistema_id) #obtenemos el nombre del usuario actual   
-    print(f"\n| HOLA {nombre_usuario}, Que deseas hacer?\n")
-    print("| MENU DEL GESTOR DE CLIENTES\n")
-    print("| 1. Agregar nuevo cliente")
-    print("| 2. Actualizar Saldo")
-    print("| 3. Modificar cliente existente")
-    print("| 4. Buscar clientes")
-    print("| 5. Obtener todos los clientes")
-    print("| 6. Eliminar cliente")
-    print("| 7. Ver historial de movimientos")
-    print("| 8. Cerrar Sesion")
-    print('-' * 80)
 
 #////---- Funcion principal de la CLI ----////
 def main_cli():
@@ -166,62 +152,6 @@ def manejar_registro():
         print("\n--- ERROR ---\n--- No se pudo registrar el usuario ---\n")
         return None
 
-#funcion para obtener un id de cliente valido
-def obtener_client_id():
-    while True:
-        try:
-            client_id = int(input("\n Ingrese el ID del cliente seleccionado: \n")) #pedimos el ID validando que sea un numero
-            if client_id <= 0: #validamos que mayor a cero
-                print("\n El ID no puede ser negativo o cero. Intente de nuevo.\n")
-            else:
-                break #salimos del bucle si el ID es valido
-        except ValueError: #atrapamos el error si no es un numero y reinciamos el bucle
-            print(" Entrada invalida. Por favor, ingrese un numero entero para el ID.\n")
-    return client_id
-
-#////---- FUNCION PARA LIMPIAR Y PROCESAR ENTRADAS DE USUARIO ----////
-def clean_input(promt, min_len=0, max_len=255, allow_empty=True, to_none_on_empty=False, special_null_keyword=None):
-    """SOLICITA UNA ENTRADA AL USUARIO, LA LIMPIA Y LA VALIDA
-    Args:
-        promt (str): el mensaje que se muestra a usuario
-        min_len (int): longitud minima (sin espacios)
-        max_len (int): longitud maxima (sin espacios)
-        allow_empty (bool): Si es True la entrada esta vacia o es None, retorna None
-                    util para campos opcionales
-        special_null_keyword (str, opcional): una palabra clave que el usuario puede escribir
-                                para que se interprete como None
-        
-        returns:
-            str or None: La entrada limpia y valida o None si esta vacia o nula
-        """
-    while True:
-        user_input = input(promt).strip() #elimina los espacios vacios al principio y al final
-        
-        #convertimos a None si se usa la palabra clave
-        if special_null_keyword and user_input.upper() == special_null_keyword.upper():
-            return None
-        
-        #entrada vacia
-        if not user_input:
-            if allow_empty:
-                #si se permite vacio convertimos a None
-                return None if to_none_on_empty else ""
-            else:
-                print(f"Este campo no puede estar vacio, intente de Nuevo\n")
-                continue
-        
-        #validamos longitud minima
-        if len(user_input.replace(" ", "")) < min_len: #contamos los caracteres sin espacios
-            print(f"El campo debe tener al menos {min_len} caracteres\n")
-            continue
-        
-        #validamos longitud maxima
-        if len(user_input.replace(" ", "")) > max_len:
-            print(f"El campo debe tener menos de {max_len} caracteres\n")
-            continue
-        
-        return user_input #retorna la entrada limpia y validada
-
 #-------- VALIDAR QUE EL CLIENTE EXISTA  O LE PERTENEZCA AL USUARIO ------
 def validar_cliente(usuario_sistema_id):
     while True:
@@ -233,81 +163,7 @@ def validar_cliente(usuario_sistema_id):
             print("\n --ERROR--\n--El cliente no existe o no pertenece a tu usuario--\n--Intenta de Nuevo--\n")
     return client_id, cliente_existente #fuera del bucle retornamos el id para usarlo en otras funciones
 
-#////---- FUNCION PARA SOLICITAR DATOS ----////
-def info_data(usuario_sistema_id):
-    """Solicita la informacion del cliente al usuario.
-    Retorna un diccionario con los datos o None si la validacion falla"""
 
-    data = {} #creamos un diccionario vacio para almacenar los datos
-    
-    #--TELEFONO--
-    while True:
-        telefono = clean_input(
-            "\n| Telefono (10 digitos): (Deje vacio para omitir): \n",
-            min_len=0,
-            max_len=10,
-            allow_empty=True,
-            to_none_on_empty=True
-        )
-        if telefono is None: #si es usuario dejo vacio, se asigna None y salimos
-            data['telefono'] = None
-            break
-        elif telefono.isdigit() and len(telefono) == 10: # si no, validamos si los digitos
-            data['telefono'] = telefono # -/- insertamos telefono en el diccionario -/-
-            break
-        else:
-            print(" -ERROR- el telefono debe tener 10 digitos.")
-            
-    #--SALDO--
-    while True:
-        saldo_str = clean_input(
-            "\n| Saldo Actual (OBLIGATORIO)\n",
-            min_len=1,
-            max_len=10,
-            allow_empty=False,
-            to_none_on_empty=False
-        )
-        if not saldo_str:
-            print("\n- ERROR- El saldo es obligatorio, no puede estar vacio\n")
-            continue
-        try:
-            saldo = Decimal(saldo_str)
-            if saldo <= 0:
-                print("\n -ERROR- El saldo no pued ser menor o igual  a '0' \n")
-                continue
-            data["saldo_incial"] = saldo #guardamos el saldo
-            break
-        except InvalidOperation: # Capturamos el error especifico de decimal
-            print(f"\n -ERROR- Ingrese un monto numerico valido (ej. 100, 50.50\n")
-            continue
-        except Exception as e: #capturamos otros errores generales
-            print(f"\n -ERROR INESPERADO- Ocurrio un error inesperado al procesar el saldo: {e}\n")
-            continue
-    
-    #--UBICACION--
-    data["ubicacion"] = clean_input(
-            "\n| Ubicacion aproximada: (Deje vacio para omitir)\n",
-            allow_empty=True,
-            to_none_on_empty=True
-        )
-    
-    #--FOTO DOMICILIO--
-    data["foto_domicilio"] = clean_input(
-            "\n| Ingrese la ruta a la foto del Domicilio: (Deje vacio para omitir)\n",
-            allow_empty=True,
-            to_none_on_empty=True
-    )
-
-    #--COMENTARIO--
-    data["comentario"] = clean_input(
-            "\n| Comentario: (Deje vacio para omitir)\n",
-            allow_empty=True,
-            to_none_on_empty=True
-    )
-    
-    data["usuario_sistema_id"] = usuario_sistema_id
-
-    return data
 
 #////---- MANEJO PARA AGREGAR CLIENTES ----////
 def new_client(usuario_sistema_id):
@@ -349,29 +205,6 @@ def new_client(usuario_sistema_id):
         list_client(client_id, usuario_sistema_id)
     else:
         print(" No se pudo agregar el cliente debido a un error o duplicado")
-
-#////---- Funcion para buscar un cliente, obtener el id y los datos ----////
-def busqueda(usuario_sistema_id):
-    search_name = input(" Ingresa el cliente para buscar, solo ingresa el primer nombre : \n")
-    filas, nombre_buscado = client_search(search_name, usuario_sistema_id) #type: ignore
-    print(f"\nResultados para '{nombre_buscado}' \n")
-    for fila in filas: #iteramos en cada fila obtenida de client_search
-        print(f"| ID: {fila[0]}\n| Nombre: {fila[1]}\n| Telefono: {fila[2]}\n| Ultima modificacion: {fila[7]}\n| Saldo: ${fila[8]}\n| Estado: --{fila[9].upper()}--")
-        print("-" * 80)
-
-#////---- Funcion para obtener todos los clientes de un usuario ----////
-def ver_clientes(usuario_sistema_id):
-    clientes = obtain_clients(usuario_sistema_id)
-    if not clientes:
-        return #sale de la funcion si retorna una lista vacia
-
-    total_saldo = Decimal(0) #inicializamos el total del saldo en 0
-    for row in clientes: #type: ignore
-        # iteramos en cada fila obtenida de obtain_clients
-        print(f"\n| ID: {row[0]}\n| NOMBRE: {row[1]}\n| TELEFONO: {row[2]} \n| COMENTARIO: {row[5]}\n| ULTIMA MODIFICACION: {row[7]}\n| SALDO: {row[8]}\n| ESTADO: {row[9].upper()}")
-        print("=" * 80) #imprimimos una linea de separacion
-        total_saldo += row[8] #sumamos el saldo de cada cliente al total
-    print(f"\n--- Total de clientes: {len(clientes)}, Saldo Global: ${total_saldo} ---\n") #type: ignore
 
 #////---- Funcion para actualizar los clientes de un usuario ----////
 def manejo_actualizacion(usuario_sistema_id):
@@ -550,36 +383,7 @@ def manejo_delete(usuario_sistema_id):
         else: # si ingresan algo diferente a S o N
             print(" Entrada Invalida, ingrese S para eliminar o N para cancelar\n")
 
-#  MANEJA EL HISTORIAL DE MOVIMIENTOS
-def manejo_historial(usuario_sistema_id):
-    """
-    Logica para mostrar el historial de movimientos de un cliente
-    """
-    print("\n---HISTORIAL DE MOVIMIENTOS---\n")
-    busqueda(usuario_sistema_id)
-    client_id, cliente_existente = validar_cliente(usuario_sistema_id)
-    
-    if not cliente_existente:
-        print(f"\nCliente no encontrado o ID invalido, no se puede obtener historial")
-        return
-    
-    print(f"\n--- Historial de movimientos para: {cliente_existente[1]}, ID {client_id} ---\n")
-    
-    movimientos = historial_movimientos(client_id, usuario_sistema_id) #asignamos a la varible movimientos, el resultado de la consulta al historial
-    if movimientos:
-        print(f"\n=== HISTORIAL DE MOVIMIENTOS ===\n")
-        print(f"Cliente ID: {client_id}, {movimientos[0][6]}")
-        print("-" * 80)
-        
-        for fila in movimientos: # iteramos en cada fila obtenuida de historial_movimientos 
-            fecha = fila[1].strftime("%d/%m/%y")
-            tipo = fila[2].replace('_', ' ')
-            monto = fila[3]
-            saldo_anterior = fila[4]
-            saldo_final = fila[5]
-            
-            print(f"\nFecha: {fecha}, Tipo: {tipo}, Abono: {monto}, Saldo Anterior: {saldo_anterior}, Saldo Final: {saldo_final}")
-            print("-" * 40)
+
 
 if __name__ == "__main__":
     
@@ -594,4 +398,3 @@ if __name__ == "__main__":
         sys.exit(1) #salimos con codigo de error 1
     finally:
         print("\n=== PROGRAMA FINALIZADO ===\n")
-
