@@ -21,7 +21,8 @@ from .user_interface import (
     solicitar_nombre_cliente,
     mostrar_cliente_detalle,
     solicitar_info_clientes,
-    solicitar_monto_actualizacion
+    solicitar_monto_actualizacion,
+    solicitar_nuevo_estado
     )
 
 #---- Funcion para obtener todos los clientes de un usuario ----
@@ -41,17 +42,17 @@ def ver_clientes(usuario_sistema_id):
 def busqueda(usuario_sistema_id):
     print("\n--- BUSQUEDA DE CLIENTES ---\n")
     
-    search_name = input(" Ingresa el cliente para buscar, ingresa el primer nombre : \n").strip()
+    search_name = input("Ingresa el cliente para buscar, ingresa el primer nombre : \n").strip()
     
     if not search_name:
-        print("\n ERROR: La busqueda no puede estar vacia")
+        print("\nERROR: La busqueda no puede estar vacia")
         return
 
     clientes_encontrados = client_search_db(search_name, usuario_sistema_id)
     if not clientes_encontrados:
         print(f"\nNo se encontraron resultados para '{search_name}'.\n")
         return
-    print(f"Resultados para la busqueda '{search_name}: ")
+    print(f"\nResultados para la busqueda '{search_name}: ")
     mostrar_clientes(clientes_encontrados)
 
 # ------- MANEJA EL HISTORIAL DE MOVIMIENTOS --------
@@ -158,6 +159,9 @@ def gestionar_actualizacion_saldo(usuario_sistema_id):
         return
     print("\nCliente a modificar: \n")
     mostrar_cliente_detalle(cliente_existente)
+    #2.1 mostramos los ultimos 3 movimientos del cliente
+    movimientos = historial_movimientos_db(client_id, usuario_sistema_id, limite=3)
+    mostrar_historial_movimientos(movimientos)
     #3 llamamos a la UI para solicitar el monto
     monto = solicitar_monto_actualizacion()
     if monto is None:
@@ -171,7 +175,7 @@ def gestionar_actualizacion_saldo(usuario_sistema_id):
     else:
         print("\n--- ERROR: No se pudo actualizar el saldo ---\n")
 
-#////---- Funcion para eliminar los clientes de un usuario ----////
+#////---- ELIMINAR UN CLIENTE ----////
 def gestionar_eliminacion_cliente(usuario_sistema_id):
     """Manejo de la logica para eliminar clientes"""
     print("\n---ELIMINANDO CLIENTE---\n")
@@ -205,5 +209,29 @@ def gestionar_eliminacion_cliente(usuario_sistema_id):
         else: # si ingresan algo diferente a S o N
             print(" Entrada Invalida, ingrese S para eliminar o N para cancelar\n")
 
-
+# ---GESTIONA EL ESTADO DEL CLIENTE ----
+def gestionar_actualizacion_estado(usuario_sistema_id):
+    print("\n--- ACTUALIZANDO ESTADO ---\n")
+    # 1. pedimos al usuario que busque el cliente
+    busqueda(usuario_sistema_id)
+    # 2. obtenemos un id valido
+    client_id = obtener_client_id()
+    #3. Validamos que el cliente exista
+    cliente_existente = list_client_db(client_id, usuario_sistema_id)
+    if not cliente_existente: #si no lo encuentra
+        print(f"\n---ERRROR---\nCliente con ID: {client_id} no encontrado")
+        return
+    #4 .mostramos el cliente que se va a modificar
+    print("VAS A MODIFICAR EL SIGUIENTE CLIENTE: \n")
+    mostrar_cliente_detalle(cliente_existente)
+    #5. solicitamos el nuevo estado
+    nuevo_estado = solicitar_nuevo_estado()
+    #6. llamamos al especialista en la db, reutilizamos client_update_db
+    print(f"\nActualizando estado a {nuevo_estado}...\n")
+    if client_update_db(client_id, usuario_sistema_id, estado_cliente=nuevo_estado):
+        print("\n--- ESTADO ACTUALIZADO EXITOSAMENTE ---\n")
+        cliente_actualizado = list_client_db(client_id, usuario_sistema_id)
+        mostrar_cliente_detalle(cliente_actualizado)
+    else:
+        print("\n--- ERROR: No se pudo actualizar el estado ---\n")
 

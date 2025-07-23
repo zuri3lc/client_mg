@@ -17,13 +17,14 @@ def mostrar_menu_principal(usuario_sistema_id):
     print(f"\n| HOLA {nombre_usuario}, Que deseas hacer?\n")
     print("| MENU DEL GESTOR DE CLIENTES\n")
     print("| 1. Agregar nuevo cliente")
-    print("| 2. Actualizar Saldo")
-    print("| 3. Modificar cliente existente")
-    print("| 4. Buscar clientes")
-    print("| 5. Obtener todos los clientes")
-    print("| 6. Eliminar cliente")
-    print("| 7. Ver historial de movimientos")
-    print("| 8. Cerrar Sesion")
+    print("| 2. Obtener todos los clientes")
+    print("| 3. Actualizar Saldo")
+    print("| 4. Modificar cliente existente")
+    print("| 5. Buscar clientes")
+    print("| 6. Ver historial de movimientos")
+    print("| 7. Cambiar estado del cliente")
+    print("| 8. Eliminar cliente")
+    print("| 9. Cerrar Sesion")
     print('-' * 40)
 
 # --- IMPRIME TODOS LOS CLIENTES FORMATEADOS ----
@@ -34,7 +35,7 @@ def mostrar_clientes(clientes):
         nombre = row[1]
         telefono = row[2]
         comentario = row[5]
-        ultima_modificacion = row[7].srftime("%d/%m/%Y")
+        ultima_modificacion = row[7].strftime("%d/%m/%Y")
         saldo = row[8]
         estado = row[9]
         
@@ -44,7 +45,7 @@ def mostrar_clientes(clientes):
         print(f"Comentario: {comentario or 'N/A'}")
         print(f"Ultima modificacion: {ultima_modificacion}")
         print(f"Saldo: {saldo}")
-        print(f"Estado: {estado}")
+        print(f"Estado: {estado.upper()}")
         print("=" * 80)
         
         total_saldo += saldo
@@ -69,7 +70,7 @@ def mostrar_historial_movimientos(movimientos):
         saldo_anterior = fila[4]
         saldo_final = fila[5]
         
-        print(f"{fecha:<12} | {tipo:<15} | ${monto:>11.2f} | {saldo_anterior:>14.2f} | {saldo_final:>14.2f}")
+        print(f"{fecha:<12} | {tipo:<15} | ${monto:>11.2f} | ${saldo_anterior:>14.2f} | ${saldo_final:>14.2f}")
         print("=" * 85)
 
 #---- SOLICITA DATOS ----
@@ -192,17 +193,12 @@ def solicitar_nombre_cliente(validation_func):
 #---- SOLICITA LOS DATOS PARA LA ACTUALIZACION -----
 def solicitar_datos_actualizacion(cliente_existente, check_name_func):
     """Muestra los datos actualies y solicita nuevos"""
-    print("\n INGRESE LOS NUEVOS VALORES PARA LOS CAMPOS A ACTUALIZAR (DEJE EN BLANCO PARA OMITIR CAMPO, ESCRIBA 'NULL' PARA BORRAR VALOR ACTUAL)\n")
+    print("\nINGRESE LOS NUEVOS VALORES PARA LOS CAMPOS A ACTUALIZAR")
+    print("(DEJE EN BLANCO PARA OMITIR, ESCRIBA 'NULL' PARA BORRAR VALOR ACTUAL)")
+    print("=" * 50)
     updates = {} #creamos un diccionario vacio para almacenar los valores
     cliente_id_actual = cliente_existente[0]
     nombre_actual = cliente_existente[1]
-    #------------------------------------------------------------------
-    #usamos clean_input para validar
-    #min_len=0 y max_len=255 son valores por defecto, asi que solo los escribirmos si necesitamos cambiarlos
-    #allow_empty=True nos permite dejar un campo vacio
-    #to_none_on_empty=False Si esta vacio NO lo convertimos a None porque en este caso el usuario no desea cambiar el valor
-    #special_null_keyword='NULL' si el usuario escribe NULL convertimos a None para eliminar el valor
-    #------------------------------------------------------------------
     #Nombre
     #------------------------------------------------------------------
     while True:
@@ -331,6 +327,24 @@ def solicitar_monto_actualizacion():
         except Exception as e:
             print(f"---ERROR INESPERADO---\n{e}")
 
+#--- SOLICITA EL NUEVO ESTADO DEL CLIENTE ---
+def solicitar_nuevo_estado():
+    """Muestra las opciones, solicita y lo valida"""
+    estados_validos = {
+        '1': 'regular',
+        '2': 'moroso',
+        '3': 'bueno',
+        '4': 'inactivo'
+    }
+    print("Seleccione un nuevo estado para el cliente: ")
+    for numero, estado in estados_validos.items():
+        print(f"{numero}. {estado.upper()}")
+    while True:
+        opcion = input("| Ingrese una opcion: 1 - 4\n").strip()
+        if opcion in estados_validos:
+            return estados_validos[opcion]
+        else:
+            print("\n---OPCION INVALIDA---\nIngrese un numero del 1 al 4\n")
 
 
 

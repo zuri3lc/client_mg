@@ -300,7 +300,7 @@ def agregar_cliente_db(nombre, telefono, ubicacion, foto_domicilio, comentario, 
             ) VALUES (
                 %s, %s, %s, %s, %s, %s)
             """,
-            (cur,
+            (
             cliente_id,
             'deuda_inicial',
             saldo_incial, #en este contexto exclusivamente saldo_incial es lo mismo que saldo final
