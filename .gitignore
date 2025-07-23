@@ -1,5 +1,5 @@
 .venv/
-db/__pycache__
+app/__pycache__
 .gitignore
 pyrefly.toml
 app_log.log
