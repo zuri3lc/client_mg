@@ -1,5 +1,8 @@
 # conectar la base de datos
 #from asyncio.exceptions import LimitOverrunError
+import os
+from dotenv import load_dotenv
+load_dotenv()
 import psycopg #importamos la libreria para 'hablar' con la DB
 from datetime import date #esto es para la fecha de adquisicion
 from psycopg.errors import UniqueViolation, ForeignKeyViolation # importamos el error especifico
@@ -9,12 +12,13 @@ import bcrypt
 
 
 #-------configuracion de la conexion a PostgreSQL----------
-# --Datos de la BD--
-DB_NAME = "clients_db"
-DB_USER = "gestor_clientes"
-DB_PASSWORD = "RettkeStysi@k208"
-DB_HOST = "192.168.1.113"
-DB_PORT = "5433"
+# --ENV con Datos de la BD--
+DB_NAME = os.getenv("DB_NAME")
+DB_USER = os.getenv("DB_USER")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
+DB_HOST = os.getenv("DB_HOST")
+DB_PORT = os.getenv("DB_PORT")
+
 #------------- BLOQUE DE CONEXION A LA DB --------------------------
 #-- CADENA DE CONEXION (esta linea conecta a la base de datos) --
 conn_string = f"dbname={DB_NAME} user={DB_USER} password={DB_PASSWORD} host={DB_HOST} port={DB_PORT}"

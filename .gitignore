@@ -1,5 +1,13 @@
+#variables de entorno
+.env
+
+#entorno virtual
 .venv/
+
+#cache de python
 app/__pycache__
-.gitignore
-pyrefly.toml
+__pycache__
+*.pyc
+
+#Archivos de registro de la app
 app_log.log
