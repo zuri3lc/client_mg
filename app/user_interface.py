@@ -5,7 +5,7 @@ from decimal import (
     InvalidOperation
     )
 from .database import (
-    get_username_by_id_db
+    get_username_by_id_db,
     )
 from .utils import (
     clean_input
@@ -26,7 +26,7 @@ def mostrar_menu_principal(usuario_sistema_id):
     print("| 8. Cerrar Sesion")
     print('-' * 40)
 
-# --- IMPRIME LOS CLIENTES FORMATEADOS ----
+# --- IMPRIME TODOS LOS CLIENTES FORMATEADOS ----
 def mostrar_clientes(clientes):
     total_saldo = Decimal(0) #inicializamos el total del saldo en 0
     for row in clientes: #type: ignore
@@ -145,3 +145,193 @@ def solicitar_info_clientes():
     )
     
     return data
+
+#---- MUESTRA TODA LA INFORMACION UN SOLO CLIENTE---
+def mostrar_cliente_detalle(cliente):
+    """Toma la unica fila y la formatea"""
+    if not cliente:
+        print(f"---ERROR---\nNo se pudieron obtener los datos del cliente...\n")
+        return
+    cliente_id, nombre, telefono, ubicacion, foto_domicilio, comentario, fecha_creacion, fecha_mod, saldo, estado = cliente
+    
+    print(f"\n" + "=" * 50)
+    print(f" " * 15, "DETALLES DEL CLIENTE")
+    print("=" * 50)
+    print(f"| ID: {cliente_id}")
+    print(f"| Nombre: {nombre}")
+    print(f"| Telefono: {telefono or 'N/A'}")
+    print(f"| Ubicacion: {ubicacion or 'N/A'}")
+    print(f"| Comentario: {comentario or 'N/A'}")
+    print(f"| Fecha de creacion: {fecha_creacion.strftime('%d/%m/%Y')}")
+    print(f"| Ultima modificacion: {fecha_mod.strftime('%d/%m/%Y')}")
+    print(f"| Saldo: ${saldo:.2f}")
+    print(f"| Estado: --{estado.upper()}--")
+    print("=" * 50)
+
+#--- SOLICITA EL NOMBRE DEL CLIENTE Y LO VALIDA---
+def solicitar_nombre_cliente(validation_func):
+    while True:
+        nombre = clean_input(
+            "| Nombre (OBLIGATORIO): formato 'Nombre Apellido' min 3 caracteres, max 255: \n",
+            min_len=3,
+            max_len=255,
+            allow_empty=False
+        ) #clean_input maneja longitud y vacio
+        if not nombre:
+            continue
+        #aqui validamos con la funcion
+        if validation_func(nombre):
+            return nombre #returnamos el nombre valido
+        else:
+            print(f"\n----ERROR----\nEl nombre '{nombre}' ya existe  o no es valido \n")
+            #reintentamos
+            reintentar = input("Desea intentar con otro nombre? (S/N)").strip().upper()
+            if reintentar != 'S':
+                return None #si no quiere reintentar devolvemos none
+
+#---- SOLICITA LOS DATOS PARA LA ACTUALIZACION -----
+def solicitar_datos_actualizacion(cliente_existente, check_name_func):
+    """Muestra los datos actualies y solicita nuevos"""
+    print("\n INGRESE LOS NUEVOS VALORES PARA LOS CAMPOS A ACTUALIZAR (DEJE EN BLANCO PARA OMITIR CAMPO, ESCRIBA 'NULL' PARA BORRAR VALOR ACTUAL)\n")
+    updates = {} #creamos un diccionario vacio para almacenar los valores
+    cliente_id_actual = cliente_existente[0]
+    nombre_actual = cliente_existente[1]
+    #------------------------------------------------------------------
+    #usamos clean_input para validar
+    #min_len=0 y max_len=255 son valores por defecto, asi que solo los escribirmos si necesitamos cambiarlos
+    #allow_empty=True nos permite dejar un campo vacio
+    #to_none_on_empty=False Si esta vacio NO lo convertimos a None porque en este caso el usuario no desea cambiar el valor
+    #special_null_keyword='NULL' si el usuario escribe NULL convertimos a None para eliminar el valor
+    #------------------------------------------------------------------
+    #Nombre
+    #------------------------------------------------------------------
+    while True:
+        nombre = clean_input(
+            f"| Nuevo nombre (actual: {cliente_existente[1]}): formato 'Nombre Apellido' min 3 caracteres, max 255\n",
+            min_len=3,
+            max_len=255,
+            allow_empty=True,
+            to_none_on_empty=False,
+            special_null_keyword=None
+            )
+        
+        if not nombre:
+            print("--- OMITIDO ---\nEl nombre no se modificara\n")
+            break
+        if nombre.strip().lower() == nombre_actual.strip().lower():
+            print("El nombre ingresado es el  mismo que el actual\n---OMITIENDO---\n")
+            break
+        if check_name_func(nombre,cliente_id_actual): #check_name_func ya recibe usuario_sistema_id
+            print("---ADVERTENCIA---")
+            print(f"ERROR: el nombre '{nombre}' ya existe para tu usuario\nNo se actulizara el nombre\n") #no agregamos a updates{} si ya existe
+        else:
+            updates['nombre'] = nombre # -/- insertamos nombre en el diccionario -/-
+            
+    #Telefono
+    #------------------------------------------------------------------
+    telefono = clean_input(
+        f"| Nuevo telefono (actual: {cliente_existente[2] if cliente_existente[2] else 'N/A'}): (Deje vacio omitir, escriba 'NULL' para borrar)\n",
+        min_len=0,
+        max_len=10,
+        allow_empty=True,
+        to_none_on_empty=False, #retorna una cadena vacia "", no queremos retornar None
+        special_null_keyword='NULL'
+    )
+    #Caso 1. El usuario quiere borrar el numero ingreso NULL
+    if telefono is None: #validamos que el telefono, no esta vacio, no es None,
+        updates['telefono'] = None # -/- insertamos None en el diccionario -/-
+        print(" Numero de Telefono Borrado\n")
+    #Caso 2. El Usuario no ingreso nada (omitio el campo) o solo ingreso espacios
+    elif telefono == "":
+        print(" Telefono no modificado\n")
+        pass
+    #Caso 3. El usuario ingreso un valor diferente a NULL y no vacio
+    else:
+        #primero verificamos que el  numero no sea igual
+        if telefono.strip() == cliente_existente[2]:
+            print(f" El numero {telefono} es el mismo que el actual\nNo se actualizo el telefono\n")
+        #si no es igual validamos que sea un numero
+        elif telefono.isdigit():
+            updates['telefono'] = telefono #si todo va bien añadimos al diccionario
+            print(f" Numero de Telefono Actualizado a {telefono}\n")
+        else:
+            #esto es solo si no es NULL, vacio, no es igual, y no es solo digitos
+            print(f" WARN: problema con el valor ingresado {telefono}\nNo se actualizo el telefono\n")
+
+
+    #Ubicacion
+    #----------------------------------------------------------------------------
+    ubicacion = clean_input(
+        # pyrefly: ignore  # bad-specialization
+        f"| Nueva ubicacion aproximada (actual: {cliente_existente[3] if cliente_existente[3] else 'N/A'})\n",
+        allow_empty=True,
+        to_none_on_empty=False,
+        special_null_keyword='NULL'
+    )
+    if ubicacion is not None and ubicacion != "":
+        updates["ubicacion_aproximada"] = ubicacion
+    elif ubicacion is None: #si el usuario escribio NULL
+        updates["ubicacion_aproximada"] = None
+        
+    # Foto Domicilio
+    #----------------------------------------------------------------------------
+    foto_domicilio = clean_input(
+        # pyrefly: ignore  # bad-specialization
+        f"| URL de la foto (actual: {cliente_existente[4] if cliente_existente[4] else 'N/A'})\n",
+        allow_empty=True,
+        to_none_on_empty=False,
+        special_null_keyword='NULL'
+    )
+    if foto_domicilio is not None and foto_domicilio != "":
+        updates["foto_domicilio"] = foto_domicilio
+    elif foto_domicilio is None: #si el usuario escribio NULL
+        updates["foto_domicilio"] = None
+
+    #Comentario
+    #--------------------------------------------------------------------------------
+    comentario = clean_input(
+        # pyrefly: ignore  # bad-specialization
+        f"| Nuevo comentario (actual: {cliente_existente[5] if cliente_existente[5] else 'N/A'})\n",
+        allow_empty=True,
+        to_none_on_empty=False,
+        special_null_keyword='NULL'
+    )
+    if comentario is not None and comentario != "":
+        updates["comentario"] = comentario
+    elif comentario is None: #si el usuario escribio NULL
+        updates["comentario"] = None
+    
+    #------------------------------------------------------------------------------------
+    
+    return updates
+
+#--- SOLICITAMOS EL MONTO DEL CLIENTE ---
+def solicitar_monto_actualizacion():
+    """Solicitamos el monto y lo validamos
+    returs Decimal or None"""
+    while True:
+        monto_str = input(
+            "\n Ingrese el monto a aplicar\n"
+            "| -AÑADIR- Saldo (ej: 00.00)\n"
+            "| -RESTAR- Saldo (ej: -00.00)\n"
+            "| deje en blanco para cancelar\n"
+            "| =>  "
+            )
+        if not monto_str:
+            return None #usuario cancelo la operacion
+        #convertimos a decimal
+        try:
+            monto = Decimal(monto_str) #convertimos a decimal
+            if monto == 0:
+                print(" El monto no puede ser '0', intente de nuevo")
+                continue
+            return monto #retornamos el monto
+        except InvalidOperation: #atrapamos el error
+            print(" Monto Invalido, intente de nuevo.\nEj: 00.00 para añadir al saldo\n  -00.00 para restar al saldo")
+        except Exception as e:
+            print(f"---ERROR INESPERADO---\n{e}")
+
+
+
+
+

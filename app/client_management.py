@@ -7,11 +7,22 @@ from .database import (
     get_username_by_id_db,
     client_search_db,
     historial_movimientos_db,
-    list_client_db
+    list_client_db,
+    check_client_name_exist_db,
+    agregar_cliente_db,
+    client_update_db,
+    actualizar_saldo_db,
+    eliminar_cliente_db
     )
 from .user_interface import (
     mostrar_clientes,
-    mostrar_historial_movimientos)
+    solicitar_datos_actualizacion,
+    mostrar_historial_movimientos,
+    solicitar_nombre_cliente,
+    mostrar_cliente_detalle,
+    solicitar_info_clientes,
+    solicitar_monto_actualizacion
+    )
 
 #---- Funcion para obtener todos los clientes de un usuario ----
 def ver_clientes(usuario_sistema_id):
@@ -65,22 +76,134 @@ def manejo_historial(usuario_sistema_id):
     # 5 llamamos al especialista de la interfaz para mostrar el historial
     mostrar_historial_movimientos(movimientos)
 
-def mostrar_cliente_detalle(cliente):
-    """Toma la unica fila y la formatea"""
-    if not cliente:
-        print(f"---ERROR---\nNo se pudieron obtener los datos del cliente...\n")
+# --- CREA UN NUEVO CLIENTE ---
+def crear_nuevo_cliente(usuario_sistema_id):
+    """Orquesta el proceso de creacion de un cliente
+    1. pide el nombre del cliente UI
+    2. verifica si ya existe DB
+    3. pide el resto de la informacion UI
+    4. guarda el cliente en la base de datos DB
+    5. muestra el resultado UI"""
+    print("\n---CREANDO NUEVO CLIENTE---\n")
+    #paso 1. obtenermos el nombre en la  UI
+    #se pasa la funcion de verificacion como argumento (DES-ACOPLAMOS)
+    nombre_cliente = solicitar_nombre_cliente(
+        lambda nombre: not check_client_name_exist_db(nombre, usuario_sistema_id) #esta es la funcion de validacion
+    )
+    #si el usuario cancela o hubo un error en la validacion
+    if not nombre_cliente:
+        print("\nOperacion cancelada.")
         return
-    id_cliente = cliente[0]
-    nombre = cliente[1]
-    telefono = cliente[2]
-    ubicacion = cliente[3]
-    foto_domicilio = cliente[4]
-    comentario = cliente[5]
-    fecha_creacion = cliente[6].strftime("%d/%m/%Y")
-    ultima_modificacion = cliente[7].strftime("%d/%m/%Y")
-    saldo = cliente[8]
-    estado = cliente[9]
+    #paso 2. usar la interfaz para solicitar los demas datos
+    datos_adicionales = solicitar_info_clientes()
+    #combinamos la informacion en el diccionario
+    datos_cliente = {
+        "nombre": nombre_cliente,
+        **datos_adicionales, #desempaquetamos el diccionario
+        "usuario_sistema_id": usuario_sistema_id #añadimos el usuario del sistema a los datos
+    }
     
+    #paso 3. llamamos al especialista y le pasamos los datos
+    cliente_id = agregar_cliente_db(**datos_cliente)
+    
+    #paso 4. usamos la interfaz para mostrar los resultados
+    if cliente_id:
+        print("\n---- CLIENTE AGREGADO EXITOSAMENTE ----\n")
+        nuevo_cliente = list_client_db(cliente_id, usuario_sistema_id)
+        mostrar_cliente_detalle(nuevo_cliente)
+    else:
+        print("\n--- ERROR: No se pudo agregar el cliente ---\n")
+
+#--- ACTUALIZACION DEL CLIENTE ---
+def actualizar_cliente(usuario_sistema_id):
+    print("---ACTUALIZANDO DATOS---")
+    #1. llamamos a busqueda para buscar al usuario que necesitamos
+    busqueda(usuario_sistema_id)
+    #2. Obtenemos un ID de cliente valido
+    client_id = obtener_client_id()
+    cliente_existente = list_client_db(client_id, usuario_sistema_id)
+    
+    if not cliente_existente:
+        print(f"\n---ERROR---\nCliente con ID: {client_id} no encontrado o no te pertenece")
+        return
+    #3. llamamos a la interfaz de usuario para que pida los nuevos datos
+    #aqui pasamois el cliente existente y la funcion de validacion
+    updates = solicitar_datos_actualizacion(
+        cliente_existente,
+        lambda nombre, exclude_id: check_client_name_exist_db(nombre, usuario_sistema_id, exclude_id)
+    )
+
+    #4 la validacion del nombre ya la estamos manejando en user_interface
+    #5 si hay datos para actualizar llamamos a la DB
+    if not updates:
+        print("No se ingresaron datos nuevos para actualizar\n---CANCELANDO---\n")
+        return
+    if client_update_db(client_id, usuario_sistema_id, **updates):
+        print("\n--- DATOS ACTUALIZADOS EXITOSAMENTE ---\n")
+        cliente_actualizado = list_client_db(client_id, usuario_sistema_id)
+        mostrar_cliente_detalle(cliente_actualizado)
+    else:
+        print("\n--- ERROR: No se pudo actualizar el cliente ---\n")
+
+#--- ACTUALIZACION DEL SALDO ---
+def gestionar_actualizacion_saldo(usuario_sistema_id):
+    print("\n--- ACTUALIZANDO SALDO ---\n")
+    #1. el usuario encuentra el cliente
+    busqueda(usuario_sistema_id)
+    #2 obtenemos ID valido del cliente
+    client_id = obtener_client_id()
+    cliente_existente = list_client_db(client_id, usuario_sistema_id)
+    if not cliente_existente:
+        print(f"\n---ERROR---\nCliente no encontrado con ID: {client_id} o no te pertence")
+        return
+    print("\nCliente a modificar: \n")
+    mostrar_cliente_detalle(cliente_existente)
+    #3 llamamos a la UI para solicitar el monto
+    monto = solicitar_monto_actualizacion()
+    if monto is None:
+        print("\nOperacion cancelada. No  se ingreso un monto valido\n")
+        return
+    #4 llamamos a la DB para actualizar el saldo
+    if actualizar_saldo_db(client_id, usuario_sistema_id, monto):
+        print("\n--- SALDO ACTUALIZADO EXITOSAMENTE ---\n")
+        cliente_actualizado = list_client_db(client_id, usuario_sistema_id)
+        mostrar_cliente_detalle(cliente_actualizado)
+    else:
+        print("\n--- ERROR: No se pudo actualizar el saldo ---\n")
+
+#////---- Funcion para eliminar los clientes de un usuario ----////
+def gestionar_eliminacion_cliente(usuario_sistema_id):
+    """Manejo de la logica para eliminar clientes"""
+    print("\n---ELIMINANDO CLIENTE---\n")
+    print("\n---VERIFIQUE DOS VECES EL CLIENTE A ELIMINAR---\n")
+    #1. ayudamos al usuario a buscar el cliente
+    busqueda(usuario_sistema_id)
+    client_id = obtener_client_id()
+    #2. verificamos que el cliente exista
+    cliente_existente = list_client_db(client_id, usuario_sistema_id)
+    if not cliente_existente:
+        print(f"\n---ERROR---\nCliente no encontrado con ID: {client_id} o no te pertence")
+        return
+    #3. confirmamos si el cliente es correcto
+    nombre = cliente_existente[1]
+    #4. llamamos a la UI que muestre los datos del cliente
+    mostrar_cliente_detalle(cliente_existente)
+    #5. solicitamos confirmacion
+    while True:
+        confirmacion = input(f"Seguro que desea eliminar el cliente con ID: {client_id} (Nombre: {nombre})\n//--   S/N   --//\n").strip().upper()
+        if confirmacion == 'N':
+            print(" Omitiendo eliminacion -- Operacion cancelada\n ===  NO SE ELIMINARON DATOS  ===")
+            break
+        elif confirmacion == 'S':
+            #si el usuario confirma llamamos al especialista de la DB
+            if eliminar_cliente_db(client_id, usuario_sistema_id): #llamamos a la funcion para eliminar, si retona True se ejecuta lo siguiente
+                print(f" SE ELIMINO EL CLIENTE CON ID: {client_id} ({nombre})")
+                break
+            else:
+                print(" ERROR: No se pudo eliminar el cliente")
+                break
+        else: # si ingresan algo diferente a S o N
+            print(" Entrada Invalida, ingrese S para eliminar o N para cancelar\n")
 
 
 

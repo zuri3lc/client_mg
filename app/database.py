@@ -89,7 +89,7 @@ def crear_tablas():
                 id SERIAL PRIMARY KEY,
                 cliente_id INTEGER NOT NULL,
                 fecha_movimiento DATE NOT NULL DEFAULT CURRENT_DATE,
-                tipo_movimiento VARCHAR(50) NOT NULL CHECK (tipo_movimiento IN ('deuda_inicial', 'abono', 'actualizacion')),
+                tipo_movimiento VARCHAR(50) NOT NULL CHECK (tipo_movimiento IN ('deuda_inicial', 'abono', 'cargo')),
                 monto NUMERIC(10, 2) NOT NULL,
                 saldo_anterior NUMERIC(10, 2) NOT NULL,
                 saldo_final NUMERIC(10, 2) NOT NULL,
@@ -233,27 +233,26 @@ def check_username_exist_db(username):
 #==================== FUNCIONES PARA CLIENTES ===================
 
 #  VERIFICAMOS SI EL NOMBRE EXISTE EN LA DB
-def check_client_name_exist_db(nombre, usuario_sistema_id):
-    """verifica si el nombre del cliente ya existe en la DB ligado al usuario actual
-    Args:
-        nombre (str): El nombre del cliente a verificar
-        usuario_sistema_id (int): El ID del usuario al que pertenece el cliente
-    Returs:
-        bool: True si el nombre existe, False en caso contrario
-    """
+def check_client_name_exist_db(nombre, usuario_sistema_id, exclude_client_id=None):
+    """verifica si el nombre del cliente ya existe en la DB ligado al usuario actual"""
     conn = db_conection()
     if conn is None: return True
     try:
         with conn.cursor() as cur:
-            # usamos ILIKE para busqueda insensible de mayusculas y minusculas
-            cur.execute("""
+            query = """
             SELECT 1 FROM clientes
             WHERE TRIM(nombre) ILIKE TRIM(%s) AND usuario_sistema_id = (%s);
-            """, (nombre, usuario_sistema_id))
+            """
+            params = [nombre, usuario_sistema_id]
+            if exclude_client_id is not None:
+                query += " AND id != (%s);" #condicion para añadir el ID
+                params.append(exclude_client_id) #añadimos a la lista
+            cur.execute(query, tuple(params)) #pasamos a ejecutar convirtiendo a tupla
+            
             return cur.fetchone() is not None            
     except psycopg.Error as e:
         logger.error(f"Error al verificar el nombre del cliente {nombre}: {e}")
-        return True #indicamos que si existe aunque no sepamos, para evitar duplicados
+        return True #FailSafe, para evitar duplicados
     finally:
         if conn: conn.close()
 
@@ -455,7 +454,7 @@ def actualizar_saldo_db(cliente_id, usuario_sistema_id, monto):
             )
             
             # Paso 3: Determinar el tipo de movimiento
-            tipo_movimiento = 'actualizacion' if monto > 0 else 'abono'
+            tipo_movimiento = 'cargo' if monto > 0 else 'abono'
             registrar_movimiento_interno(cur, cliente_id, tipo_movimiento, monto, saldo_anterior, saldo_final, usuario_sistema_id)
             conn.commit() #guardamos los cambios
             logger.info(f"Saldo del cliente ID {cliente_id} actualizado a {saldo_final}")
