@@ -4,6 +4,7 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 import psycopg #importamos la libreria para 'hablar' con la DB
+from psycopg.rows import dict_row
 from datetime import date #esto es para la fecha de adquisicion
 from psycopg.errors import UniqueViolation, ForeignKeyViolation # importamos el error especifico
 from decimal import Decimal #importamos decimal para uso con saldos
@@ -261,7 +262,7 @@ def check_client_name_exist_db(nombre, usuario_sistema_id, exclude_client_id=Non
         if conn: conn.close()
 
 #  AGREGAR CLIENTES
-def agregar_cliente_db(nombre, telefono, ubicacion, foto_domicilio, comentario, saldo_incial, usuario_sistema_id
+def agregar_cliente_db(nombre, telefono, ubicacion, foto_domicilio, comentario, saldo_inicial, usuario_sistema_id
     ): 
     """Agrega un nuevo cliente a la DB, sin duplicados por id"""
     conn = db_conection() #conectamos a al DB
@@ -288,7 +289,7 @@ def agregar_cliente_db(nombre, telefono, ubicacion, foto_domicilio, comentario, 
             foto_domicilio,
             comentario,
             date.today(),
-            saldo_incial,
+            saldo_inicial,
             usuario_sistema_id
             ))
             cliente_id = cur.fetchone()[0] # type: ignore
@@ -307,9 +308,9 @@ def agregar_cliente_db(nombre, telefono, ubicacion, foto_domicilio, comentario, 
             (
             cliente_id,
             'deuda_inicial',
-            saldo_incial, #en este contexto exclusivamente saldo_incial es lo mismo que saldo final
+            saldo_inicial, #en este contexto exclusivamente saldo_inicial es lo mismo que saldo final
             0.00,
-            saldo_incial,
+            saldo_inicial,
             usuario_sistema_id
                 ))
             conn.commit()
@@ -332,7 +333,7 @@ def obtain_clients_db(usuario_sistema_id):
     conn = db_conection()
     if conn is None: return [] #Devuelve una lista vacia si hay algun problema con la conexion
     try:
-        with conn.cursor() as cur:
+        with conn.cursor(row_factory=dict_row) as cur:
             # seleccionamos todas las columnas (*) y filtramos por usuario del sistema
             cur.execute("""
                         SELECT
@@ -364,7 +365,7 @@ def list_client_db(cliente_id, usuario_sistema_id):
     if conn is None: return None
     try:
         user = get_username_by_id_db(usuario_sistema_id)
-        with conn.cursor() as cur:
+        with conn.cursor(row_factory=dict_row) as cur:
             #seleccionamos la columna y la fila
             cur.execute("""
                         SELECT
