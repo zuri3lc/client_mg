@@ -76,7 +76,6 @@ def manejar_registro():
     
     if user_data:
         print(f"\n--- Usuario registrado exitosamente ---\n")
-        print(f"--- Bienvenido {get_username_by_id_db(user_data)} ---\n")
         return user_data
     else:
         print("\n--- ERROR ---\n--- No se pudo registrar el usuario ---\n")
