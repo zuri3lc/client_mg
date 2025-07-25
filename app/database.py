@@ -78,6 +78,7 @@ def crear_tablas():
                 comentario TEXT,
                 fecha_adquisicion DATE NOT NULL DEFAULT CURRENT_DATE,
                 fecha_ultima_modificacion DATE NOT NULL DEFAULT CURRENT_DATE,
+                last_updated TIMESTAMPTZ DEFAULT NOW(),
                 saldo_actual NUMERIC(10, 2) DEFAULT 0.00,
                 estado_cliente VARCHAR(50) DEFAULT 'regular',
                 usuario_sistema_id INTEGER NOT NULL,
@@ -98,6 +99,7 @@ def crear_tablas():
                 monto NUMERIC(10, 2) NOT NULL,
                 saldo_anterior NUMERIC(10, 2) NOT NULL,
                 saldo_final NUMERIC(10, 2) NOT NULL,
+                last_updated TIMESTAMPTZ DEFAULT NOW(),
                 usuario_sistema_id INTEGER NOT NULL,
                 CONSTRAINT fk_cliente_movimiento FOREIGN KEY (cliente_id) REFERENCES clientes(id) ON DELETE CASCADE
             );
@@ -262,7 +264,7 @@ def check_client_name_exist_db(nombre, usuario_sistema_id, exclude_client_id=Non
         if conn: conn.close()
 
 #  AGREGAR CLIENTES
-def agregar_cliente_db(nombre, telefono, ubicacion_aproximada, foto_domicilio, comentario, saldo_inicial, usuario_sistema_id
+def agregar_cliente_db(nombre, telefono, ubicacion, foto_domicilio, comentario, saldo_inicial, usuario_sistema_id
     ): 
     """Agrega un nuevo cliente a la DB, sin duplicados por id"""
     conn = db_conection() #conectamos a al DB
@@ -285,7 +287,7 @@ def agregar_cliente_db(nombre, telefono, ubicacion_aproximada, foto_domicilio, c
             """,
             (nombre,
             telefono,
-            ubicacion_aproximada,
+            ubicacion,
             foto_domicilio,
             comentario,
             date.today(),
@@ -406,7 +408,7 @@ def client_update_db(cliente_id, usuario_sistema_id, **kwargs):
     values = list(kwargs.values())
     values.extend([cliente_id, usuario_sistema_id])
     
-    update_sql = f"UPDATE clientes SET {','.join(set_clauses)}, fecha_ultima_modificacion = CURRENT_DATE WHERE id = %s AND usuario_sistema_id = %s;"
+    update_sql = f"UPDATE clientes SET {','.join(set_clauses)}, last_updated = CURRENT_TIMESTAMP, fecha_ultima_modificacion = CURRENT_DATE WHERE id = %s AND usuario_sistema_id = %s;"
 
     try:
         with conn.cursor() as cur:
@@ -452,7 +454,8 @@ def actualizar_saldo_db(cliente_id, usuario_sistema_id, monto):
             UPDATE clientes
             SET 
                 saldo_actual = %s,
-                fecha_ultima_modificacion = CURRENT_DATE
+                fecha_ultima_modificacion = CURRENT_DATE,
+                last_updated = CURRENT_TIMESTAMP
             WHERE id = %s AND usuario_sistema_id = %s;
             """,
             (saldo_final, #actualizamos la fecha de ultima modificacion

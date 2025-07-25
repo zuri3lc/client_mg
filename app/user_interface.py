@@ -31,13 +31,13 @@ def mostrar_menu_principal(usuario_sistema_id):
 def mostrar_clientes(clientes):
     total_saldo = Decimal(0) #inicializamos el total del saldo en 0
     for row in clientes: #type: ignore
-        id_cliente = row[0]
-        nombre = row[1]
-        telefono = row[2]
-        comentario = row[5]
-        ultima_modificacion = row[7].strftime("%d/%m/%Y")
-        saldo = row[8]
-        estado = row[9]
+        id_cliente = row['id']
+        nombre = row['nombre']
+        telefono = row['telefono']
+        comentario = row['comentario']
+        ultima_modificacion = row['fecha_ultima_modificacion'].strftime("%d/%m/%Y")
+        saldo = row['saldo_actual']
+        estado = row['estado_cliente']
         
         print(f"\nID: {id_cliente}")
         print(f"Nombre: {nombre}")
@@ -153,7 +153,16 @@ def mostrar_cliente_detalle(cliente):
     if not cliente:
         print(f"---ERROR---\nNo se pudieron obtener los datos del cliente...\n")
         return
-    cliente_id, nombre, telefono, ubicacion, foto_domicilio, comentario, fecha_creacion, fecha_mod, saldo, estado = cliente
+    # cliente_id, nombre, telefono, ubicacion, foto_domicilio, comentario, fecha_creacion, fecha_mod, saldo, estado = cliente
+    cliente_id = cliente['id']
+    nombre = cliente['nombre']
+    telefono = cliente['telefono']
+    ubicacion = cliente['ubicacion_aproximada']
+    comentario = cliente['comentario']
+    fecha_creacion = cliente['fecha_adquisicion']
+    fecha_mod = cliente['fecha_ultima_modificacion'].strftime("%d/%m/%Y")
+    saldo = cliente['saldo_actual']
+    estado = cliente['estado_cliente']
     
     print(f"\n" + "=" * 50)
     print(f" " * 15, "DETALLES DEL CLIENTE")

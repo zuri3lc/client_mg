@@ -71,7 +71,7 @@ def manejo_historial(usuario_sistema_id):
     movimientos = historial_movimientos_db(client_id, usuario_sistema_id)
     # 4 manejamos el caso de que no haya movimientos
     if not movimientos:
-        nombre_cliente = cliente_existente[1]
+        nombre_cliente = cliente_existente['nombre']
         print(f"\n--- No se encontraron movimientos para: {nombre_cliente}, ID {client_id} ---\n")
         return
     # 5 llamamos al especialista de la interfaz para mostrar el historial
@@ -189,7 +189,7 @@ def gestionar_eliminacion_cliente(usuario_sistema_id):
         print(f"\n---ERROR---\nCliente no encontrado con ID: {client_id} o no te pertence")
         return
     #3. confirmamos si el cliente es correcto
-    nombre = cliente_existente[1]
+    nombre = cliente_existente['nombre']
     #4. llamamos a la UI que muestre los datos del cliente
     mostrar_cliente_detalle(cliente_existente)
     #5. solicitamos confirmacion

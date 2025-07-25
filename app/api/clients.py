@@ -8,6 +8,23 @@ from ..database import (
     client_update_db,
     eliminar_cliente_db
 )
+from ..security import decode_access_token, oauth2_scheme
+
+#--- FUNCION GUARDIA ---
+# esta funcion es una dependencia, FASTApi la ejecutara primero
+#1. exige un token ('Depends(oauth2_scheme)')
+#2. lo valida con decode_access_token
+#3. si es valido, devuelve el id del usuario, si no, devuelve error 401
+def get_current_user_id(token: str = Depends(oauth2_scheme)) -> int:
+    user_id = decode_access_token(token) #decodificamos el token
+    if user_id is None:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Token invalido o expirado",
+            headers={"WWW-Authenticate": "Bearer"}
+        )
+    return user_id
+    
 
 
 router = APIRouter(
@@ -17,19 +34,17 @@ router = APIRouter(
 
 # Endpoint GET (lista) para obtener la lista de clientes de un usuario
 @router.get("/", response_model=List[ClientShowSchema])
-def obtener_clientes_por_usuario():
+def obtener_clientes_por_usuario(user_id: int = Depends(get_current_user_id)):
     """Endpoint para obtener la lista de clientes de un usuario"""
     #por ahora indicamos un ID de usuario fijo
-    user_id = 2
     db_clientes = obtain_clients_db(user_id)
     #pydantic, usara el molde ClienteShowSchema y from_attributes, para convertir los resultados de la DB al formatos JSON correcto
     return db_clientes
 
 #Endpoint POST para crear un nuevo cliente
 @router.post("/", response_model=ClientShowSchema, status_code=status.HTTP_201_CREATED)
-def crear_nuevo_cliente(cliente: ClientCreateSchema):
+def crear_nuevo_cliente(cliente: ClientCreateSchema, user_id: int = Depends(get_current_user_id)):
     """Crea un nuevo cliente en el cuerpo de la peticion, y los valida contra el molde ClientCreateSchema"""
-    user_id = 2
     #llamamos a la funcion de DB, pasandole los datos del molde.
     #cliente.model_dump() convierte el objeto pydantic a un diccionario
     id_nuevo_cliente = agregar_cliente_db(
@@ -49,9 +64,8 @@ def crear_nuevo_cliente(cliente: ClientCreateSchema):
 
 #Endpoint GET para obtener 1 solo cliente
 @router.get("/{client_id}", response_model=ClientShowSchema)
-def obtener_cliente_por_id(client_id: int):
+def obtener_cliente_por_id(client_id: int, user_id: int = Depends(get_current_user_id)):
     """Obtiene los datos de un unico cliente"""
-    user_id = 2
     cliente = list_client_db(client_id, user_id)
     if not cliente: #si no se encuentra enviamos un error HTTP
         raise HTTPException(
@@ -60,9 +74,8 @@ def obtener_cliente_por_id(client_id: int):
 
 #Endpoint PUT para actualizar un cliente
 @router.put("/{client_id}", response_model=ClientShowSchema)
-def actualizar_cliente(client_id: int, cliente: ClientUpdateSchema):
+def actualizar_cliente(client_id: int, cliente: ClientUpdateSchema, user_id: int = Depends(get_current_user_id)):
     """Endpoint para actualizar un cliente"""
-    user_id = 2
     #.model_dump(exclude_unset=True) crea un diccionario con los datos que el usuario envio, ignorando los que dejo en blanco
     cliente_actualizado = cliente.model_dump(exclude_unset=True)
     if not cliente_actualizado: #si no se encuentra envuamos un HTTPError
@@ -75,7 +88,7 @@ def actualizar_cliente(client_id: int, cliente: ClientUpdateSchema):
 
 #Endpoint DELETE para eliminar un cliente
 @router.delete("/{client_id}", status_code=status.HTTP_204_NO_CONTENT, response_model=None)
-def eliminar_cliente(client_id: int):
+def eliminar_cliente(client_id: int, user_id: int = Depends(get_current_user_id)):
     """Endpoint para eliminar un cliente por su id"""
     user_id = 2
     success = eliminar_cliente_db(client_id, user_id)
