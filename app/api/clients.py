@@ -90,7 +90,6 @@ def actualizar_cliente(client_id: int, cliente: ClientUpdateSchema, user_id: int
 @router.delete("/{client_id}", status_code=status.HTTP_204_NO_CONTENT, response_model=None)
 def eliminar_cliente(client_id: int, user_id: int = Depends(get_current_user_id)):
     """Endpoint para eliminar un cliente por su id"""
-    user_id = 2
     success = eliminar_cliente_db(client_id, user_id)
     if not success:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Cliente no encontrado")

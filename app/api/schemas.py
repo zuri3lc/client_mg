@@ -17,7 +17,7 @@ class TokenSchema(BaseModel):
 class ClientBaseSchema(BaseModel):
     nombre: str #campo obligatorio
     telefono: Optional[str] = None #campo opcional
-    ubicacion: Optional[str] = None #campo opcional
+    ubicacion_aproximada: Optional[str] = None #campo opcional
     foto_domicilio: Optional[str] = None #campo opcional por ahora solo sera una cadena
     comentario: Optional[str] = None #campo opcional 
     
@@ -42,7 +42,7 @@ class ClientShowSchema(ClientBaseSchema):
 class ClientUpdateSchema(BaseModel):
     nombre: Optional[str] = None
     telefono: Optional[str] = None
-    ubicacion: Optional[str] = None
+    ubicacion_aproximada: Optional[str] = None
     foto_domicilio: Optional[str] = None
     comentario: Optional[str] = None
     estado_cliente: Optional[str] = None
