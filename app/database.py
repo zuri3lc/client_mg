@@ -262,7 +262,7 @@ def check_client_name_exist_db(nombre, usuario_sistema_id, exclude_client_id=Non
         if conn: conn.close()
 
 #  AGREGAR CLIENTES
-def agregar_cliente_db(nombre, telefono, ubicacion, foto_domicilio, comentario, saldo_inicial, usuario_sistema_id
+def agregar_cliente_db(nombre, telefono, ubicacion_aproximada, foto_domicilio, comentario, saldo_inicial, usuario_sistema_id
     ): 
     """Agrega un nuevo cliente a la DB, sin duplicados por id"""
     conn = db_conection() #conectamos a al DB
@@ -285,7 +285,7 @@ def agregar_cliente_db(nombre, telefono, ubicacion, foto_domicilio, comentario, 
             """,
             (nombre,
             telefono,
-            ubicacion,
+            ubicacion_aproximada,
             foto_domicilio,
             comentario,
             date.today(),

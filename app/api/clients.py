@@ -74,7 +74,7 @@ def actualizar_cliente(client_id: int, cliente: ClientUpdateSchema):
     return list_client_db(client_id, user_id)
 
 #Endpoint DELETE para eliminar un cliente
-@router.delete("/{client_id}, status_code=status.HTTP_204_NO_CONTENT")
+@router.delete("/{client_id}", status_code=status.HTTP_204_NO_CONTENT, response_model=None)
 def eliminar_cliente(client_id: int):
     """Endpoint para eliminar un cliente por su id"""
     user_id = 2

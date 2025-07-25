@@ -42,7 +42,7 @@ class ClientShowSchema(ClientBaseSchema):
 class ClientUpdateSchema(BaseModel):
     nombre: Optional[str] = None
     telefono: Optional[str] = None
-    ubicacion: Optional[str] = None
+    ubicacion_aproximada: Optional[str] = None
     foto_domicilio: Optional[str] = None
     comentario: Optional[str] = None
     estado_cliente: Optional[str] = None
