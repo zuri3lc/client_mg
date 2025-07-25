@@ -346,7 +346,8 @@ def obtain_clients_db(usuario_sistema_id):
                             fecha_adquisicion,
                             fecha_ultima_modificacion,
                             saldo_actual,
-                            estado_cliente
+                            estado_cliente,
+                            usuario_sistema_id
                         FROM
                             clientes 
                         WHERE
@@ -378,7 +379,8 @@ def list_client_db(cliente_id, usuario_sistema_id):
                             fecha_adquisicion,
                             fecha_ultima_modificacion,
                             saldo_actual,
-                            estado_cliente
+                            estado_cliente,
+                            usuario_sistema_id
                         FROM
                             clientes 
                         WHERE

@@ -32,10 +32,20 @@ class ClientShowSchema(ClientBaseSchema):
     fecha_adquisicion: date
     fecha_ultima_modificacion: date
     saldo_actual: Decimal
+    estado_cliente: str
     usuario_sistema_id: int
     #esta configuracion es un traductor que le dice a Pydantic que puede construirlo no solo desde un diccionario si no despues de un objeto complejo, en este caso la respuesta de ls DB
     class Config:
         from_attributes = True
+
+#Molde para actualizar un cliente
+class ClientUpdateSchema(BaseModel):
+    nombre: Optional[str] = None
+    telefono: Optional[str] = None
+    ubicacion: Optional[str] = None
+    foto_domicilio: Optional[str] = None
+    comentario: Optional[str] = None
+    estado_cliente: Optional[str] = None
 
 
 
