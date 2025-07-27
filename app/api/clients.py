@@ -125,6 +125,28 @@ def actualizar_cliente(client_id: int, cliente: ClientUpdateSchema, current_user
     #devolvemos el cliente con los datos actualizados
     return list_client_db(client_id, current_user.id)
 
+#Endpoint que solo actualiza el estado del cliente
+@router.put("/{client_id}/status", response_model=schemas.ClientShowSchema, tags=["Clientes"])
+def actualizar_estado_cliente(
+    client_id: int,
+    status_update: schemas.ClientUpdateStatusSchema, # Usamos el molde específico para el estado
+    current_user: schemas.User = Depends(get_current_user)
+):
+    """NUEVO ENDPOINT: Actualiza únicamente el estado de un cliente.
+    Es más seguro porque solo permite modificar ese campo específico."""
+    success = client_update_db(
+        client_id,
+        current_user.id,
+        estado_cliente=status_update.estado_cliente
+    )
+    if not success:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Cliente no encontrado o error al actualizar el estado."
+        )
+    # Devolvemos los datos completos del cliente con su nuevo estado.
+    return list_client_db(client_id, current_user.id)
+
 #Endpoint DELETE para eliminar un cliente
 @router.delete("/{client_id}", status_code=status.HTTP_204_NO_CONTENT, response_model=None)
 def eliminar_cliente(client_id: int, current_user: dict = Depends(get_current_user)):
