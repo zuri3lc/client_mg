@@ -65,6 +65,26 @@ class ClientDetailSchema(ClientShowSchema):
 
 #---- ESQUEMAS PARA USUARIOS ----)
 
+#---- ESQUEMAS PARA USUARIOS ----
+
+class UserBase(BaseModel):
+    """
+    Molde base para un usuario. Solo contiene el username.
+    """
+    username: str
+
+class User(UserBase):
+    """
+    Molde para MOSTRAR un usuario. Hereda el username
+    y añade el 'id' que viene de la base de datos.
+    Nuestra función 'get_current_user' usará este molde.
+    """
+    id: int
+    nombre: Optional[str] = None # Hacemos el nombre opcional
+    
+    class Config:
+        from_attributes = True
+
 #FASTapi espera un JSON con "username" y "password"
 class UserLoginSchema(BaseModel):
     username: str

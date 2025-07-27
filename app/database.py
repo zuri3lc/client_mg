@@ -523,7 +523,7 @@ def client_search_db(nombre_buscado, usuario_sistema_id):
     conn = db_conection()
     if conn is None: return []
     try:
-        with conn.cursor() as cur:
+        with conn.cursor(row_factory=dict_row) as cur:
             patron_busqueda = f"%{nombre_buscado.strip()}%"
             cur.execute("""
                 SELECT
