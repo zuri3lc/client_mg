@@ -1,8 +1,69 @@
 #moldes
 from pydantic import BaseModel
-from datetime import date, datetime
+from datetime import date
 from decimal import Decimal
-from typing import Optional
+from typing import List, Optional
+
+#---- ESQUEMAS PARA MOVIMIENTOS ----
+class MovimientoCreateSchema(BaseModel):
+    """Esquema para registrar un movimiento"""
+    monto: Decimal
+
+class MovimientoShowSchema(BaseModel):
+    """Esquema para mostrar movimientos"""
+    id: int
+    fecha_movimiento: date
+    tipo_movimiento: str
+    monto: Decimal
+    saldo_anterior: Decimal
+    saldo_final: Decimal
+    
+    class Config:
+        from_attributes = True
+
+#----- ESQUEMAS PARA CLIENTES ----
+
+class ClientBaseSchema(BaseModel):
+    """Molde base, datos que siempre se piden"""
+    nombre: str 
+    telefono: Optional[str] = None
+    ubicacion_aproximada: Optional[str] = None
+    foto_domicilio: Optional[str] = None
+    comentario: Optional[str] = None
+    
+class ClientCreateSchema(ClientBaseSchema):
+    """hereda todos los datos de la clase base y le añadimos el saldo inicial"""
+    saldo_inicial: Decimal 
+    
+class ClientUpdateSchema(BaseModel):
+    """Molde para la actualizacion de clientes"""
+    nombre: Optional[str] = None
+    telefono: Optional[str] = None
+    ubicacion_aproximada: Optional[str] = None
+    foto_domicilio: Optional[str] = None
+    comentario: Optional[str] = None
+    estado_cliente: Optional[str] = None
+
+class ClientUpdateStatusSchema(BaseModel):
+    """Molde para actualizar el estado de un cliente"""
+    estado_cliente: str
+
+class ClientShowSchema(ClientBaseSchema):
+    """Molde para mostrar clientes"""
+    id: int
+    estado_cliente: str
+    fecha_adquisicion: date
+    fecha_ultima_modificacion: date
+    saldo_actual: Decimal
+    
+    class Config:
+        from_attributes = True
+
+class ClientDetailSchema(ClientShowSchema):
+    """Molde compuesto, hereda toda la informacion de ClientShowSchema y le añade una lista de sus movimientos"""
+    movimientos_recientes: List[MovimientoShowSchema] = []
+
+#---- ESQUEMAS PARA USUARIOS ----)
 
 #FASTapi espera un JSON con "username" y "password"
 class UserLoginSchema(BaseModel):
@@ -12,44 +73,6 @@ class UserLoginSchema(BaseModel):
 class TokenSchema(BaseModel):
     access_token: str
     token_type: str
-
-#Molde base, datos que siempre se piden
-class ClientBaseSchema(BaseModel):
-    nombre: str #campo obligatorio
-    telefono: Optional[str] = None #campo opcional
-    ubicacion_aproximada: Optional[str] = None #campo opcional
-    foto_domicilio: Optional[str] = None #campo opcional por ahora solo sera una cadena
-    comentario: Optional[str] = None #campo opcional 
-    
-#Molde para los datos que se requieren para CREAR un cliente
-class ClientCreateSchema(ClientBaseSchema): #hereda los campos del molde base
-    saldo_inicial: Decimal #añadimos un campo mas, este es obligatorio
-
-#Molde para MOSTRAR datos
-#hereda los campos del monde base y añadimos los campos que genera la DB
-class ClientShowSchema(ClientBaseSchema):
-    id: int
-    fecha_adquisicion: date
-    fecha_ultima_modificacion: date
-    saldo_actual: Decimal
-    estado_cliente: str
-    usuario_sistema_id: int
-    #esta configuracion es un traductor que le dice a Pydantic que puede construirlo no solo desde un diccionario si no despues de un objeto complejo, en este caso la respuesta de ls DB
-    class Config:
-        from_attributes = True
-
-#Molde para actualizar un cliente
-class ClientUpdateSchema(BaseModel):
-    nombre: Optional[str] = None
-    telefono: Optional[str] = None
-    ubicacion_aproximada: Optional[str] = None
-    foto_domicilio: Optional[str] = None
-    comentario: Optional[str] = None
-    estado_cliente: Optional[str] = None
-
-
-
-
 
 
 

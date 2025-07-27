@@ -237,6 +237,12 @@ def check_username_exist_db(username):
     finally:
         if conn: conn.close()
 
+#OBTIENE EL USUARIO Y EL ID 
+def get_user_by_id_db(db_conn, user_id: int):
+    with db_conn.cursor(row_factory=dict_row) as cur:
+        cur.execute("SELECT id, username FROM usuarios WHERE id = %s;", (user_id,))
+        return cur.fetchone()
+
 #==================== FUNCIONES PARA CLIENTES ===================
 
 #  VERIFICAMOS SI EL NOMBRE EXISTE EN LA DB

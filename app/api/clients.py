@@ -1,30 +1,27 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from typing import List
-from .schemas import ClientShowSchema, ClientCreateSchema, ClientUpdateSchema
+from .schemas import (
+    ClientShowSchema,
+    ClientCreateSchema,
+    ClientUpdateSchema,
+    ClientUpdateStatusSchema,
+    ClientDetailSchema,
+    MovimientoShowSchema,
+    MovimientoCreateSchema
+    )
 from ..database import (
     obtain_clients_db,
     agregar_cliente_db,
     list_client_db,
     client_update_db,
-    eliminar_cliente_db
+    eliminar_cliente_db,
+    historial_movimientos_db,
+    actualizar_saldo_db,
+    client_search_db
 )
 from ..security import decode_access_token, oauth2_scheme
+from .auth import get_current_user
 
-#--- FUNCION GUARDIA ---
-# esta funcion es una dependencia, FASTApi la ejecutara primero
-#1. exige un token ('Depends(oauth2_scheme)')
-#2. lo valida con decode_access_token
-#3. si es valido, devuelve el id del usuario, si no, devuelve error 401
-def get_current_user_id(token: str = Depends(oauth2_scheme)) -> int:
-    user_id = decode_access_token(token) #decodificamos el token
-    if user_id is None:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Token invalido o expirado",
-            headers={"WWW-Authenticate": "Bearer"}
-        )
-    return user_id
-    
 
 
 router = APIRouter(
@@ -34,39 +31,74 @@ router = APIRouter(
 
 # Endpoint GET (lista) para obtener la lista de clientes de un usuario
 @router.get("/", response_model=List[ClientShowSchema])
-def obtener_clientes_por_usuario(user_id: int = Depends(get_current_user_id)):
-    """Endpoint para obtener la lista de clientes de un usuario"""
-    #por ahora indicamos un ID de usuario fijo
-    db_clientes = obtain_clients_db(user_id)
-    #pydantic, usara el molde ClienteShowSchema y from_attributes, para convertir los resultados de la DB al formatos JSON correcto
+def obtener_clientes_por_usuario(current_user: dict = Depends(auth.get_current_user)):
+    """Endpoint para obtener la lista de clientes del usuario autenticado"""
+    db_clientes = obtain_clients_db(current_user['id'])
     return db_clientes
 
 #Endpoint POST para crear un nuevo cliente
 @router.post("/", response_model=ClientShowSchema, status_code=status.HTTP_201_CREATED)
-def crear_nuevo_cliente(cliente: ClientCreateSchema, user_id: int = Depends(get_current_user_id)):
+def crear_nuevo_cliente(cliente: ClientCreateSchema, current_user: dict = Depends(auth.get_current_user)):
     """Crea un nuevo cliente en el cuerpo de la peticion, y los valida contra el molde ClientCreateSchema"""
-    #llamamos a la funcion de DB, pasandole los datos del molde.
     #cliente.model_dump() convierte el objeto pydantic a un diccionario
     id_nuevo_cliente = agregar_cliente_db(
         **cliente.model_dump(),
-        usuario_sistema_id=user_id)
-    #validamos los fallos
+        usuario_sistema_id=current_user['id'])
     if not id_nuevo_cliente:
-        #si hubo un error, por lo que sea, un duplicado o un error en la db
-        #lanzamos un error HTTP
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Error al crear cliente, es posible que el nombre ya exista para este usuario"
         )
-    #si el cliente se creo con exito, obtenemos los datos para devolverlos
-    cliente_creado = list_client_db(id_nuevo_cliente, user_id)
+    cliente_creado = list_client_db(id_nuevo_cliente, current_user['id'])
     return cliente_creado
+
+#Endpoint para buscar clientes
+@router.get("/search", response_model=List[ClientShowSchema])
+def buscar_cliente(query: str, current_user: dict = Depends(auth.get_current_user)):
+    """Buscamos clientes por el termino de busqueda"""
+    clientes_encontrados = client_search_db(query, current_user['id'])
+    return clientes_encontrados
+
+#Obtiene la vista detallada de un cliente
+@router.get("/{client_id}/details", response_model=ClientDetailSchema)
+def obtener_detalle_cliente(client_id: int, current_user: dict = Depends(auth.get_current_user)):
+    #1. obtenemos los datos
+    cliente = list_client_db(client_id, current_user['id'])
+    if not cliente:
+        raise HTTPException(status_code=404, detail="Cliente no encontrado")
+    #2. obtenemos el historial de movmimientos
+    historial_movimientos = historial_movimientos_db(client_id, current_user['id'], limite=10)
+    #3. convertimos las tuplas a diccionario
+    columnas = ["id", "fecha_movimiento", "tipo_movimiento", "monto", "saldo_anterior", "saldo_final"]
+    movimientos_lista = [dict(zip(columnas, row[:6])) for row in historial_movimientos] #type:ignore
+    #4 combinamos todo en el molde y devolvemos
+    detalle_cliente = ClientDetailSchema(**cliente, movimientos_recientes=movimientos_lista)
+    return detalle_cliente
+
+#OBTIENE TODOS los movimientos de un cliente
+@router.get("/{client_id}/movements", response_model=List[MovimientoShowSchema])
+def obtener_movimientos_cliente(client_id: int, current_user: dict = Depends(auth.get_current_user)):
+    historial_movimientos = historial_movimientos_db(client_id, current_user['id'], limite=25)
+    columnas = ["id", "fecha_movimiento", "tipo_movimiento", "monto", "saldo_anterior", "saldo_final"]
+    movimientos_lista = [dict(zip(columnas, row[:6])) for row in historial_movimientos]
+    return movimientos_lista
+
+#REGISTRA UN NUEVO MOVIMIENTO
+@router.post("/{client_id}/movements", response_model=ClientShowSchema)
+def registrar_movimiento(client_id: int, movimiento: MovimientoCreateSchema, current_user: dict = Depends(auth.get_current_user)):
+    success = actualizar_saldo_db(client_id, current_user['id'], movimiento.monto)
+    if not success:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="No se pudo registrar el movimiento.")
+    #movimiento exitoso
+    return list_client_db(client_id, current_user['id'])
+
+
 
 #Endpoint GET para obtener 1 solo cliente
 @router.get("/{client_id}", response_model=ClientShowSchema)
-def obtener_cliente_por_id(client_id: int, user_id: int = Depends(get_current_user_id)):
+def obtener_cliente_por_id(client_id: int, current_user: dict = Depends(auth.get_current_user)):
     """Obtiene los datos de un unico cliente"""
-    cliente = list_client_db(client_id, user_id)
+    cliente = list_client_db(client_id, current_user['id'])
     if not cliente: #si no se encuentra enviamos un error HTTP
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="Cliente no encontrado")
@@ -74,26 +106,23 @@ def obtener_cliente_por_id(client_id: int, user_id: int = Depends(get_current_us
 
 #Endpoint PUT para actualizar un cliente
 @router.put("/{client_id}", response_model=ClientShowSchema)
-def actualizar_cliente(client_id: int, cliente: ClientUpdateSchema, user_id: int = Depends(get_current_user_id)):
+def actualizar_cliente(client_id: int, cliente: ClientUpdateSchema, current_user: dict = Depends(get_current_user)):
     """Endpoint para actualizar un cliente"""
-    #.model_dump(exclude_unset=True) crea un diccionario con los datos que el usuario envio, ignorando los que dejo en blanco
     cliente_actualizado = cliente.model_dump(exclude_unset=True)
     if not cliente_actualizado: #si no se encuentra envuamos un HTTPError
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="No se enviaron datos para actualizar")
-    actualizacion_lista = client_update_db(client_id, user_id, **cliente_actualizado)
+    actualizacion_lista = client_update_db(client_id, current_user['id'], **cliente_actualizado)
     if not actualizacion_lista:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Cliente no encontrado")
     #devolvemos el cliente con los datos actualizados
-    return list_client_db(client_id, user_id)
+    return list_client_db(client_id, current_user['id'])
 
 #Endpoint DELETE para eliminar un cliente
 @router.delete("/{client_id}", status_code=status.HTTP_204_NO_CONTENT, response_model=None)
-def eliminar_cliente(client_id: int, user_id: int = Depends(get_current_user_id)):
+def eliminar_cliente(client_id: int, current_user: dict = Depends(get_current_user)):
     """Endpoint para eliminar un cliente por su id"""
-    success = eliminar_cliente_db(client_id, user_id)
+    success = eliminar_cliente_db(client_id, current_user['id'])
     if not success:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Cliente no encontrado")
     #una eliminacion exitosa no devuelve contenido solo el codigo 204
     return
-
-
