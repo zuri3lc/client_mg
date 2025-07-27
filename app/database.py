@@ -238,10 +238,24 @@ def check_username_exist_db(username):
         if conn: conn.close()
 
 #OBTIENE EL USUARIO Y EL ID 
-def get_user_by_id_db(db_conn, user_id: int):
-    with db_conn.cursor(row_factory=dict_row) as cur:
-        cur.execute("SELECT id, username FROM usuarios WHERE id = %s;", (user_id,))
-        return cur.fetchone()
+def get_user_by_id_db(user_id: int):
+    """
+    NUEVO: Obtiene los datos de un usuario por su ID y los devuelve como un diccionario.
+    Esta función ahora maneja su propia conexión, como el resto de tus funciones.
+    """
+    conn = db_conection()
+    if conn is None:
+        return None
+    try:
+        with conn.cursor(row_factory=dict_row) as cur:
+            cur.execute("SELECT id, username, nombre FROM usuarios WHERE id = %s;", (user_id,))
+            return cur.fetchone()
+    except psycopg.Error as e:
+        logger.error(f"Error al obtener usuario por ID {user_id}: {e}")
+        return None
+    finally:
+        if conn:
+            conn.close()
 
 #==================== FUNCIONES PARA CLIENTES ===================
 

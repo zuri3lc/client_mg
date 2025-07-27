@@ -22,6 +22,7 @@ from ..database import (
 from ..security import decode_access_token, oauth2_scheme
 from .auth import get_current_user
 
+#---- ROUTER ----
 
 
 router = APIRouter(
@@ -31,14 +32,14 @@ router = APIRouter(
 
 # Endpoint GET (lista) para obtener la lista de clientes de un usuario
 @router.get("/", response_model=List[ClientShowSchema])
-def obtener_clientes_por_usuario(current_user: dict = Depends(auth.get_current_user)):
+def obtener_clientes_por_usuario(current_user: dict = Depends(get_current_user)):
     """Endpoint para obtener la lista de clientes del usuario autenticado"""
     db_clientes = obtain_clients_db(current_user['id'])
     return db_clientes
 
 #Endpoint POST para crear un nuevo cliente
 @router.post("/", response_model=ClientShowSchema, status_code=status.HTTP_201_CREATED)
-def crear_nuevo_cliente(cliente: ClientCreateSchema, current_user: dict = Depends(auth.get_current_user)):
+def crear_nuevo_cliente(cliente: ClientCreateSchema, current_user: dict = Depends(get_current_user)):
     """Crea un nuevo cliente en el cuerpo de la peticion, y los valida contra el molde ClientCreateSchema"""
     #cliente.model_dump() convierte el objeto pydantic a un diccionario
     id_nuevo_cliente = agregar_cliente_db(
@@ -54,14 +55,14 @@ def crear_nuevo_cliente(cliente: ClientCreateSchema, current_user: dict = Depend
 
 #Endpoint para buscar clientes
 @router.get("/search", response_model=List[ClientShowSchema])
-def buscar_cliente(query: str, current_user: dict = Depends(auth.get_current_user)):
+def buscar_cliente(query: str, current_user: dict = Depends(get_current_user)):
     """Buscamos clientes por el termino de busqueda"""
     clientes_encontrados = client_search_db(query, current_user['id'])
     return clientes_encontrados
 
 #Obtiene la vista detallada de un cliente
 @router.get("/{client_id}/details", response_model=ClientDetailSchema)
-def obtener_detalle_cliente(client_id: int, current_user: dict = Depends(auth.get_current_user)):
+def obtener_detalle_cliente(client_id: int, current_user: dict = Depends(get_current_user)):
     #1. obtenemos los datos
     cliente = list_client_db(client_id, current_user['id'])
     if not cliente:
@@ -77,7 +78,7 @@ def obtener_detalle_cliente(client_id: int, current_user: dict = Depends(auth.ge
 
 #OBTIENE TODOS los movimientos de un cliente
 @router.get("/{client_id}/movements", response_model=List[MovimientoShowSchema])
-def obtener_movimientos_cliente(client_id: int, current_user: dict = Depends(auth.get_current_user)):
+def obtener_movimientos_cliente(client_id: int, current_user: dict = Depends(get_current_user)):
     historial_movimientos = historial_movimientos_db(client_id, current_user['id'], limite=25)
     columnas = ["id", "fecha_movimiento", "tipo_movimiento", "monto", "saldo_anterior", "saldo_final"]
     movimientos_lista = [dict(zip(columnas, row[:6])) for row in historial_movimientos]
@@ -85,7 +86,7 @@ def obtener_movimientos_cliente(client_id: int, current_user: dict = Depends(aut
 
 #REGISTRA UN NUEVO MOVIMIENTO
 @router.post("/{client_id}/movements", response_model=ClientShowSchema)
-def registrar_movimiento(client_id: int, movimiento: MovimientoCreateSchema, current_user: dict = Depends(auth.get_current_user)):
+def registrar_movimiento(client_id: int, movimiento: MovimientoCreateSchema, current_user: dict = Depends(get_current_user)):
     success = actualizar_saldo_db(client_id, current_user['id'], movimiento.monto)
     if not success:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="No se pudo registrar el movimiento.")
@@ -96,7 +97,7 @@ def registrar_movimiento(client_id: int, movimiento: MovimientoCreateSchema, cur
 
 #Endpoint GET para obtener 1 solo cliente
 @router.get("/{client_id}", response_model=ClientShowSchema)
-def obtener_cliente_por_id(client_id: int, current_user: dict = Depends(auth.get_current_user)):
+def obtener_cliente_por_id(client_id: int, current_user: dict = Depends(get_current_user)):
     """Obtiene los datos de un unico cliente"""
     cliente = list_client_db(client_id, current_user['id'])
     if not cliente: #si no se encuentra enviamos un error HTTP

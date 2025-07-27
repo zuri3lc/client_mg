@@ -1,6 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 from datetime import timedelta
+from . import schemas
+
 #---Molde y la funcion de verificacion de la db
 from .schemas import TokenSchema
 from ..database import (
@@ -41,17 +43,23 @@ def login(form_data: OAuth2PasswordRequestForm = Depends()):
     #retornamos el token en un diccionario
     return {"access_token": access_token, "token_type": "bearer"}
 
-def get_current_user(token: str = Depends(oauth2_scheme), db: psycopg.Connection = Depends(db_conection)) -> schemas.User:
+def get_current_user(token: str = Depends(oauth2_scheme)) -> schemas.User:
+    """
+    Esta es la dependencia "guardia" que usarán todos nuestros endpoints.
+    Ahora no necesita que le pasen la 'db', porque la función que llama
+    ('get_user_by_id_db') ya se encarga de la conexión.
+    """
     user_id = decode_access_token(token)
     if user_id is None:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Token invalido o expirado",
+            detail="Token inválido o expirado",
         )
-    user = get_user_by_id_db(db, user_id)
-    if user is None:
+    user_data = get_user_by_id_db(user_id) # Llamamos a la función corregida
+    if user_data is None:
         raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
+            status_code=status.HTTP_404_NOT_FOUND,
             detail="Usuario no encontrado",
         )
-    return schemas.User(**user)
+    # Convertimos el diccionario de la DB en un objeto User de Pydantic
+    return schemas.User(**user_data)
