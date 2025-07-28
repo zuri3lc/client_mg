@@ -16,7 +16,8 @@ from ..security import create_access_token, decode_access_token, oauth2_scheme
 #---- ROUTER ----
 router = APIRouter(
     prefix="/auth", #todas las rutas de este archivo empezaran con /auth
-    tags=["Autenticacion"] #etiqueta para la documentacion
+    tags=["Autenticacion"], #etiqueta para la documentacion
+    redirect_slashes=False
 )
 # Endpoint para el login
 # usamos .post() porque el usuario esta enviando datos URL /auth/login

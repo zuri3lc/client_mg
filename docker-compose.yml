@@ -1,0 +1,48 @@
+# version: "3.8" # La versión es opcional
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    container_name: postgres_db
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      TZ: America/Mexico_City
+      PGTZ: America/Mexico_City
+    # --- CORRECCIÓN DE INDENTACIÓN AQUÍ ---
+    # 'volumes' debe estar al mismo nivel que 'environment'.
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    # --- Y TAMBIÉN AQUÍ ---
+    # 'ports' debe estar al mismo nivel que 'environment'.
+    ports:
+      - "${DB_PORT}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build: .
+    container_name: fastapi_api
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_HOST: db
+      DB_PORT: 5432
+      SECRET_KEY: ${SECRET_KEY}
+      ALGORITHM: ${ALGORITHM}
+      ACCESS_TOKEN_EXPIRE_MINUTES: ${ACCESS_TOKEN_EXPIRE_MINUTES}
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  pg_data: {}
