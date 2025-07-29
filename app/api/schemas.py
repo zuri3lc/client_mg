@@ -1,6 +1,6 @@
 #moldes
 from pydantic import BaseModel
-from datetime import date
+from datetime import date, datetime
 from decimal import Decimal
 from typing import List, Optional
 
@@ -89,10 +89,12 @@ class User(UserBase):
 class UserLoginSchema(BaseModel):
     username: str
     password: str
+    
 #La respuesta que la app espera un JSON "acces_token" y "toke_type"
 class TokenSchema(BaseModel):
     access_token: str
     token_type: str
+    user_id: int
 
 # Schema para creacion de Usuarios con MASTER_KEY
 class UserCreateSchema(BaseModel):

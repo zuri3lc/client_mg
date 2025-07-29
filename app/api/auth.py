@@ -45,7 +45,11 @@ def login(
     token_data = {"sub": str(user_id)}
     access_token = create_access_token(data=token_data)
     #retornamos el token en un diccionario
-    return {"access_token": access_token, "token_type": "bearer"}
+    return {
+        "access_token": access_token,
+        "token_type": "bearer",
+        "user_id": user_id
+        }
 
 #-- REGISTRA UN NUEVO USUARIO
 @router.post("/register", response_model=schemas.User, status_code=status.HTTP_201_CREATED, tags=["Autenticacion"])
