@@ -94,5 +94,11 @@ class TokenSchema(BaseModel):
     access_token: str
     token_type: str
 
+# Schema para creacion de Usuarios con MASTER_KEY
+class UserCreateSchema(BaseModel):
+    username: str
+    password: str
+    nombre: Optional[str] = None
+    master_key: str
 
 

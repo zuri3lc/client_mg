@@ -1,4 +1,5 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+import os
+from fastapi import APIRouter, Depends, HTTPException, status, Form
 from fastapi.security import OAuth2PasswordRequestForm
 from datetime import timedelta
 from . import schemas
@@ -9,7 +10,9 @@ from .schemas import TokenSchema
 from ..database import (
     verificar_credenciales_db,
     db_conection,
-    get_user_by_id_db
+    get_user_by_id_db,
+    check_username_exist_db,
+    registrar_usuario_db
     )
 from ..security import create_access_token, decode_access_token, oauth2_scheme
 
@@ -22,10 +25,12 @@ router = APIRouter(
 # Endpoint para el login
 # usamos .post() porque el usuario esta enviando datos URL /auth/login
 @router.post("/login", response_model=TokenSchema)
-def login(form_data: OAuth2PasswordRequestForm = Depends()):
-    """Endpoint para el login, recibe usuario y contraseña y devuelve un token"""
-    #reutilizamos la funcion que ya hemos utilizado
-    user_id = verificar_credenciales_db(form_data.username, form_data.password)
+def login(
+    username: str = Form(...),
+    password: str = Form(...)
+):
+
+    user_id = verificar_credenciales_db(username, password)
     
     if not user_id:
         #si la funcion devuelve None, credenciales incorrectas
@@ -35,16 +40,42 @@ def login(form_data: OAuth2PasswordRequestForm = Depends()):
             detail="Credenciales Incorrectas",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    #si las credenciales son correctas
-    #creamos el payload del token
+
     #'sub' (subject) es el estandar para el identificador del usuario
     token_data = {"sub": str(user_id)}
-    
-    #llamamos a la funcion para crear el token
     access_token = create_access_token(data=token_data)
     #retornamos el token en un diccionario
     return {"access_token": access_token, "token_type": "bearer"}
 
+#-- REGISTRA UN NUEVO USUARIO
+@router.post("/register", response_model=schemas.User, status_code=status.HTTP_201_CREATED, tags=["Autenticacion"])
+def register_user(user: schemas.UserCreateSchema, db: psycopg.Connection = Depends(db_conection)):
+    # 1. obtenermos la masterkey del .env
+    SECRET_KEY = os.getenv("MASTER_KEY")
+    # 2. verificacion
+    if user.master_key != SECRET_KEY:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="La llave maestra no es valida, no estas autorizado a crear usuarios"
+        )
+    if check_username_exist_db(user.username):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"El nombre de usuario {user.username} ya existe"
+        )
+    user_id = registrar_usuario_db(
+        username=user.username,
+        password=user.password,
+        nombre=user.nombre
+    )
+    if not user_id:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="No se pudo crear el usuario."
+        )
+    new_user_data = get_user_by_id_db(user_id)
+    db.close()
+    return new_user_data
 
 
 def get_current_user(token: str = Depends(oauth2_scheme), db: psycopg.Connection = Depends(db_conection)) -> schemas.User:

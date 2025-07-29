@@ -1,25 +1,21 @@
 # version: "3.8" # La versión es opcional
 
 services:
-  db:
-    image: postgres:16-alpine
+  db: #nombre del servicio
+    image: postgres:16-alpine #imagen oficial de postgreSQL
     restart: unless-stopped
     container_name: postgres_db
-    environment:
-      POSTGRES_DB: ${DB_NAME}
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    environment: #variables de entorno
+      POSTGRES_DB: ${DB_NAME} #nombre de la base de datos
+      POSTGRES_USER: ${DB_USER} #usuario de la BD
+      POSTGRES_PASSWORD: ${DB_PASSWORD} #contraseña BD
       TZ: America/Mexico_City
-      PGTZ: America/Mexico_City
-    # --- CORRECCIÓN DE INDENTACIÓN AQUÍ ---
-    # 'volumes' debe estar al mismo nivel que 'environment'.
+      PGZ: America/Mexico_City
     volumes:
-      - pg_data:/var/lib/postgresql/data
-    # --- Y TAMBIÉN AQUÍ ---
-    # 'ports' debe estar al mismo nivel que 'environment'.
+      - pg_data:/var/lib/postgresql/data #mapeamos la carpeta pg_data en el directorio a la ruta DATA en el contenedo
     ports:
-      - "${DB_PORT}:5432"
-    healthcheck:
+      - ${DB_PORT}:5432 #mapea el puerto 5433 del host al puerto 5432 del contenedor
+    healthcheck: #verifica que la bd este lista
       test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
       interval: 5s
       timeout: 5s
@@ -39,10 +35,12 @@ services:
       DB_PORT: 5432
       SECRET_KEY: ${SECRET_KEY}
       ALGORITHM: ${ALGORITHM}
-      ACCESS_TOKEN_EXPIRE_MINUTES: ${ACCESS_TOKEN_EXPIRE_MINUTES}
+      ACCESS_TOKEN_EXPIRE_MINUTES: 30
     depends_on:
       db:
         condition: service_healthy
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
 
 volumes:
   pg_data: {}
