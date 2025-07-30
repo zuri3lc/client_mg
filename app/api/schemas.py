@@ -63,8 +63,6 @@ class ClientDetailSchema(ClientShowSchema):
     """Molde compuesto, hereda toda la informacion de ClientShowSchema y le añade una lista de sus movimientos"""
     movimientos_recientes: List[MovimientoShowSchema] = []
 
-#---- ESQUEMAS PARA USUARIOS ----)
-
 #---- ESQUEMAS PARA USUARIOS ----
 
 class UserBase(BaseModel):
