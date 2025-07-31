@@ -3,28 +3,34 @@ import { ref } from 'vue';
 import api from '@/services/api';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/auth';
-
-
+import { useClientStore } from '@/stores/client';
 
 const router = useRouter(); // instancia del router a redirigir
 const authStore = useAuthStore(); //instancia del store
-
+const clientStore = useClientStore(); //instancia del store
 
 // 1. Variables relativas para almacenar los datos del formulario
 const username = ref('');
 const password = ref('');
 const loading = ref(false); //muestra un estado de carga en el boton 
 const errorMessage = ref(null);
+const syncMessage = ref(null);
+
 // 2. Funcion que se ejecuta al hacer clic al boton
 const handleLogin = async() => {
-    console.log('Iniciando sesion con:', username.value, password.value);
     loading.value = true;
     errorMessage.value = null;
+    syncMessage.value = '';
+
     try {
         await authStore.login({
             username: username.value,
             password: password.value
         });
+
+        syncMessage.value = 'Syncronizando clientes Remoto => Local...';
+        await clientStore.fetchStoreClients();
+
         //redireccion
         router.push({name: 'home'});
     } catch (error){
@@ -66,16 +72,17 @@ const handleLogin = async() => {
                 <v-text-field
                 v-model="username"
                 label="Nombre de Usuario"
-                variant="outlined"
+                variant="underlined"
                 rounded="lg"
                 class="mb-2"
                 ></v-text-field>
 
                 <v-text-field
                 v-model="password"
+                hint="Cuidado con los espacios y las mayusculas"
                 label="Contraseña"
                 type="password"
-                variant="outlined"
+                variant="underlined"
                 rounded="lg"
                 ></v-text-field>
 
@@ -84,7 +91,6 @@ const handleLogin = async() => {
                     :loading="loading"
                     @click="handleLogin"
                     color="primary"
-                    size="large"
                     rounded="pill"
                     class="mt-5"
                     >
@@ -93,7 +99,7 @@ const handleLogin = async() => {
 
                     <v-btn
                     :to="{ name: 'register' }"
-                    variant="text"
+                    variant="plain"
                     rounded="pill"
                     size="x-small"
                     class="mt-5"

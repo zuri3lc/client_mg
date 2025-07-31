@@ -7,12 +7,18 @@ const router = useRouter();
 
 const username = ref('');
 const password = ref('');
+const passwordConfirm = ref('');
 const nombre = ref('');
 const masterKey = ref('');
 const loading = ref(false);
 const errorMessage = ref(null);
 
 const handleRegister = async () => {
+    if (password.value !== passwordConfirm.value) {
+        errorMessage.value = 'Las contraseñas no coinciden';
+        return;
+    }
+
     if (!username.value || !password.value || !masterKey.value) {
         errorMessage.value = 'Usuario, Contraseña y MasterKey son obligatorios';
         return;
@@ -68,7 +74,7 @@ const handleRegister = async () => {
         <v-text-field
         v-model="username"
         label="Nombre de Usuario"
-        variant="outlined"
+        variant="underlined"
         rounded="lg"
         class="mb-2"
         ></v-text-field>
@@ -77,15 +83,26 @@ const handleRegister = async () => {
         v-model="nombre"
         label="Nombre Completo (opcional)"
         rounded="lg"
-        variant="outlined"
+        variant="underlined"
         class="mb-2"
         ></v-text-field>
 
         <v-text-field
         v-model="password"
         label="Contraseña"
+        hint="Cuidado con los espacios y las mayusculas"
         type="password"
-        variant="outlined"
+        variant="underlined"
+        rounded="lg"
+        class="mb-2"
+        ></v-text-field>
+
+        <v-text-field
+        v-model="passwordConfirm"
+        label="Confirmar Contraseña"
+        hint="Cuidado con los espacios y las mayusculas"
+        type="passwordConfirm"
+        variant="underlined"
         rounded="lg"
         class="mb-2"
         ></v-text-field>
@@ -94,7 +111,7 @@ const handleRegister = async () => {
         v-model="masterKey" 
         label="Llave Maestra" 
         type="password" 
-        variant="outlined"
+        variant="underlined"
         rounded="lg"
         ></v-text-field>
 
@@ -103,7 +120,6 @@ const handleRegister = async () => {
             :loading="loading"
             @click="handleRegister"
             color="primary"
-            size="large"
             rounded="pill"
             class="mt-5">
                 Crear Usuario
@@ -111,7 +127,7 @@ const handleRegister = async () => {
 
             <v-btn
             :to="{ name: 'login' }"
-            variant="text"
+            variant="plain"
             rounded="pill"
             size="x-small"
             class="mt-5">

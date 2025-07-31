@@ -1,3 +1,4 @@
+import { useAuthStore } from "@/stores/auth";
 import axios from "axios";
 
 //Creando una instancia de axios con la configuracion base
@@ -7,6 +8,18 @@ const apiClient = axios.create({
         'Content-Type': 'application/json',
     
     }
+});
+
+// INTERCEPTOR para añadir el token a las peticiones
+apiClient.interceptors.request.use(config =>{
+    const authStore = useAuthStore();
+    const token = authStore.token;
+    if(token){
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+}, error => {
+    return Promise.reject(error);
 })
 
 // Exportamos un objeto con los metodos
@@ -25,6 +38,9 @@ export default {
     },
     register(userData){
         return apiClient.post('/auth/register', userData);
+    },
+    getClients(){
+        return apiClient.get('/clients');
     }
     // Aqui se añaden las demas llamadas
 }

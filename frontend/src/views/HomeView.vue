@@ -1,40 +1,142 @@
 <script setup>
-// 1. Importamos lo que necesitamos
+import {ref, computed, onMounted} from 'vue';
+import { useClientStore } from '@/stores/client';
 import { useAuthStore } from '@/stores/auth';
 import { useRouter } from 'vue-router';
 
-// 2. Creamos las instancias del store y el router
+const clientStore = useClientStore();
 const authStore = useAuthStore();
 const router = useRouter();
-
-// 3. Obtenemos el nombre de usuario del store para personalizar el saludo
 const username = authStore.user?.username || 'usuario';
+const searchQuery = ref('');
 
-// 4. Creamos la función para manejar el logout
+onMounted(()=> {
+    clientStore.loadClients();
+});
+
+const filteredClients = computed(() => {
+    if (!searchQuery.value) {
+        return clientStore.clients;
+    }
+    return clientStore.clients.filter(client =>
+        client.nombre.toLowerCase().includes(searchQuery.value.toLowerCase())
+    );
+});
+
+// FUNCIÓN ACTUALIZADA PARA FORMATEAR EL DINERO
+const formatCurrency = (amount) => {
+    // Primero, intenta convertir el valor a un número.
+    // parseFloat es útil para cadenas que representan números con decimales.
+    const numericAmount = parseFloat(amount); //
+
+    // Si numericAmount no es un número válido DESPUÉS de intentar convertirlo, regresa 'N/A'
+    if (isNaN(numericAmount)) { //
+        return 'N/A'; // O cualquier otro valor que prefieras
+    }
+
+    // Usamos Intl.NumberFormat para formatear el número
+    return new Intl.NumberFormat('es-MX', { //
+        style: 'decimal', //
+        minimumFractionDigits: 2, //
+        maximumFractionDigits: 2, //
+    }).format(numericAmount); //
+};
+
+const goToNewClient = () => {
+    router.push({ name: 'new-client' });
+};
+
 const handleLogout = () => {
-  // Llamamos a la acción de logout que ya existe en nuestro store
     authStore.logout();
-  // Redirigimos al usuario a la página de login
     router.push({ name: 'login' });
+};
+
+const getStatusColor = (status) => {
+    switch (status) {
+    case 'bueno':
+      return 'info'; // Verde
+    case 'regular':
+      return 'success';    // Azul
+    case 'moroso':
+      return 'error';   // Rojo
+    default:
+      return 'grey';    // Un color por defecto si el estado es inesperado
+    }
 };
 </script>
 
 <template>
-<v-container class="fill-height d-flex justify-center align-center">
-    <div class="text-center">
-        <h1 class="text-h4 mb-4">¡Bienvenido, {{ username }}!</h1>
-        <p class="mb-8">Has iniciado sesión correctamente.</p>
-
-    <v-btn 
-        color="primary" 
-        @click="handleLogout"
+    <v-container>
+        <v-text-field
+        v-model="searchQuery"
+        label="Buscar clientes..."
+        prepend-inner-icon="mdi-magnify"
+        variant="solo"
+        rounded="pill"
+        density="compact"
+        hide-details
+        single-line
+        class="mb-4"
         >
-            Cerrar Sesión
-        </v-btn>
-    </div>
-</v-container>
+        </v-text-field>
+
+        <div v-if="clientStore.clients.length === 0" class="text-center mt-16 ">
+            <p>No hay clientes para mostrar.</p>
+        </div>
+
+        <v-list
+        lines="two"
+        v-else
+        bg-color="transparent"
+        
+        >
+            <v-list-item
+            v-for="client in filteredClients"
+            :key="client.id"
+            :title="client.nombre"
+            :subtitle="`Tel: ${client.telefono || 'No disponible'}`"
+            class="client-list-item"
+
+            rounded="xl"
+
+            :to="{ name: 'client-detail', params: {id: client.id} }"
+            link
+            >
+            <template v-slot:prepend>
+                <v-avatar color="primary">
+                <!-- <span class="white--text text-h6 ">{{ client.nombre.charAt(0).toUpperCase() }}</span> -->
+                <v-icon color="white">mdi-account-card-outline</v-icon>
+                </v-avatar>
+            </template>
+
+            <template v-slot:append>
+                <div class="d-flex flex-column align-end"> 
+                    <div
+                    class="d-flex justify-space-between flex-grow-1"
+                    style="min-width: 125px">
+                    <span class="">Saldo: $ </span>
+                    <span class=" ml-2">{{formatCurrency(client.saldo_actual)}}</span>
+                </div>
+                <v-chip 
+                    :color="getStatusColor(client.estado_cliente)"
+                    size="x-small"
+                    class="mt-1">
+                    {{ client.estado_cliente }}
+                </v-chip>
+                </div>
+            </template>
+
+            </v-list-item>
+        </v-list>
+    </v-container>
 </template>
 
 <style scoped>
-/* Puedes añadir estilos aquí si lo deseas */
+.client-list-item {
+    border-bottom: 1px solid #212121;
+    /* padding-bottom: 8px; */ 
+}
+.client-list-item:last-child {
+    border-bottom: none;
+}
 </style>

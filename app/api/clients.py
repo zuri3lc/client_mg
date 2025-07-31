@@ -31,7 +31,7 @@ router = APIRouter(
 )
 
 # Endpoint GET (lista) para obtener la lista de clientes de un usuario
-@router.get("/", response_model=List[ClientShowSchema])
+@router.get("", response_model=List[ClientShowSchema])
 def obtener_clientes_por_usuario(current_user: dict = Depends(get_current_user)):
     """Endpoint para obtener la lista de clientes del usuario autenticado"""
     db_clientes = obtain_clients_db(current_user.id)
