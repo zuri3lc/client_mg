@@ -3,11 +3,23 @@ import { db } from './db';
 import api from './api';
 
 let isSyncing = false;
+let syncIntervalId = null;
 
 // La función principal que se encargará de subir los datos
-const syncData = async () => {
+export const syncData = async () => {
     if (isSyncing || !navigator.onLine) {
+        if (!navigator.onLine) console.log('Offline, se omite el intento de sincronización.');
         return;
+    }
+
+    try {
+        // Antes de hacer el trabajo pesado, intentamos llegar al servidor.
+        await api.pingServer();
+        console.log('✅ Conexión con el servidor confirmada.');
+    } catch (error) {
+        // Si el ping falla, significa que no hay una conexión real a internet.
+        console.log('⚠️ No se pudo conectar con el servidor. Se aborta la sincronización.');
+        return; // Detenemos la ejecución.
     }
 
     isSyncing = true;
@@ -127,10 +139,32 @@ const syncData = async () => {
     }
 };
 
-// La función para inicializar el servicio no cambia
+
 export const initSyncService = () => {
-    window.addEventListener('online', syncData);
-    window.addEventListener('offline', () => console.log('Modo offline detectado.'));
+    // Listener del evento 'online' como primer intento
+    window.addEventListener('online', () => {
+        console.log('Evento "online" detectado. Intentando sincronizar...');
+        syncData();
+    });
+    window.addEventListener('offline', () => {
+        console.log('Modo offline detectado.');
+    });
+
+    // Verificación Periódica (la parte clave)
+    const startPeriodicSync = () => {
+        // Si ya hay un intervalo corriendo, no creamos otro
+        if (syncIntervalId) return;
+
+        console.log('Iniciando verificación periódica de sincronización (cada 30 segundos)...');
+        // Intentamos sincronizar cada 30 segundos
+        syncIntervalId = setInterval(syncData, 30000); 
+    };
+
+    // Al cargar la app, iniciamos la verificación periódica
+    startPeriodicSync();
+    
+    // Intento inicial por si acaso
     syncData();
+
     console.log('Servicio de Sincronización Inicializado.');
 };

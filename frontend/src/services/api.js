@@ -56,6 +56,9 @@ export default {
     },
     createMovement(clientId, movementData) {
         return apiClient.post(`/clients/${clientId}/movements`, movementData);
+    },
+    pingServer(){
+        return apiClient.get('/');
     }
     // Aqui se añaden las demas llamadas
 }

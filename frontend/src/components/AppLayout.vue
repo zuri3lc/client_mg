@@ -2,6 +2,7 @@
 import { watch, ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useAuthStore } from '@/stores/auth';
+import { syncData } from '@/services/sync';
 
 const router = useRouter();
 const route = useRoute();
@@ -12,9 +13,13 @@ watch(() => route.name, (newRouteName) => {
     selectedTab.value = newRouteName;
 }, { immediate: true});
 
-const handleLogout = () => {
-    authStore.logout();
+const handleLogout = async () => {
+    await authStore.logout();
     router.push({ name: 'login' });
+};
+const handleSync = () => {
+    console.log('Forzando sincronización manual...');
+    syncData();
 };
 </script>
 
@@ -30,6 +35,11 @@ const handleLogout = () => {
             Client Manager
         </v-btn>
         <v-spacer></v-spacer>
+        
+        <v-btn icon @click="handleSync">
+        <v-icon size="small">mdi-sync</v-icon>
+        </v-btn>
+
         <v-btn icon @click="handleLogout">
         <v-icon size="small">mdi-logout</v-icon>
         </v-btn>

@@ -4,6 +4,8 @@ import api from '@/services/api';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/auth';
 import { useClientStore } from '@/stores/client';
+import { syncData } from '@/services/sync';
+
 
 const router = useRouter(); // instancia del router a redirigir
 const authStore = useAuthStore(); //instancia del store
@@ -45,6 +47,11 @@ const handleLogin = async() => {
         // sin importar la respuesta detenemos la carga
         loading.value = false;
     }
+};
+
+const handleSync = () => {
+    console.log('Forzando sincronización manual...');
+    syncData();
 };
 </script>
 
@@ -107,8 +114,11 @@ const handleLogin = async() => {
                         REGISTRO NUEVO
                     </v-btn>
                 </div>
+                
             </div>
+            
         </v-responsive>
+        
     </v-container>
 
 </template>

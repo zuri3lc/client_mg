@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import api from "@/services/api";
+import { db } from "@/services/db";
 
 // defineStore crea el almacen
 export const useAuthStore = defineStore("auth", () => {
