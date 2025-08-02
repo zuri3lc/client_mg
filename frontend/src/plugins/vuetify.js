@@ -11,7 +11,7 @@ import * as directives from 'vuetify/directives'
 const c_mDarkTheme = {
 dark: true,
 colors: {
-    background: '#121212', // Fondo principal oscuro
+    background: '#0a0a0aff', // Fondo principal oscuro
     surface: '#212121',    // Color para tarjetas y superficies, un gris ligeramente más claro
     primary: '#4DB6AC',   // Un tono de aguamarina/teal sutil, no muy brillante
     secondary: '#B0BEC5',  // Un gris azulado para elementos secundarios

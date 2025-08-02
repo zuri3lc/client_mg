@@ -101,7 +101,7 @@ const handleRegister = async () => {
         v-model="passwordConfirm"
         label="Confirmar Contraseña"
         hint="Cuidado con los espacios y las mayusculas"
-        type="passwordConfirm"
+        type="password"
         variant="underlined"
         rounded="lg"
         class="mb-2"

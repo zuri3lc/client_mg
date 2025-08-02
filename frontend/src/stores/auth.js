@@ -22,12 +22,39 @@ export const useAuthStore = defineStore("auth", () => {
     };
 
     //--- MANEJO LOGOUT ---
-    const logout = () => {
-        token.value = null;
-        user.value = null;
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
+    // const logout = () => {
+    //     token.value = null;
+    //     user.value = null;
+    //     localStorage.removeItem('token');
+    //     localStorage.removeItem('user');
+    // };
+    const logout = async () => { // La convertimos en async
+        try {
+            // 1. Verificamos si hay algún elemento pendiente de sincronizar en CUALQUIER tabla.
+            const pendingClients = await db.clients.where('needsSync').above(0).count();
+            const pendingMovements = await db.movimientos.where('needsSync').above(0).count();
+            const itemsPending = pendingClients + pendingMovements;
+
+            if (itemsPending > 0) {
+                // Si hay pendientes, NO borramos la DB.
+                console.log(`Logout realizado, pero ${itemsPending} elementos siguen pendientes de sincronización. La base de datos local se mantiene intacta.`);
+            } else {
+                // Si no hay pendientes, borramos todo.
+                console.log("Cerrando sesión y limpiando base de datos local...");
+                await db.clients.clear();
+                await db.movimientos.clear();
+            }
+        } catch (error) {
+            console.error("Error durante el proceso de logout:", error);
+        } finally {
+            // 2. La limpieza de la sesión (token y user) se hace SIEMPRE.
+            token.value = null;
+            user.value = null;
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+        }
     };
+
     //--- GETERS ---
     //Exponemos el estado
     return { token, user, login, logout };

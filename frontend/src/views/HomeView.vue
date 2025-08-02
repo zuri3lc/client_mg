@@ -23,23 +23,15 @@ const filteredClients = computed(() => {
     );
 });
 
-// FUNCIÓN ACTUALIZADA PARA FORMATEAR EL DINERO
 const formatCurrency = (amount) => {
-    // Primero, intenta convertir el valor a un número.
-    // parseFloat es útil para cadenas que representan números con decimales.
-    const numericAmount = parseFloat(amount); //
-
-    // Si numericAmount no es un número válido DESPUÉS de intentar convertirlo, regresa 'N/A'
-    if (isNaN(numericAmount)) { //
-        return 'N/A'; // O cualquier otro valor que prefieras
+    const numericAmount = parseFloat(amount); 
+    if (isNaN(numericAmount)) { 
+        return 'N/A'; 
     }
-
-    // Usamos Intl.NumberFormat para formatear el número
-    return new Intl.NumberFormat('es-MX', { //
+    return new Intl.NumberFormat('es-MX', { 
         style: 'decimal', //
-        minimumFractionDigits: 2, //
-        maximumFractionDigits: 2, //
-    }).format(numericAmount); //
+        minimumFractionDigits: 2,
+    }).format(numericAmount);
 };
 
 const goToNewClient = () => {
@@ -105,7 +97,7 @@ const getStatusColor = (status) => {
             <template v-slot:prepend>
                 <v-avatar color="primary">
                 <!-- <span class="white--text text-h6 ">{{ client.nombre.charAt(0).toUpperCase() }}</span> -->
-                <v-icon color="white">mdi-account-card-outline</v-icon>
+                <v-icon color="white">mdi-account-cash-outline</v-icon>
                 </v-avatar>
             </template>
 

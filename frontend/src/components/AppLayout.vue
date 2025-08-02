@@ -20,8 +20,15 @@ const handleLogout = () => {
 
 <template>
     <v-layout>
-    <v-app-bar color="background" elevation="0">
-        <v-app-bar-title>Client Manager</v-app-bar-title>
+    <v-app-bar density="compact" color="background" elevation="0">
+        <v-btn
+        :to="{name: 'home'}"
+        variant="plain"
+        rounded="lg"
+        class="bar-title"
+        >
+            Client Manager
+        </v-btn>
         <v-spacer></v-spacer>
         <v-btn icon @click="handleLogout">
         <v-icon size="small">mdi-logout</v-icon>
@@ -70,3 +77,14 @@ const handleLogout = () => {
 
     </v-layout>
 </template>
+
+<style>
+.bar-title {
+    font-size: 1.25rem !important; /* Mantiene el tamaño de fuente de un título de app-bar */
+    font-weight: 500;
+    text-transform: none; /* Evita que el texto esté en mayúsculas */
+    letter-spacing: normal;
+    color: inherit;
+    padding-left: 16px !important;
+}
+</style>

@@ -28,8 +28,8 @@ const handleLogin = async() => {
             password: password.value
         });
 
-        syncMessage.value = 'Syncronizando clientes Remoto => Local...';
-        await clientStore.fetchStoreClients();
+        syncMessage.value = 'Syncronizando clientes y movimientos: Remoto => Local...';
+        await clientStore.initialSync();
 
         //redireccion
         router.push({name: 'home'});

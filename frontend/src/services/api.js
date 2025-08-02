@@ -41,6 +41,21 @@ export default {
     },
     getClients(){
         return apiClient.get('/clients');
+    },
+    getAllMoves(){
+        return apiClient.get("movs/all")
+    },
+    createClient(clientData) {
+        return apiClient.post('/clients/', clientData);
+    },
+    updateClient(clientId, clientData) {
+        return apiClient.put(`/clients/${clientId}`, clientData);
+    },
+    deleteClient(clientId) {
+        return apiClient.delete(`/clients/${clientId}`);
+    },
+    createMovement(clientId, movementData) {
+        return apiClient.post(`/clients/${clientId}/movements`, movementData);
     }
     // Aqui se añaden las demas llamadas
 }

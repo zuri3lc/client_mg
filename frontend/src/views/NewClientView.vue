@@ -5,6 +5,15 @@ import { useClientStore } from '@/stores/client';
 
 const router = useRouter();
 
+
+// const newClientForm = reactive({
+//     nombre: '',
+//     telefono: '',
+//     ubicacion: '',
+//     comentario: '',
+//     saldo_inicial: null,
+// });
+
 // Variables para los campos del formulario
 const nombre = ref('');
 const telefono = ref('');
@@ -17,7 +26,7 @@ const clientStore = useClientStore();
 const loading = ref(false);
 
 const handleSaveClient = async () => {
-    if (!nombre.value || !saldoInicial.value) {
+    if (!nombre.value) {
         alert('Nombre y saldo son obligatorios');
         return;
     }
@@ -37,6 +46,12 @@ const handleSaveClient = async () => {
         loading.value = false;
     }
 };
+// Regla de validación para el saldo
+const saldoRules = [
+    value => !!value || 'El saldo inicial es obligatorio.',
+    value => (value && value > 0) || 'El saldo inicial debe ser mayor a cero.',
+];
+
 </script>
 
 <template>
@@ -50,7 +65,8 @@ const handleSaveClient = async () => {
         <v-form @submit.prevent="handleSaveClient">
         <v-text-field
             v-model="nombre"
-            label="Nombre completo"
+            label="Nombre"
+            hint="(OBLIGATORIO)"
             variant="outlined"
             class="mb-4"
             required
@@ -58,28 +74,29 @@ const handleSaveClient = async () => {
 
         <v-text-field
             v-model.number="saldoInicial"
+            hint="(OBLIGATORIO) El saldo debe ser mayor a cero"
             label="Saldo Inicial"
             type="number"
-            step="0.01"
             prefix="$"
             variant="outlined"
             class="mb-4"
-            required
+            :rules="saldoRules"
         ></v-text-field>
 
         <v-text-field
             v-model="telefono"
             label="Teléfono"
+            hint="(OPCIONAL)"
             variant="outlined"
             class="mb-4"
         ></v-text-field>
 
-        <v-text-field
+        <!-- <v-text-field
             v-model="ubicacion"
             label="Ubicación aproximada"
             variant="outlined"
             class="mb-4"
-        ></v-text-field>
+        ></v-text-field> -->
 
         <v-textarea
             v-model="comentario"
