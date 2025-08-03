@@ -345,7 +345,7 @@ def agregar_cliente_db(nombre, telefono, ubicacion_aproximada, foto_domicilio, c
             usuario_sistema_id
             ))
             cliente_id = cur.fetchone()[0] # type: ignore
-            #paso 2 insertamos el saldo inicial del cliente
+            # paso 2 insertamos el saldo inicial del cliente
             cur.execute("""
             INSERT INTO movimientos (
                 cliente_id,

@@ -1,6 +1,6 @@
 <script setup>
 // 1. 'computed' es nuevo, para el cálculo en tiempo real
-import { onMounted, ref, computed } from 'vue';
+import { onMounted, ref, computed, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useClientStore } from '@/stores/client';
 import { useMovimientoStore } from '@/stores/movimiento';
@@ -10,8 +10,32 @@ const router = useRouter();
 const clientStore = useClientStore();
 const movimientoStore = useMovimientoStore();
 
-// 2. Eliminamos toda la lógica del dialog (dialog, movimientoTipo, watchers, etc.)
-// y añadimos las nuevas variables para los campos en línea.
+// --- INICIO DE LA MODIFICACIÓN ---
+
+// NUEVO: Observador (watch) para la reactividad del ID.
+// Este bloque de código vigila el cliente que está seleccionado en el store.
+watch(() => clientStore.selectedClient, (clienteActualizado) => {
+    // Nos aseguramos de que haya un cliente cargado.
+    if (clienteActualizado) {
+        // Obtenemos el ID de la URL actual (que podría ser el ID temporal negativo).
+        const idEnUrl = Number(route.params.id);
+
+        // La condición clave: si el ID en la URL es diferente al ID del cliente
+        // que ahora está en el store, significa que la sincronización ocurrió y el ID cambió.
+        if (idEnUrl !== clienteActualizado.id) {
+            console.log(`El ID del cliente cambió de ${idEnUrl} a ${clienteActualizado.id}. Redirigiendo...`);
+            
+            // Reemplazamos la URL actual con la nueva URL que contiene el ID permanente.
+            // Usamos 'replace' para no crear un historial de navegación innecesario.
+            router.replace({ name: 'client-detail', params: { id: clienteActualizado.id } });
+        }
+    }
+}, {
+    // 'deep: true' es importante para que el observador detecte cambios
+    // dentro de las propiedades del objeto del cliente.
+    deep: true 
+});
+
 const montoAbono = ref(0);
 const montoCredito = ref(0);
 const loadingSave = ref(false); // Para el nuevo botón de guardar

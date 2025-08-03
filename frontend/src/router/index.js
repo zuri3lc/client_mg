@@ -54,7 +54,7 @@ const router = createRouter({
 // NavigationGuard
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore();
-  const isAuthenticated = !!authStore.token;
+  const isAuthenticated = !!authStore.accessToken;
 
   if (to.meta.requiresAuth && !isAuthenticated) {
     next({ name: "login" });
