@@ -42,30 +42,24 @@ def ver_clientes(usuario_sistema_id):
 def busqueda(usuario_sistema_id):
     print("\n--- BUSQUEDA DE CLIENTES ---\n")
     
-    while True:
-        search_name = input("Ingresa el cliente para buscar, ingresa el primer nombre : \n").strip()
-        
-        if not search_name:
-            print("\nERROR: La busqueda no puede estar vacia")
-            continue
+    search_name = input("Ingresa el cliente para buscar, ingresa el primer nombre : \n").strip()
+    
+    if not search_name:
+        print("\nERROR: La busqueda no puede estar vacia")
+        return
 
-        clientes_encontrados = client_search_db(search_name, usuario_sistema_id)
-        
-        if clientes_encontrados:
-            print(f"\nResultados para la busqueda '{search_name}: ")
-            mostrar_clientes(clientes_encontrados)
-            break
-        else:
-            print(f"\nNo se encontraron resultados para '{search_name}'.\n")
-            continue
+    clientes_encontrados = client_search_db(search_name, usuario_sistema_id)
+    if not clientes_encontrados:
+        print(f"\nNo se encontraron resultados para '{search_name}'.\n")
+        return
+    print(f"\nResultados para la busqueda '{search_name}: ")
+    mostrar_clientes(clientes_encontrados)
 
 # ------- MANEJA EL HISTORIAL DE MOVIMIENTOS --------
 def manejo_historial(usuario_sistema_id):
     """Logica para mostrar el historial de movimientos de un cliente"""
     print("\n---CONSULTAR HISTORIAL DE MOVIMIENTOS---\n")
-    
     busqueda(usuario_sistema_id)
-    
     # 1 obtenemos un id valido
     client_id = obtener_client_id()
     # 2 validamos que el cliente exista

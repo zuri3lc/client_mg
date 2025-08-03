@@ -21,6 +21,19 @@ class MovimientoShowSchema(BaseModel):
     class Config:
         from_attributes = True
 
+class AllMoveSchema(BaseModel):
+    """Schema para todos los movimientos"""
+    id: int
+    cliente_id: int
+    fecha_movimiento: date
+    tipo_movimiento: str
+    monto: Decimal
+    saldo_anterior: Decimal
+    saldo_final: Decimal
+    
+    class Config:
+        from_attributes = True
+
 #----- ESQUEMAS PARA CLIENTES ----
 
 class ClientBaseSchema(BaseModel):
@@ -54,6 +67,7 @@ class ClientShowSchema(ClientBaseSchema):
     estado_cliente: str
     fecha_adquisicion: date
     fecha_ultima_modificacion: date
+    last_updated: datetime
     saldo_actual: Decimal
     
     class Config:

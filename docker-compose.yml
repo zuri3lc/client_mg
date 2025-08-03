@@ -42,5 +42,16 @@ services:
     labels:
       - "com.centurylinklabs.watchtower.enable=false"
 
+  frontend:
+    build: ./frontend
+    container_name: vue_pwa
+    restart: unless-stopped
+    ports:
+      - "8099:80"
+    depends_on:
+      - api
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
+
 volumes:
   pg_data: {}

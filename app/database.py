@@ -95,7 +95,7 @@ def crear_tablas():
                 id SERIAL PRIMARY KEY,
                 cliente_id INTEGER NOT NULL,
                 fecha_movimiento DATE NOT NULL DEFAULT CURRENT_DATE,
-                tipo_movimiento VARCHAR(50) NOT NULL CHECK (tipo_movimiento IN ('deuda_inicial', 'abono', 'cargo')),
+                tipo_movimiento VARCHAR(50) NOT NULL CHECK (tipo_movimiento IN ('deuda_inicial', 'abono', 'credito')),
                 monto NUMERIC(10, 2) NOT NULL,
                 saldo_anterior NUMERIC(10, 2) NOT NULL,
                 saldo_final NUMERIC(10, 2) NOT NULL,
@@ -237,6 +237,36 @@ def check_username_exist_db(username):
     finally:
         if conn: conn.close()
 
+# Ontiene todos lo movimientos existentes
+def sync_movimientos_db(usuario_sistema_id):
+    """Obtiene todos los movimientos de un usuario."""
+    conn = db_conection()
+    if conn is None: return []
+    try:
+        with conn.cursor(row_factory=dict_row) as cur:
+            cur.execute(
+                """
+                SELECT 
+                id, 
+                cliente_id, 
+                fecha_movimiento, 
+                tipo_movimiento, 
+                monto, 
+                saldo_anterior, 
+                saldo_final 
+                FROM movimientos 
+                WHERE usuario_sistema_id = %s
+                ORDER BY cliente_id DESC;
+                """,
+                (usuario_sistema_id,)
+            )
+            return cur.fetchall()
+    except psycopg.Error as e:
+        logger.error(f'Error al obtener todos los movimientos: {e}')
+        return []
+    finally:
+        if conn: conn.close()
+
 #OBTIENE EL USUARIO Y EL ID 
 def get_user_by_id_db(user_id: int):
     """
@@ -367,6 +397,7 @@ def obtain_clients_db(usuario_sistema_id):
                             comentario,
                             fecha_adquisicion,
                             fecha_ultima_modificacion,
+                            last_updated,
                             saldo_actual,
                             estado_cliente,
                             usuario_sistema_id
@@ -400,6 +431,7 @@ def list_client_db(cliente_id, usuario_sistema_id):
                             comentario,
                             fecha_adquisicion,
                             fecha_ultima_modificacion,
+                            last_updated,
                             saldo_actual,
                             estado_cliente,
                             usuario_sistema_id
@@ -484,7 +516,7 @@ def actualizar_saldo_db(cliente_id, usuario_sistema_id, monto):
             )
             
             # Paso 3: Determinar el tipo de movimiento
-            tipo_movimiento = 'cargo' if monto > 0 else 'abono'
+            tipo_movimiento = 'credito' if monto > 0 else 'abono'
             registrar_movimiento_interno(cur, cliente_id, tipo_movimiento, monto, saldo_anterior, saldo_final, usuario_sistema_id)
             conn.commit() #guardamos los cambios
             logger.info(f"Saldo del cliente ID {cliente_id} actualizado a {saldo_final}")
@@ -535,6 +567,7 @@ def client_search_db(nombre_buscado, usuario_sistema_id):
                     comentario,
                     fecha_adquisicion,
                     fecha_ultima_modificacion,
+                    last_updated,
                     saldo_actual,
                     estado_cliente
                 FROM

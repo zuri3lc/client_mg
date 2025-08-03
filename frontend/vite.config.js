@@ -38,8 +38,8 @@ export default defineConfig({
       // Esto asegura que el manifest.json se genere correctamente.
       includeAssets: ['favicon.ico', 'apple-touch-icon.png'],
       manifest: {
-        name: 'Client Manager',
-        short_name: 'ClientMgr',
+        name: 'Gestor de Clientes',
+        short_name: 'Gestor',
         description: 'Gestión de clientes y saldos offline-first.',
         theme_color: '#212121',
         background_color: '#121212',

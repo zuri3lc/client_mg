@@ -1,0 +1,13 @@
+ 
+# frontend/.dockerignore
+
+# Ignorar dependencias, deben ser instaladas dentro del contenedor
+node_modules
+
+# Ignorar la carpeta de build, si existe localmente
+dist
+
+# Archivos de log y de entorno local
+npm-debug.log*
+.env
+.env.local
