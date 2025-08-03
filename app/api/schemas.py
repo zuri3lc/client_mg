@@ -105,6 +105,7 @@ class UserLoginSchema(BaseModel):
 #La respuesta que la app espera un JSON "acces_token" y "toke_type"
 class TokenSchema(BaseModel):
     access_token: str
+    refresh_token: str
     token_type: str
     user_id: int
 

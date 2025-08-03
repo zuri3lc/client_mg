@@ -12,9 +12,10 @@ from ..database import (
     db_conection,
     get_user_by_id_db,
     check_username_exist_db,
-    registrar_usuario_db
+    registrar_usuario_db,
+    
     )
-from ..security import create_access_token, decode_access_token, oauth2_scheme
+from ..security import create_access_token, decode_access_token, create_refresh_token, oauth2_scheme
 
 #---- ROUTER ----
 router = APIRouter(
@@ -41,15 +42,35 @@ def login(
             headers={"WWW-Authenticate": "Bearer"},
         )
 
-    #'sub' (subject) es el estandar para el identificador del usuario
     token_data = {"sub": str(user_id)}
+    #se generan ambos tokens
     access_token = create_access_token(data=token_data)
+    refresh_token = create_refresh_token(data=token_data)
     #retornamos el token en un diccionario
     return {
         "access_token": access_token,
+        "refresh_token": refresh_token,
         "token_type": "bearer",
         "user_id": user_id
         }
+
+#Endpoint para el refresh token
+@router.post("/refresh", response_model=schemas.TokenSchema)
+def refresh_token(current_user: schemas.User = Depends(get_user_by_id_db)):
+    """Genera un nuevo par de tokens, a partir del token valido"""
+    user_id = current_user.id
+    token_data = {"sub": str(user_id)}
+    
+    #nuevo par de tokens
+    new_access_token = create_access_token(data=token_data)
+    new_refresh_token = create_refresh_token(data=token_data)
+    
+    return {
+        "access_token": new_access_token,
+        "refresh_token": new_refresh_token,
+        "token_type": "bearer",
+        "user_id": user_id
+    }
 
 #-- REGISTRA UN NUEVO USUARIO
 @router.post("/register", response_model=schemas.User, status_code=status.HTTP_201_CREATED, tags=["Autenticacion"])

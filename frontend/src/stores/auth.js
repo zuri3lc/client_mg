@@ -7,7 +7,8 @@ import { db } from "@/services/db";
 export const useAuthStore = defineStore("auth", () => {
     //--- STATE ---
     // guardamos el token y datos del usuario
-    const token = ref(localStorage.getItem("token"));
+    const accessToken = ref(localStorage.getItem("accessToken"));
+    const refreshToken = ref(localStorage.getItem("refreshToken"));
     const user = ref(JSON.parse(localStorage.getItem("user")));
 
     //--- ACTIONS ---
@@ -15,20 +16,15 @@ export const useAuthStore = defineStore("auth", () => {
     const login = async (credentials) => {
         const response = await api.login(credentials);
         // guardamos el token y los datos en el estado
-        token.value = response.data.access_token;
+        accessToken.value = response.data.access_token;
+        refreshToken.value = response.data.refresh_token;
         user.value = {username: credentials.username, id: response.data.user_id};
         // guardamos en localStorage para persistir la sesion
-        localStorage.setItem('token', token.value);
+        localStorage.setItem('accessToken', accessToken.value);
+        localStorage.setItem('refreshToken', refreshToken.value);
         localStorage.setItem('user', JSON.stringify(user.value));
     };
 
-    //--- MANEJO LOGOUT ---
-    // const logout = () => {
-    //     token.value = null;
-    //     user.value = null;
-    //     localStorage.removeItem('token');
-    //     localStorage.removeItem('user');
-    // };
     const logout = async () => { // La convertimos en async
         try {
             // 1. Verificamos si hay algún elemento pendiente de sincronizar en CUALQUIER tabla.
@@ -49,14 +45,35 @@ export const useAuthStore = defineStore("auth", () => {
             console.error("Error durante el proceso de logout:", error);
         } finally {
             // 2. La limpieza de la sesión (token y user) se hace SIEMPRE.
-            token.value = null;
+            accessToken.value = null;
+            refreshToken.value = null;
             user.value = null;
-            localStorage.removeItem('token');
+            localStorage.removeItem('accessToken');
+            localStorage.removeItem('refreshToken');
             localStorage.removeItem('user');
         }
     };
 
+    const refreshAccessToken = async () => {
+        if (!refreshToken.value){
+            throw new Error("No hay refresh token disponible");
+        } try {
+            const response =  await api.refreshToken(refreshToken.value);
+            accessToken.value = response.data.access_token;
+            refreshToken.value = response.data.refresh_token;
+            
+            localStorage.setItem('accessToken', accessToken.value);
+            localStorage.setItem('refreshToken', refreshToken.value);
+            
+            return accessToken.value;
+        } catch (error) {
+            console.error("Error al refrescar el token:", error);
+            await logout();
+            throw error;
+        }
+    }
+
     //--- GETERS ---
     //Exponemos el estado
-    return { token, user, login, logout };
+    return {accessToken, refreshToken, user, login, logout, refreshAccessToken };
 });

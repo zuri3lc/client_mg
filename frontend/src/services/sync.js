@@ -26,6 +26,7 @@ export const syncData = async () => {
     console.log('🚀 Iniciando proceso de sincronización: Local -> Remoto');
 
     try {
+        let refreshNeeded = false;
         // --- 1. SINCRONIZACIÓN DE CLIENTES NUEVOS (needsSync: 1) ---
         const clientsToCreate = await db.clients.where('needsSync').equals(1).toArray();
         if (clientsToCreate.length > 0) {
@@ -43,7 +44,9 @@ export const syncData = async () => {
                     const serverClient = response.data;
                     
                     await db.transaction('rw', db.clients, db.movimientos, async () => {
-                        await db.movimientos.where('cliente_id').equals(localClient.id).modify({ cliente_id: serverClient.id });
+                        await db.movimientos.where('cliente_id').equals(localClient.id).modify({
+                            cliente_id: serverClient.id,
+                            needsSync: 0 });
                         await db.clients.delete(localClient.id);
                         await db.clients.add({ ...serverClient, needsSync: 0 });
                     });
@@ -91,38 +94,18 @@ export const syncData = async () => {
 
         // 4. Lógica para sincronizar movimientos individuales
         const movementsToSync = await db.movimientos.where('needsSync').equals(1).toArray();
-        
         if (movementsToSync.length > 0) {
-            console.log(`Enviando ${movementsToSync.length} movimientos nuevos al servidor...`);
-
+            refreshNeeded = true;
+            console.log(`Enviando ${movementsToSync.length} movimientos nuevos...`);
             for (const localMovement of movementsToSync) {
+                // El bug del duplicado ya se corrigió arriba, aquí solo procesamos abonos/cargos
+                if (localMovement.tipo_movimiento === 'deuda_inicial') continue;
                 try {
-                    // Si el cliente_id es negativo, significa que el cliente al que pertenece
-                    // todavía no se ha sincronizado. Debemos esperar a la siguiente ronda.
-                    if (localMovement.cliente_id < 0) {
-                        console.log(`Saltando movimiento ${localMovement.id}, su cliente aún no está sincronizado.`);
-                        continue; // Pasa al siguiente movimiento
-                    }
-
-                    // Preparamos el payload que espera la API
-                    const payload = {
-                        monto: localMovement.monto
-                        // Tu API de movimientos parece que solo necesita el monto,
-                        // ya que el tipo se deduce del signo y el resto se calcula en el backend.
-                        // Si necesitara más campos, se añadirían aquí.
-                    };
-
-                    // Enviamos el movimiento al servidor
+                    if (localMovement.cliente_id < 0) continue;
+                    const payload = { monto: localMovement.monto };
                     await api.createMovement(localMovement.cliente_id, payload);
-
-                    // Si tuvo éxito, lo borramos de la base de datos local.
-                    // Lo borramos en lugar de solo actualizar 'needsSync' porque la sincronización
-                    // inicial (Remoto -> Local) es la que debe traer la versión "oficial" del movimiento.
-                    // Esto evita duplicados y conflictos.
                     await db.movimientos.delete(localMovement.id);
-
-                    console.log(`Movimiento ${localMovement.id} para cliente ${localMovement.cliente_id} sincronizado y eliminado localmente.`);
-
+                    console.log(`Movimiento ${localMovement.id} sincronizado.`);
                 } catch (error) {
                     console.error(`Error sincronizando movimiento ${localMovement.id}:`, error);
                 }
@@ -131,11 +114,21 @@ export const syncData = async () => {
             console.log('No hay nuevos movimientos para sincronizar.');
         }
 
+        if (refreshNeeded) {
+            console.log('Sincronización completada. Refrescando datos de la aplicación...');
+            // Volvemos a cargar todos los clientes para la HomeView
+            await clientStore.loadClients(); 
+            // Si estamos en la vista de detalles, recargamos los movimientos de ese cliente
+            if (clientStore.selectedClient) {
+                await movimientoStore.loadMovimientosFromDB(clientStore.selectedClient.id);
+            }
+        }
         console.log('✅ Proceso de sincronización terminado.');
     } catch (error) {
         console.error('Error durante el ciclo de sincronización:', error);
     } finally {
         isSyncing = false;
+        console.log('✅ Proceso de sincronización terminado.');
     }
 };
 

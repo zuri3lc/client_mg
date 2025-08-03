@@ -13,14 +13,44 @@ const apiClient = axios.create({
 // INTERCEPTOR para añadir el token a las peticiones
 apiClient.interceptors.request.use(config =>{
     const authStore = useAuthStore();
-    const token = authStore.token;
+    // access token para las peticiones normales
+    const token = authStore.accessToken;
     if(token){
         config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
 }, error => {
     return Promise.reject(error);
-})
+});
+
+// --- INTERCEPTOR DE RESPUESTA (Response) ---
+// Se ejecuta DESPUÉS de recibir una respuesta (exitosa o con error).
+apiClient.interceptors.response.use(
+    (response) => response, // Si la respuesta es exitosa (2xx), la devuelve sin más.
+    async (error) => {
+        const originalRequest = error.config;
+        // Si el error es 401 (No Autorizado) y no hemos reintentado ya esta petición
+        if (error.response.status === 401 && !originalRequest._retry) {
+            originalRequest._retry = true; // Marcamos que vamos a reintentar
+            
+            const authStore = useAuthStore();
+            try {
+                // Intentamos refrescar el token
+                const newAccessToken = await authStore.refreshAccessToken();
+                // Actualizamos el header de la petición original con el nuevo token
+                originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
+                // Reintentamos la petición original que había fallado
+                return apiClient(originalRequest);
+            } catch (refreshError) {
+                // Si el refresco falla, el store ya se encarga de hacer logout.
+                // Rechazamos la promesa para detener cualquier otra acción.
+                return Promise.reject(refreshError);
+            }
+        }
+        // Para cualquier otro error, simplemente lo devolvemos.
+        return Promise.reject(error);
+    }
+);
 
 // Exportamos un objeto con los metodos
 export default {
@@ -35,6 +65,13 @@ export default {
                 'Content-Type': 'application/x-www-form-urlencoded',
             }
         });
+    },
+    refreshToken(token){
+        return axios.post('https://api.techz.bid/auth/refresh', {}, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
     },
     register(userData){
         return apiClient.post('/auth/register', userData);
