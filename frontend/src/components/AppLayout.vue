@@ -6,7 +6,7 @@
 import { watch, ref, computed, onMounted, onUnmounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useAuthStore } from '@/stores/auth';
-import { syncData } from '@/services/sync';
+import { syncData, downloadDataFromServer } from '@/services/sync';
 
 const router = useRouter();
 const route = useRoute();
@@ -49,8 +49,12 @@ const handleLogout = async () => {
     router.push({ name: 'login' });
 };
 const handleSync = () => {
-    console.log('Forzando sincronización manual...');
+    console.log('Forzando sincronización manual (SUBE Y BAJA)...');
     syncData();
+};
+const handleDownload = () => {
+    console.log('Descargando datos del servidor (SOLO BAJA)...');
+    downloadDataFromServer();
 };
 </script>
 
@@ -66,6 +70,11 @@ const handleSync = () => {
             Client Manager
         </v-btn>
         <v-spacer></v-spacer>
+<!--  -->
+        <v-btn v-if="onHomePage" icon @click="handleDownload" :disabled="!isOnline">
+            <v-icon size="small">mdi-cloud-download-outline</v-icon>
+            <v-tooltip activator="parent" location="bottom">{{ isOnline ? 'Descargar Datos' : 'Necesitas conexión' }}</v-tooltip>
+        </v-btn>
         
         <v-btn v-if="onHomePage" icon @click="handleSync" :disabled="!isOnline">
             <v-icon size="small">mdi-sync</v-icon>
@@ -74,6 +83,7 @@ const handleSync = () => {
 
         <v-btn icon @click="handleLogout">
         <v-icon size="small">mdi-logout</v-icon>
+        <v-tooltip activator="parent" location="bottom">{{'Cerrar Sesion'}}</v-tooltip>
         </v-btn>
     </v-app-bar>
 
