@@ -17,7 +17,7 @@ if SECRET_KEY is None:
 #algoritmo para la firma
 ALGORITHM = os.getenv("ALGORITHM")
 #El tiempo de vida del token
-ACCES_TOKEN_EXPIRE_MINUTES = 30
+ACCES_TOKEN_EXPIRE_MINUTES = 11000
 REFRESH_TOKEN_EXPIRE_DAYS = 30
 
 

@@ -7,6 +7,8 @@ import { useAuthStore } from './auth';
 export const useClientStore = defineStore('client', () =>{
     const clients = ref([]); // estado para mantener los clientes en la memoria
     const selectedClient = ref(null);
+    //preservacion de busqueda
+    const searchQuery = ref('');
 
     const initialSync = async () => {
         try {
@@ -143,6 +145,7 @@ export const useClientStore = defineStore('client', () =>{
     return { 
         clients,
         selectedClient,
+        searchQuery,
         initialSync,
         loadClients,
         addClient,

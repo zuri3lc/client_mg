@@ -3,12 +3,14 @@ import {ref, computed, onMounted} from 'vue';
 import { useClientStore } from '@/stores/client';
 import { useAuthStore } from '@/stores/auth';
 import { useRouter } from 'vue-router';
+import { storeToRefs } from 'pinia';
 
 const clientStore = useClientStore();
 const authStore = useAuthStore();
 const router = useRouter();
 const username = authStore.user?.username || 'usuario';
-const searchQuery = ref('');
+// const searchQuery = ref('');
+const { clients, searchQuery } = storeToRefs(clientStore);
 
 onMounted(()=> {
     clientStore.loadClients();
@@ -16,7 +18,8 @@ onMounted(()=> {
 
 const filteredClients = computed(() => {
     if (!searchQuery.value) {
-        return clientStore.clients;
+        // return clientStore.clients;
+        return clients.value;
     }
     return clientStore.clients.filter(client =>
         client.nombre.toLowerCase().includes(searchQuery.value.toLowerCase())
@@ -69,6 +72,8 @@ const getStatusColor = (status) => {
         hide-details
         single-line
         class="mb-4"
+        clearable
+        clear-icon="mdi-close-circle"
         >
         </v-text-field>
 

@@ -11,14 +11,26 @@ const telefono = ref('');
 const ubicacion = ref('');
 const comentario = ref('');
 const saldoInicial = ref(0.00);
+const errorMessage = ref(null);
 
 const clientStore = useClientStore();
 
 const loading = ref(false);
 
 const handleSaveClient = async () => {
+    //validacion de nombre de cliente
+    errorMessage.value = null;
+    const trimmedNewName = nombre.value.trim().toLowerCase();
+    const isDuplicate = clientStore.clients.some(
+        client => client.nombre.trim().toLowerCase() === trimmedNewName
+    );
+
+    if (isDuplicate) {
+        errorMessage.value = `El cliente "${nombre.value}" ya existe. Por favor, elige otro nombre.`;
+        return;
+    }
     if (!nombre.value) {
-        alert('Nombre y saldo son obligatorios');
+        alert('El nombre es obligatorio');
         return;
     }
     loading.value = true;
@@ -53,6 +65,18 @@ const saldoRules = [
 
     <v-main>
     <v-container>
+        <v-alert
+        v-if="errorMessage"
+        type="error"
+        variant="tonal"
+        density="compact"
+        class="mb-4"
+        >
+        {{ errorMessage }}
+        </v-alert>
+
+    <v-form @submit.prevent="handleSaveClient">
+        </v-form>
         <v-form @submit.prevent="handleSaveClient">
         <v-text-field
             v-model="nombre"
