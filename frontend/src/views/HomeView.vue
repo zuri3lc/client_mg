@@ -46,9 +46,9 @@ const handleLogout = () => {
 const getStatusColor = (status) => {
     switch (status) {
     case 'bueno':
-      return 'info'; // Verde
+      return 'success'; // Verde
     case 'regular':
-      return 'success';    // Azul
+      return 'info';    // Azul
     case 'moroso':
       return 'error';   // Rojo
     default:
@@ -86,17 +86,19 @@ const getStatusColor = (status) => {
             v-for="client in filteredClients"
             :key="client.id"
             :title="client.nombre"
-            :subtitle="`Tel: ${client.telefono || 'No disponible'}`"
-            class="client-list-item"
+            :subtitle="`${client.ubicacion_aproximada || 'N/A'}`"
+            class="client-list-item mt-2"
 
             rounded="xl"
 
             :to="{ name: 'client-detail', params: {id: client.id} }"
             link
             >
+            <div class="text-caption text-grey mt-1" v-if="client.comentario">
+            {{ client.comentario }}
+            </div>
             <template v-slot:prepend>
                 <v-avatar color="primary">
-                <!-- <span class="white--text text-h6 ">{{ client.nombre.charAt(0).toUpperCase() }}</span> -->
                 <v-icon color="white">mdi-account-cash-outline</v-icon>
                 </v-avatar>
             </template>

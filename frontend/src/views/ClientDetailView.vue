@@ -90,9 +90,9 @@ onMounted(() => {
 const getStatusColor = (status) => {
     switch (status) {
     case 'bueno':
-        return 'info';
-    case 'regular':
         return 'success';
+    case 'regular':
+        return 'info';
     case 'moroso':
         return 'error';
     default:
@@ -170,11 +170,25 @@ const formatCurrency = (amount) => {
                     </v-row>
                     <v-divider class="my-2"></v-divider>
 
-                    <v-row no-gutters class="py-2 px-4 align-center">
-                        <v-col cols="4" class="font-weight-medium text-subtitle-2 text-grey-darken-2">Teléfono</v-col>
-                        <v-col cols="8" class="text-subtitle-1 text-right">{{ clientStore.selectedClient.telefono || 'No especificado' }}</v-col>
+                    <v-row no-gutters class="pt-4 pb-2 px-4 align-center">
+                    <v-col cols="4" class="font-weight-medium text-subtitle-2 text-grey-darken-2">
+                        Ubicacion
+                    </v-col>
+                    <v-col cols="8" class="text-subtitle-1 text-h7 font-weight-light text-right">
+                        {{ clientStore.selectedClient.ubicacion || 'No añadido' }}
+                    </v-col>
                     </v-row>
-                    <v-divider class="my-2"></v-divider>
+                    <v-divider class="mb-4"></v-divider>
+
+                    <v-row no-gutters class="py-2 px-4 align-center">
+                    <v-col cols="4" class="font-weight-medium text-subtitle-2 text-grey-darken-2">
+                        Comentario
+                    </v-col>
+                    <v-col cols="8" class="text-subtitle-1 text-h7 font-weight-light text-right">
+                        {{ clientStore.selectedClient.comentario || 'No añadido' }}
+                    </v-col>
+                    </v-row>
+                    <v-divider class="mb-4"></v-divider>
 
                     <v-row no-gutters class="py-2 px-4 align-center">
                         <v-col cols="4" class="font-weight-medium text-subtitle-2 text-grey-darken-2">Estado</v-col>
@@ -226,25 +240,11 @@ const formatCurrency = (amount) => {
                 <v-divider ></v-divider>
                 </v-card>
 
-                <v-row no-gutters class="pt-4 pb-2 px-4 align-center">
-                    <v-col cols="4" class="font-weight-medium text-subtitle-2 text-grey-darken-2">
-                        Ubicacion
-                    </v-col>
-                    <v-col cols="8" class="text-subtitle-1 text-h7 font-weight-light text-right">
-                        {{ clientStore.selectedClient.ubicacion || 'No añadido' }}
-                    </v-col>
-                    </v-row>
-                    <v-divider class="mb-4"></v-divider>
-
-                    <v-row no-gutters class="py-2 px-4 align-center">
-                    <v-col cols="4" class="font-weight-medium text-subtitle-2 text-grey-darken-2">
-                        Comentario
-                    </v-col>
-                    <v-col cols="8" class="text-subtitle-1 text-h7 font-weight-light text-right">
-                        {{ clientStore.selectedClient.comentario || 'No añadido' }}
-                    </v-col>
-                    </v-row>
-                    <v-divider class="mb-4"></v-divider>
+                <v-row no-gutters class="py-2 px-4 align-center">
+                    <v-col cols="4" class="font-weight-medium text-subtitle-2 text-grey-darken-2">Teléfono</v-col>
+                    <v-col cols="8" class="text-subtitle-1 text-right">{{ clientStore.selectedClient.telefono || 'No especificado' }}</v-col>
+                </v-row>
+                <v-divider class="my-2"></v-divider>
 
             </v-container>
             <div v-else class="text-center mt-16">

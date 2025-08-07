@@ -5,15 +5,6 @@ import { useClientStore } from '@/stores/client';
 
 const router = useRouter();
 
-
-// const newClientForm = reactive({
-//     nombre: '',
-//     telefono: '',
-//     ubicacion: '',
-//     comentario: '',
-//     saldo_inicial: null,
-// });
-
 // Variables para los campos del formulario
 const nombre = ref('');
 const telefono = ref('');
@@ -91,19 +82,19 @@ const saldoRules = [
             class="mb-4"
         ></v-text-field>
 
-        <!-- <v-text-field
+        <v-text-field
             v-model="ubicacion"
             label="Ubicación aproximada"
             variant="outlined"
             class="mb-4"
-        ></v-text-field> -->
+        ></v-text-field>
 
-        <v-textarea
+        <v-text-field
             v-model="comentario"
             label="Comentario"
             variant="outlined"
             class="mb-4"
-        ></v-textarea>
+        ></v-text-field>
 
         <div class="d-flex flex-column align-center">
             <v-btn
