@@ -175,7 +175,7 @@ const formatCurrency = (amount) => {
                         Ubicacion
                     </v-col>
                     <v-col cols="8" class="text-subtitle-1 text-h7 font-weight-light text-right">
-                        {{ clientStore.selectedClient.ubicacion || 'No añadido' }}
+                        {{ clientStore.selectedClient.ubicacion_aproximada || 'No añadido' }}
                     </v-col>
                     </v-row>
                     <v-divider class="mb-4"></v-divider>

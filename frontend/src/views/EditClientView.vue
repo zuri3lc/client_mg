@@ -40,7 +40,7 @@ onMounted(async() => {
     if (cliente){
         nombre.value = cliente.nombre;
         telefono.value = cliente.telefono || "";
-        ubicacion.value = cliente.ubicacion || "";
+        ubicacion.value = cliente.ubicacion_aproximada || "";
         comentario.value = cliente.comentario || "";
         estado.value = cliente.estado_cliente;
     }
