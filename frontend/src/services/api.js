@@ -24,60 +24,53 @@ apiClient.interceptors.request.use(config =>{
 });
 
 // --- INTERCEPTOR DE RESPUESTA (Response) ---
-// // Se ejecuta DESPUÉS de recibir una respuesta (exitosa o con error).
+
 // apiClient.interceptors.response.use(
-//     (response) => response, // Si la respuesta es exitosa (2xx), la devuelve sin más.
+//     (response) => response, 
 //     async (error) => {
 //         const originalRequest = error.config;
-//         // Si el error es 401 (No Autorizado) y no hemos reintentado ya esta petición
+        
+//         // Si el error es 401 (No Autorizado)
 //         if (error.response.status === 401 && !originalRequest._retry) {
-//             originalRequest._retry = true; // Marcamos que vamos a reintentar
-
+//             originalRequest._retry = true; // Evitar bucles infinitos
+            
 //             const authStore = useAuthStore();
-//             try {
-//                 // Intentamos refrescar el token
-//                 const newAccessToken = await authStore.refreshAccessToken();
-//                 // Actualizamos el header de la petición original con el nuevo token
-//                 originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
-//                 // Reintentamos la petición original que había fallado
-//                 return apiClient(originalRequest);
-//             } catch (refreshError) {
-//                 // Si el refresco falla, el store ya se encarga de hacer logout.
-//                 // Rechazamos la promesa para detener cualquier otra acción.
-//                 return Promise.reject(refreshError);
-//             }
+//             console.error("Token expirado o inválido. Cerrando sesión.");
+            
+//             // En lugar de refrescar, directamente cerramos la sesión
+//             await authStore.logout();
+            
+//             // Opcional: Redirigir al login
+//             // Esto es mejor manejarlo en la UI, pero se puede hacer aquí también.
+//             window.location.href = '/login'; 
+            
+//             // Rechazamos la promesa para detener la petición original
+//             return Promise.reject(error); 
 //         }
-//         // Para cualquier otro error, simplemente lo devolvemos.
+
 //         return Promise.reject(error);
 //     }
 // );
 
 apiClient.interceptors.response.use(
-    (response) => response, 
+    (response) => response,
     async (error) => {
-        const originalRequest = error.config;
-        
-        // Si el error es 401 (No Autorizado)
-        if (error.response.status === 401 && !originalRequest._retry) {
-            originalRequest._retry = true; // Evitar bucles infinitos
-            
-            const authStore = useAuthStore();
-            console.error("Token expirado o inválido. Cerrando sesión.");
-            
-            // En lugar de refrescar, directamente cerramos la sesión
-            await authStore.logout();
-            
-            // Opcional: Redirigir al login
-            // Esto es mejor manejarlo en la UI, pero se puede hacer aquí también.
-            window.location.href = '/login'; 
-            
-            // Rechazamos la promesa para detener la petición original
-            return Promise.reject(error); 
-        }
+    if (error.response) {
+        const { status, config } = error.response;
 
-        return Promise.reject(error);
+        if (status === 401 && !config.url.includes('/auth/login')) {
+        const authStore = useAuthStore();
+        console.log('Token no válido o expirado. Se cerrará la sesión.');
+        await authStore.logout();
+        window.location.href = '/login';
+        }
+    } else {
+        console.error('Error de red detectado:', error.message);
+    }
+    return Promise.reject(error);
     }
 );
+
 
 // Exportamos un objeto con los metodos
 export default {

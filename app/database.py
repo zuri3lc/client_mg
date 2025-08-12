@@ -314,67 +314,54 @@ def check_client_name_exist_db(nombre, usuario_sistema_id, exclude_client_id=Non
         if conn: conn.close()
 
 #  AGREGAR CLIENTES
-def agregar_cliente_db(nombre, telefono, ubicacion_aproximada, foto_domicilio, comentario, saldo_inicial, usuario_sistema_id
-    ): 
+def agregar_cliente_db(nombre, telefono, ubicacion_aproximada, foto_domicilio, comentario, saldo_inicial, usuario_sistema_id, estado_cliente=None): 
     """Agrega un nuevo cliente a la DB, sin duplicados por id"""
-    conn = db_conection() #conectamos a al DB
+    conn = db_conection()
     if conn is None: return None
     try:
         with conn.cursor() as cur:
-            # paso 1 insertar el cliente
-            cur.execute("""
+            # 1. Preparamos la consulta SQL y los parámetros
+            sql_query = """
             INSERT INTO clientes (
-                nombre,
-                telefono,
-                ubicacion_aproximada,
-                foto_domicilio,
-                comentario,
-                fecha_adquisicion,
-                saldo_actual,
-                usuario_sistema_id
-            ) VALUES(%s, %s, %s, %s, %s, %s, %s, %s)
-            RETURNING id; -- OBTENEMOS EL id DEL CLIENTE INSERTADO
-            """,
-            (nombre,
-            telefono,
-            ubicacion_aproximada,
-            foto_domicilio,
-            comentario,
-            date.today(),
-            saldo_inicial,
-            usuario_sistema_id
-            ))
-            cliente_id = cur.fetchone()[0] # type: ignore
-            # paso 2 insertamos el saldo inicial del cliente
+                nombre, telefono, ubicacion_aproximada, foto_domicilio, comentario, 
+                fecha_adquisicion, saldo_actual, usuario_sistema_id, estado_cliente
+            ) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)
+            RETURNING id;
+            """
+            
+            # 2. Si no se proporciona estado_cliente, usamos el valor por defecto de la DB ('regular')
+            #    Le pasamos COALESCE para que si el valor es None, PostgreSQL use el default de la tabla.
+            #    O mejor aún, manejamos la lógica aquí:
+            estado_final = estado_cliente if estado_cliente else 'regular'
+
+            params = (
+                nombre, telefono, ubicacion_aproximada, foto_domicilio, comentario,
+                date.today(), saldo_inicial, usuario_sistema_id, estado_final
+            )
+
+            # 3. Ejecutamos la consulta
+            cur.execute(sql_query, params)
+            
+            cliente_id = cur.fetchone()[0] #type: ignore
+            
+            # El resto de la función para insertar el movimiento inicial no cambia
             cur.execute("""
-            INSERT INTO movimientos (
-                cliente_id,
-                tipo_movimiento,
-                monto,
-                saldo_anterior,
-                saldo_final,
-                usuario_sistema_id
-            ) VALUES (
-                %s, %s, %s, %s, %s, %s)
+            INSERT INTO movimientos (...) VALUES (...)
             """,
             (
-            cliente_id,
-            'deuda_inicial',
-            saldo_inicial, #en este contexto exclusivamente saldo_inicial es lo mismo que saldo final
-            0.00,
-            saldo_inicial,
-            usuario_sistema_id
-                ))
+                cliente_id, 'deuda_inicial', saldo_inicial, 0.00, saldo_inicial, usuario_sistema_id
+            ))
+            
             conn.commit()
-            logger.info(f'Cliente "{nombre}" ah sido agregado con exito, id: {cliente_id}')
-            return cliente_id # devuelve el id del nuevo cliente
-    #----////CON ESTE BLOQUE CAPTURAMOS EL ERROR DE Unique.Violaton/////-----
-    except UniqueViolation as e: # capturamos el error especifico de unicidad
-        logger.warning(f"ERROR: El cliente '{nombre}' ya existe para tu usuario.\nDetalle: \n {e}") # type: ignore
+            logger.info(f'Cliente "{nombre}" ha sido agregado con éxito, id: {cliente_id}')
+            return cliente_id
+    except UniqueViolation as e:
+        logger.warning(f"ERROR: El cliente '{nombre}' ya existe para tu usuario.\nDetalle: \n {e}")
+        if conn: conn.rollback()
         return None
-    #----////AQUI CERRAMOS EL BLOQUE DE CAPTURA DEL ERROR Unique.Violaton/////-----
-    except psycopg.Error as e: #manejo de errores si psycopg tiene algun error
+    except psycopg.Error as e:
         logger.error(f"Error al agregar cliente {nombre}: {e}")
+        if conn: conn.rollback()
         return None
     finally:
         if conn: conn.close()
