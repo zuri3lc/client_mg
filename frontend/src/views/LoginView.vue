@@ -3,14 +3,12 @@ import { ref } from 'vue';
 import api from '@/services/api';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/auth';
-import { useClientStore } from '@/stores/client';
 import { syncData } from '@/services/sync';
 import { useUIStore } from '@/stores/ui';
 
 const uiStore = useUIStore();
 const router = useRouter(); // instancia del router a redirigir
 const authStore = useAuthStore(); //instancia del store
-const clientStore = useClientStore(); //instancia del store
 
 // 1. Variables relativas para almacenar los datos del formulario
 const username = ref('');
@@ -34,7 +32,8 @@ const handleLogin = async() => {
 
         uiStore.loadingMessage = 'Sincronizando clientes y movimientos: Remoto => Local...'
         syncMessage.value = 'Sincronizando clientes y movimientos: Remoto => Local...';
-        await clientStore.initialSync();
+
+        await syncData();
 
         //redireccion
         router.push({name: 'home'});

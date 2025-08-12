@@ -61,21 +61,20 @@ export const syncData = async () => {
     console.log('🚀 Iniciando proceso de sincronización...');
 
     try {
-        let needsRefresh = false;
 
         const clientsToCreateCount = await db.clients.where('needsSync').equals(1).count();
         const clientsToUpdateCount = await db.clients.where('needsSync').equals(2).count();
         const clientsToDeleteCount = await db.clients.where('needsSync').equals(3).count();
         const movementsToSyncCount = await db.movimientos.where('needsSync').equals(1).count();
+        const hasLocalChanges = clientsToCreateCount + clientsToUpdateCount + clientsToDeleteCount + movementsToSyncCount > 0;
 
-        if (clientsToCreateCount + clientsToUpdateCount + clientsToDeleteCount + movementsToSyncCount === 0) {
+
+        if (!hasLocalChanges) {
             console.log('No hay cambios locales para sincronizar.');
-            isSyncing = false;
-            return;
+        } else {
+            console.log('Detectados cambios locales. Comenzando sincronización')
         }
         
-        needsRefresh = true;
-
         // --- PASO 2: Subir los cambios locales al servidor (Sync Up) ---
 
         // Subir nuevos clientes
@@ -157,7 +156,6 @@ export const syncData = async () => {
         }
         
         // --- PASO 3: Descargar los datos actualizados del servidor (Sync Down) ---
-        if (needsRefresh) {
             console.log('Sincronización Local->Remoto completada. Actualizando datos desde el servidor...');
             try {
                 const selectedClientId = clientStore.selectedClient ? clientStore.selectedClient.id : null;
@@ -187,7 +185,8 @@ export const syncData = async () => {
             } catch (error) {
                 console.error('Error al refrescar los datos desde el servidor:', error);
             }
-        }
+        
+        console.log('Actualizando datos locales desde el servidor...')
         await downloadDataFromServer();
     } catch (error) {
         console.error('Error durante el ciclo de sincronización:', error);
@@ -196,7 +195,6 @@ export const syncData = async () => {
         console.log('✅ Proceso de sincronización terminado.');
     }
 };
-
 
 export const initSyncService = () => {
     // Listener del evento 'online' como primer intento
