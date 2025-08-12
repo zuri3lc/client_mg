@@ -17,8 +17,8 @@ if SECRET_KEY is None:
 #algoritmo para la firma
 ALGORITHM = os.getenv("ALGORITHM")
 #El tiempo de vida del token
-ACCES_TOKEN_EXPIRE_MINUTES = 11000
-REFRESH_TOKEN_EXPIRE_DAYS = 30
+# ACCES_TOKEN_EXPIRE_MINUTES = 11000
+# REFRESH_TOKEN_EXPIRE_DAYS = 30
 
 
 #esta linea crea un "esquema" de seguridad, le dice a FASTApi que espere un token en el encabezado de la peticion (Authorization Header) con el formato "Bearer <token>". el token apunta a nuestro endpoint de login
@@ -53,18 +53,18 @@ def create_access_token(data: dict) -> str:
     #cpiamos los datos para no modificarlos
     to_encode = data.copy()
     #calculamos la fecha de expiracion del token
-    expire = datetime.now(timezone.utc) + timedelta(minutes=ACCES_TOKEN_EXPIRE_MINUTES)
-    to_encode.update({"exp": expire}) #exp campo estandar de JWT
+    # expire = datetime.now(timezone.utc) + timedelta(minutes=ACCES_TOKEN_EXPIRE_MINUTES)
+    # to_encode.update({"exp": expire}) #exp campo estandar de JWT
     #codificamos el token
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM) #type: ignore
     return encoded_jwt
 
-def create_refresh_token(data: dict) -> str:
-    """crea un token de refresco (JWT) de larga duracion"""
-    to_encode = data.copy()
-    expire = datetime.now(timezone.utc) + timedelta(minutes=REFRESH_TOKEN_EXPIRE_DAYS)
-    to_encode.update({"exp": expire})
-    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM) #type: ignore
-    return encoded_jwt
+# def create_refresh_token(data: dict) -> str:
+#     """crea un token de refresco (JWT) de larga duracion"""
+#     to_encode = data.copy()
+#     expire = datetime.now(timezone.utc) + timedelta(minutes=REFRESH_TOKEN_EXPIRE_DAYS)
+#     to_encode.update({"exp": expire})
+#     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM) #type: ignore
+#     return encoded_jwt
 
 

@@ -8,7 +8,7 @@ export const useAuthStore = defineStore("auth", () => {
     //--- STATE ---
     // guardamos el token y datos del usuario
     const accessToken = ref(localStorage.getItem("accessToken"));
-    const refreshToken = ref(localStorage.getItem("refreshToken"));
+    // const refreshToken = ref(localStorage.getItem("refreshToken"));
     const user = ref(JSON.parse(localStorage.getItem("user")));
 
     //--- ACTIONS ---
@@ -17,11 +17,11 @@ export const useAuthStore = defineStore("auth", () => {
         const response = await api.login(credentials);
         // guardamos el token y los datos en el estado
         accessToken.value = response.data.access_token;
-        refreshToken.value = response.data.refresh_token;
+        // refreshToken.value = response.data.refresh_token;
         user.value = {username: credentials.username, id: response.data.user_id};
         // guardamos en localStorage para persistir la sesion
         localStorage.setItem('accessToken', accessToken.value);
-        localStorage.setItem('refreshToken', refreshToken.value);
+        // localStorage.setItem('refreshToken', refreshToken.value);
         localStorage.setItem('user', JSON.stringify(user.value));
     };
 
@@ -46,34 +46,34 @@ export const useAuthStore = defineStore("auth", () => {
         } finally {
             // 2. La limpieza de la sesión (token y user) se hace SIEMPRE.
             accessToken.value = null;
-            refreshToken.value = null;
+            // refreshToken.value = null;
             user.value = null;
             localStorage.removeItem('accessToken');
-            localStorage.removeItem('refreshToken');
+            // localStorage.removeItem('refreshToken');
             localStorage.removeItem('user');
         }
     };
 
-    const refreshAccessToken = async () => {
-        if (!refreshToken.value){
-            throw new Error("No hay refresh token disponible");
-        } try {
-            const response =  await api.refreshToken(refreshToken.value);
-            accessToken.value = response.data.access_token;
-            refreshToken.value = response.data.refresh_token;
+    // const refreshAccessToken = async () => {
+    //     if (!refreshToken.value){
+    //         throw new Error("No hay refresh token disponible");
+    //     } try {
+    //         const response =  await api.refreshToken(refreshToken.value);
+    //         accessToken.value = response.data.access_token;
+    //         refreshToken.value = response.data.refresh_token;
             
-            localStorage.setItem('accessToken', accessToken.value);
-            localStorage.setItem('refreshToken', refreshToken.value);
+    //         localStorage.setItem('accessToken', accessToken.value);
+    //         localStorage.setItem('refreshToken', refreshToken.value);
             
-            return accessToken.value;
-        } catch (error) {
-            console.error("Error al refrescar el token:", error);
-            await logout();
-            throw error;
-        }
-    }
+    //         return accessToken.value;
+    //     } catch (error) {
+    //         console.error("Error al refrescar el token:", error);
+    //         await logout();
+    //         throw error;
+    //     }
+    // }
 
     //--- GETERS ---
     //Exponemos el estado
-    return {accessToken, refreshToken, user, login, logout, refreshAccessToken };
+    return {accessToken, user, login, logout, };
 });
