@@ -1,9 +1,11 @@
 <script setup>
 import { RouterView } from 'vue-router'
+import GlobalFeedback from './components/GlobalFeedback.vue';
 </script>
 
 <template>
   <RouterView />
+  <GlobalFeedback />
 </template>
 
 <style>

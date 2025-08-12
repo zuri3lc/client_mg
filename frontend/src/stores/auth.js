@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 import api from "@/services/api";
 import { db } from "@/services/db";
+import { useUIStore } from "./ui";
 
 // defineStore crea el almacen
 export const useAuthStore = defineStore("auth", () => {
@@ -25,7 +26,9 @@ export const useAuthStore = defineStore("auth", () => {
         localStorage.setItem('user', JSON.stringify(user.value));
     };
 
-    const logout = async () => { // La convertimos en async
+    const logout = async () => {
+        const uiStore = useUIStore();
+
         try {
             // 1. Verificamos si hay algún elemento pendiente de sincronizar en CUALQUIER tabla.
             const pendingClients = await db.clients.where('needsSync').above(0).count();
@@ -34,8 +37,14 @@ export const useAuthStore = defineStore("auth", () => {
 
             if (itemsPending > 0) {
                 // Si hay pendientes, NO borramos la DB.
+                const confirmed = await uiStore.confirmLogout();
+                if (!confirmed) {
+                    console.log("Logout cancelado por el usuario.");
+                    return;
+                }
+                
                 console.log(`Logout realizado, pero ${itemsPending} elementos siguen pendientes de sincronización. La base de datos local se mantiene intacta.`);
-            } else {
+                } else {
                 // Si no hay pendientes, borramos todo.
                 console.log("Cerrando sesión y limpiando base de datos local...");
                 await db.clients.clear();
@@ -44,13 +53,14 @@ export const useAuthStore = defineStore("auth", () => {
         } catch (error) {
             console.error("Error durante el proceso de logout:", error);
         } finally {
-            // 2. La limpieza de la sesión (token y user) se hace SIEMPRE.
             accessToken.value = null;
             // refreshToken.value = null;
             user.value = null;
             localStorage.removeItem('accessToken');
             // localStorage.removeItem('refreshToken');
             localStorage.removeItem('user');
+
+            window.location.href = '/login';
         }
     };
 

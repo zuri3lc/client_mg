@@ -5,8 +5,9 @@ import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/auth';
 import { useClientStore } from '@/stores/client';
 import { syncData } from '@/services/sync';
+import { useUIStore } from '@/stores/ui';
 
-
+const uiStore = useUIStore();
 const router = useRouter(); // instancia del router a redirigir
 const authStore = useAuthStore(); //instancia del store
 const clientStore = useClientStore(); //instancia del store
@@ -20,17 +21,19 @@ const syncMessage = ref(null);
 
 // 2. Funcion que se ejecuta al hacer clic al boton
 const handleLogin = async() => {
-    loading.value = true;
+    // loading.value = true;
     errorMessage.value = null;
     syncMessage.value = '';
 
     try {
+        uiStore.startLoading('Iniciando Sesión...')
         await authStore.login({
             username: username.value,
             password: password.value
         });
 
-        syncMessage.value = 'Syncronizando clientes y movimientos: Remoto => Local...';
+        uiStore.loadingMessage = 'Sincronizando clientes y movimientos: Remoto => Local...'
+        syncMessage.value = 'Sincronizando clientes y movimientos: Remoto => Local...';
         await clientStore.initialSync();
 
         //redireccion
@@ -45,7 +48,8 @@ const handleLogin = async() => {
         }
     } finally {
         // sin importar la respuesta detenemos la carga
-        loading.value = false;
+        // loading.value = false;
+        uiStore.stopLoading();
     }
 };
 

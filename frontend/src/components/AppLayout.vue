@@ -1,34 +1,25 @@
 
 <script setup>
-// PASO 1: Importamos las herramientas necesarias de Vue.
-// - computed: para crear una variable que reacciona a los cambios (como la ruta).
-// - onMounted/onUnmounted: para gestionar los eventos de conexión a internet.
 import { watch, ref, computed, onMounted, onUnmounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useAuthStore } from '@/stores/auth';
 import { syncData, downloadDataFromServer } from '@/services/sync';
+import { useUIStore } from '@/stores/ui';
 
+const uiStore = useUIStore();
 const router = useRouter();
 const route = useRoute();
 const authStore = useAuthStore();
 const selectedTab = ref(route.name);
 
-// PASO 2: Creamos una variable reactiva para saber si hay conexión.
-// navigator.onLine nos da el estado actual del navegador.
 const isOnline = ref(navigator.onLine);
 
-// PASO 3: Creamos la propiedad computada que controla la visibilidad.
-// Esta variable será 'true' SOLO si el nombre de la ruta actual es 'home'.
-// En cualquier otra pantalla, será 'false'.
 const onHomePage = computed(() => route.name === 'home');
 
-// Función que se activa cuando el navegador detecta un cambio en la conexión.
 const updateOnlineStatus = () => {
     isOnline.value = navigator.onLine;
 };
 
-// PASO 4: Activamos y desactivamos los "escuchas" de eventos.
-// Esto es una buena práctica para que la app sea eficiente.
 onMounted(() => {
     window.addEventListener('online', updateOnlineStatus);
     window.addEventListener('offline', updateOnlineStatus);
@@ -48,14 +39,33 @@ const handleLogout = async () => {
     await authStore.logout();
     router.push({ name: 'login' });
 };
-const handleSync = () => {
-    console.log('Forzando sincronización manual (SUBE Y BAJA)...');
-    syncData();
+
+const handleSync =  async () => {
+    uiStore.loadingMessage = 'Forzando sincronización manual (Up&Download)...'
+    console.log('Forzando sincronización manual (Up&Download)...');
+    try{
+        uiStore.startLoading('Sincronizando datos ...')
+        await syncData();
+    } catch (e) {
+        console.error('Error al sincronizar datos:', e);
+    } finally {
+        uiStore.stopLoading();
+    }
 };
-const handleDownload = () => {
-    console.log('Descargando datos del servidor (SOLO BAJA)...');
-    downloadDataFromServer();
+
+const handleDownload = async () => {
+    uiStore.loadingMessage = 'Descargando datos del servidor (Download)...'
+    console.log('Descargando datos del servidor (Download)...');
+    try{
+        uiStore.startLoading('Descargando datos del servidor ...')
+        await downloadDataFromServer();
+    } catch (e) {
+        console.error('Error al descargar datos del servidor:', e);
+    } finally {
+        uiStore.stopLoading();
+    }
 };
+
 </script>
 
 <template>
