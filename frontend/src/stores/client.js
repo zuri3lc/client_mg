@@ -55,7 +55,7 @@ export const useClientStore = defineStore('client', () =>{
         ubicacion_aproximada: clientData.ubicacion,
         comentario: clientData.comentario,
         saldo_actual: clientData.saldo_inicial || 0.00,
-        estado_cliente: 'regular',
+        estado_cliente: clientData.estado_cliente || 'regular',
         fecha_adquisicion: new Date().toISOString().split('T')[0],
         usuario_sistema_id: authStore.user.id,
         needsSync: 1

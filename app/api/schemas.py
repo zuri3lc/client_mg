@@ -47,6 +47,7 @@ class ClientBaseSchema(BaseModel):
 class ClientCreateSchema(ClientBaseSchema):
     """hereda todos los datos de la clase base y le añadimos el saldo inicial"""
     saldo_inicial: Decimal 
+    estado_cliente: Optional[str] = None
     
 class ClientUpdateSchema(BaseModel):
     """Molde para la actualizacion de clientes"""
