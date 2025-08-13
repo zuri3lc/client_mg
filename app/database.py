@@ -320,43 +320,48 @@ def agregar_cliente_db(nombre, telefono, ubicacion_aproximada, foto_domicilio, c
     if conn is None: return None
     try:
         with conn.cursor() as cur:
-            # 1. Preparamos la consulta SQL y los parámetros
-            sql_query = """
+            # --- PARTE 1: INSERTAR EL CLIENTE (Esto ya estaba bien) ---
+            estado_final = estado_cliente if estado_cliente else 'regular'
+            cur.execute("""
             INSERT INTO clientes (
                 nombre, telefono, ubicacion_aproximada, foto_domicilio, comentario, 
                 fecha_adquisicion, saldo_actual, usuario_sistema_id, estado_cliente
             ) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)
             RETURNING id;
-            """
-            
-            # 2. Si no se proporciona estado_cliente, usamos el valor por defecto de la DB ('regular')
-            #    Le pasamos COALESCE para que si el valor es None, PostgreSQL use el default de la tabla.
-            #    O mejor aún, manejamos la lógica aquí:
-            estado_final = estado_cliente if estado_cliente else 'regular'
-
-            params = (
-                nombre, telefono, ubicacion_aproximada, foto_domicilio, comentario,
-                date.today(), saldo_inicial, usuario_sistema_id, estado_final
-            )
-
-            # 3. Ejecutamos la consulta
-            cur.execute(sql_query, params)
+            """,
+            (nombre, telefono, ubicacion_aproximada, foto_domicilio, comentario, date.today(), saldo_inicial, usuario_sistema_id, estado_final))
             
             cliente_id = cur.fetchone()[0] #type: ignore
+
+            # --- PARTE 2: INSERTAR EL MOVIMIENTO INICIAL (AQUÍ ESTÁ LA CORRECCIÓN) ---
+            saldo_final_movimiento = saldo_inicial # Para mayor claridad
             
-            # El resto de la función para insertar el movimiento inicial no cambia
+            # La consulta SQL ahora tiene los placeholders %s
             cur.execute("""
-            INSERT INTO movimientos (...) VALUES (...)
+            INSERT INTO movimientos (
+                cliente_id,
+                tipo_movimiento,
+                monto,
+                saldo_anterior,
+                saldo_final,
+                usuario_sistema_id
+            ) VALUES (%s, %s, %s, %s, %s, %s)
             """,
-            (
-                cliente_id, 'deuda_inicial', saldo_inicial, 0.00, saldo_inicial, usuario_sistema_id
+            ( # Y aquí le pasamos los valores en una tupla
+                cliente_id,
+                'deuda_inicial',
+                saldo_inicial,
+                0.00,
+                saldo_final_movimiento,
+                usuario_sistema_id
             ))
             
             conn.commit()
             logger.info(f'Cliente "{nombre}" ha sido agregado con éxito, id: {cliente_id}')
             return cliente_id
-    except UniqueViolation as e:
-        logger.warning(f"ERROR: El cliente '{nombre}' ya existe para tu usuario.\nDetalle: \n {e}")
+    # ... (el resto de la función con el manejo de errores no cambia)
+    except UniqueViolation:
+        logger.warning(f"ERROR: El cliente '{nombre}' ya existe para tu usuario.")
         if conn: conn.rollback()
         return None
     except psycopg.Error as e:
