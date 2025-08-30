@@ -36,8 +36,8 @@ watch(() => clientStore.selectedClient, (clienteActualizado) => {
     deep: true 
 });
 
-const montoAbono = ref(0);
-const montoCredito = ref(0);
+const montoAbono = ref('');
+const montoCredito = ref('');
 const loadingSave = ref(false); // Para el nuevo botón de guardar
 
 const saldoFinalCalculado = computed(() => {
@@ -69,8 +69,8 @@ const handleSaveChanges = async () => {
             });
         }
 
-        montoAbono.value = 0;
-        montoCredito.value = 0;
+        montoAbono.value = '';
+        montoCredito.value = '';
         await clientStore.fetchClientById(clientStore.selectedClient.id);
         
     } catch (error) {
@@ -203,7 +203,7 @@ const formatCurrency = (amount) => {
 
                     <v-card-actions class="pa-4">
                         <v-spacer></v-spacer>
-                        <v-btn color="primary" variant="flat" @click="handleSaveChanges" :loading="loadingSave" :disabled="montoAbono === 0 && montoCredito === 0">
+                        <v-btn color="primary" variant="flat" @click="handleSaveChanges" :loading="loadingSave" :disabled="!montoAbono && !montoCredito">
                             Guardar Movimiento
                         </v-btn>
                     </v-card-actions>

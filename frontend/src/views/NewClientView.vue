@@ -10,7 +10,7 @@ const nombre = ref('');
 const telefono = ref('');
 const ubicacion = ref('');
 const comentario = ref('');
-const saldoInicial = ref(0.00);
+const saldoInicial = ref('');
 const estado = ref('regular');
 const errorMessage = ref(null);
 
@@ -52,9 +52,17 @@ const handleSaveClient = async () => {
     }
 };
 // Regla de validación para el saldo
+// const saldoRules = [
+//     value => !!value || 'El saldo inicial es obligatorio.',
+//     value => (value && value >= 0) || 'El saldo inicial debe ser mayor a cero.',
+// ];
+
 const saldoRules = [
     value => !!value || 'El saldo inicial es obligatorio.',
-    value => (value && value >= 0) || 'El saldo inicial debe ser mayor a cero.',
+    value => {
+        const numericValue = parseFloat(value);
+        return (!isNaN(numericValue) && numericValue >= 0) || 'El saldo inicial debe ser mayor o igual a cero.';
+    }
 ];
 
 </script>
