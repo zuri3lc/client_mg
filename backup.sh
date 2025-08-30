@@ -35,7 +35,7 @@ fi
 # --- LIMPIEZA DE BACKUPS ANTIGUOS ---
 # Mantener solo los 10 backups más recientes
 echo "INFO: Realizando limpieza de backups antiguos..."
-ls -1t "$BACKUP_DIR"/backup-*.sql.gz | tail -n +11 | xargs -r rm
-echo "INFO: Limpieza completada. Se conservan los 10 backups más recientes."
+ls -1t "$BACKUP_DIR"/backup-*.sql.gz | tail -n +21 | xargs -r rm
+echo "INFO: Limpieza completada. Se conservan los 20 backups más recientes."
 
 echo "--- Proceso de backup finalizado ---"
