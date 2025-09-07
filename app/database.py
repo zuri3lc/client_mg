@@ -316,6 +316,11 @@ def check_client_name_exist_db(nombre, usuario_sistema_id, exclude_client_id=Non
 #  AGREGAR CLIENTES
 def agregar_cliente_db(nombre, telefono, ubicacion_aproximada, foto_domicilio, comentario, saldo_inicial, usuario_sistema_id, fecha_adquisicion, estado_cliente=None): 
     """Agrega un nuevo cliente a la DB, sin duplicados por id"""
+    
+    # ---- INICIO DE BLOQUE DE DEPURACIÓN ----
+    logger.warning(f"VALOR DE fecha_adquisicion RECIBIDO EN DB: {fecha_adquisicion}")
+    # ---- FIN DE BLOQUE DE DEPURACIÓN ----
+    
     conn = db_conection()
     if conn is None: return None
     try:

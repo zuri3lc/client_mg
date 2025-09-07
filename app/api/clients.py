@@ -1,5 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from typing import List
+
+import logging 
+
 from .schemas import (
     ClientShowSchema,
     ClientCreateSchema,
@@ -41,7 +44,14 @@ def obtener_clientes_por_usuario(current_user: dict = Depends(get_current_user))
 @router.post("/", response_model=ClientShowSchema, status_code=status.HTTP_201_CREATED)
 def crear_nuevo_cliente(cliente: ClientCreateSchema, current_user: dict = Depends(get_current_user)):
     """Crea un nuevo cliente en el cuerpo de la peticion, y los valida contra el molde ClientCreateSchema"""
-    #cliente.model_dump() convierte el objeto pydantic a un diccionario
+    nuevo_cliente_data = cliente.model_dump() #convierte el objeto pydantic a un diccionario
+    
+    # ---- INICIO DE BLOQUE DE DEPURACIÓN ----
+    logging.warning(f"DATOS RECIBIDOS EN LA API: {nuevo_cliente_data}")
+    if 'fecha_adquisicion' in nuevo_cliente_data:
+        logging.warning(f"TIPO DE fecha_adquisicion: {type(nuevo_cliente_data['fecha_adquisicion'])}")
+    # ---- FIN DE BLOQUE DE DEPURACIÓN ----
+    
     id_nuevo_cliente = agregar_cliente_db(
         **cliente.model_dump(),
         usuario_sistema_id=current_user.id)
