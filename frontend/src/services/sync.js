@@ -88,7 +88,9 @@ export const syncData = async () => {
                         telefono: localClient.telefono,
                         ubicacion_aproximada: localClient.ubicacion_aproximada,
                         comentario: localClient.comentario,
-                        saldo_inicial: localClient.saldo_actual
+                        estado_cliente: localClient.estado_cliente,
+                        saldo_inicial: localClient.saldo_actual,
+                        fecha_adquisicion: localClient.fecha_adquisicion
                     };
                     const response = await api.createClient(payload);
                     const serverClient = response.data;
