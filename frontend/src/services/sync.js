@@ -82,7 +82,7 @@ export const syncData = async () => {
             const clientsToCreate = await db.clients.where('needsSync').equals(1).toArray();
             console.log(`Enviando ${clientsToCreate.length} clientes nuevos...`);
             for (const localClient of clientsToCreate) {
-                const tempId = client.id;
+                const tempId = localClient.id;
                 try {
                     const payload = {
                         nombre: localClient.nombre,
@@ -94,14 +94,9 @@ export const syncData = async () => {
                         fecha_adquisicion: localClient.fecha_adquisicion
                     };
                     const response = await api.createClient(payload);
-                    // const serverClient = response.data;
                     const serverId = response.data.id;
                     
-                    // await db.transaction('rw', db.clients, db.movimientos, async () => {
-                    //     await db.movimientos.where('cliente_id').equals(localClient.id).modify({ cliente_id: serverClient.id, needsSync: 0 });
-                    //     await db.clients.delete(localClient.id);
-                    //     await db.clients.add({ ...serverClient, needsSync: 0 });
-                    // });
+
                     await db.transaction('rw', db.clients, db.movimientos, async () => {
                     // 1. Actualiza el cliente local con el ID del servidor.
                     await db.clients.update(tempId, { id: serverId, needsSync: 0 });
@@ -120,37 +115,13 @@ export const syncData = async () => {
                     }
                 });
                 console.log(`Cliente con ID temporal ${tempId} actualizado a ID de servidor ${serverId}.`);
-                    console.log(`Cliente "${localClient.nombre}" creado en servidor (ID: ${serverClient.id})`);
+                    console.log(`Cliente "${localClient.nombre}" creado en servidor (ID: ${serverId})`);
                 } catch (error) { 
                     console.error(`Error sincronizando creación de cliente ${localClient.id}:`, error);
                     console.error(`Error al sincronizar cliente nuevo con ID temporal ${tempId}:`, error);
                 }
             }
-            const movementsToCreate = await db.movimientos.where('needsSync').equals(1).toArray();
-            if (movementsToCreate.length > 0) {
-            console.log(`Sincronizando ${movementsToCreate.length} movimientos nuevos...`);
-            for (const mov of movementsToCreate) {
-            try {
-                if (mov.cliente_id < 0) { 
-                    console.warn(`Saltando movimiento ${mov.id} porque su cliente (ID: ${mov.cliente_id}) aún no está sincronizado.`);
-                    continue;
-                }
-                
-                const payload = {
-                    monto: mov.monto,
-                    fecha_movimiento: mov.fecha_movimiento
-                };
-
-                await api.createMovement(mov.cliente_id, payload);
-                await db.movimientos.update(mov.id, { needsSync: 0 });
-
-            } catch (error) {
-                console.error(`Error al sincronizar movimiento nuevo con ID ${mov.id}:`, error);
-            }
         }
-    }
-
-}
 
         // Subir clientes actualizados
         if (clientsToUpdateCount > 0) {
@@ -187,22 +158,32 @@ export const syncData = async () => {
             }
         }
 
-        // Subir nuevos movimientos
-        if (movementsToSyncCount > 0) {
-            const movementsToSync = await db.movimientos.where('needsSync').equals(1).toArray();
-            console.log(`Enviando ${movementsToSync.length} movimientos nuevos...`);
-            for (const localMovement of movementsToSync) {
-                try {
-                    if (localMovement.cliente_id < 0) continue;
-                    const payload = { monto: localMovement.monto };
-                    await api.createMovement(localMovement.cliente_id, payload);
-                    await db.movimientos.update(localMovement.id, { needsSync: 0 });
-                    console.log(`Movimiento ${localMovement.id} sincronizado.`);
-                } catch (error) {
-                    console.error(`Error sincronizando movimiento ${localMovement.id}:`, error);
+         // Subir nuevos movimientos
+
+        const movementsToCreate = await db.movimientos.where('needsSync').equals(1).toArray();
+            if (movementsToCreate.length > 0) {
+            console.log(`Sincronizando ${movementsToCreate.length} movimientos nuevos...`);
+            for (const mov of movementsToCreate) {
+            try {
+                if (mov.cliente_id < 0) { 
+                    console.warn(`Saltando movimiento ${mov.id} porque su cliente (ID: ${mov.cliente_id}) aún no está sincronizado.`);
+                    continue;
                 }
+                
+                const payload = {
+                    monto: mov.monto,
+                    fecha_movimiento: mov.fecha_movimiento
+                };
+
+                await api.createMovement(mov.cliente_id, payload);
+                await db.movimientos.update(mov.id, { needsSync: 0 });
+
+            } catch (error) {
+                console.error(`Error al sincronizar movimiento nuevo con ID ${mov.id}:`, error);
             }
         }
+    }
+
         
         // --- PASO 3: Descargar los datos actualizados del servidor (Sync Down) ---
             console.log('Sincronización Local->Remoto completada. Actualizando datos desde el servidor...');
