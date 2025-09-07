@@ -8,6 +8,7 @@ from typing import List, Optional
 class MovimientoCreateSchema(BaseModel):
     """Esquema para registrar un movimiento"""
     monto: Decimal
+    fecha_movimiento: Optional[date] = None
 
 class MovimientoShowSchema(BaseModel):
     """Esquema para mostrar movimientos"""
@@ -48,6 +49,7 @@ class ClientCreateSchema(ClientBaseSchema):
     """hereda todos los datos de la clase base y le añadimos el saldo inicial"""
     saldo_inicial: Decimal 
     estado_cliente: Optional[str] = None
+    fecha_adquisicion: Optional[date] = None
     
 class ClientUpdateSchema(BaseModel):
     """Molde para la actualizacion de clientes"""

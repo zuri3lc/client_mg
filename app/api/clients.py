@@ -94,12 +94,11 @@ def obtener_movimientos_cliente(client_id: int, current_user: dict = Depends(get
 #REGISTRA UN NUEVO MOVIMIENTO
 @router.post("/{client_id}/movements", response_model=ClientShowSchema)
 def registrar_movimiento(client_id: int, movimiento: MovimientoCreateSchema, current_user: dict = Depends(get_current_user)):
-    success = actualizar_saldo_db(client_id, current_user.id, movimiento.monto)
+    success = actualizar_saldo_db(client_id, current_user.id, movimiento.monto, movimiento.fecha_movimiento)
     if not success:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="No se pudo registrar el movimiento.")
     #movimiento exitoso
     return list_client_db(client_id, current_user.id)
-
 
 
 #Endpoint GET para obtener 1 solo cliente

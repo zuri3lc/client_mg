@@ -314,7 +314,7 @@ def check_client_name_exist_db(nombre, usuario_sistema_id, exclude_client_id=Non
         if conn: conn.close()
 
 #  AGREGAR CLIENTES
-def agregar_cliente_db(nombre, telefono, ubicacion_aproximada, foto_domicilio, comentario, saldo_inicial, usuario_sistema_id, estado_cliente=None): 
+def agregar_cliente_db(nombre, telefono, ubicacion_aproximada, foto_domicilio, comentario, saldo_inicial, usuario_sistema_id, fecha_adquisicion, estado_cliente=None): 
     """Agrega un nuevo cliente a la DB, sin duplicados por id"""
     conn = db_conection()
     if conn is None: return None
@@ -329,7 +329,7 @@ def agregar_cliente_db(nombre, telefono, ubicacion_aproximada, foto_domicilio, c
             ) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)
             RETURNING id;
             """,
-            (nombre, telefono, ubicacion_aproximada, foto_domicilio, comentario, date.today(), saldo_inicial, usuario_sistema_id, estado_final))
+            (nombre, telefono, ubicacion_aproximada, foto_domicilio, comentario, fecha_adquisicion, saldo_inicial, usuario_sistema_id, estado_final))
             
             cliente_id = cur.fetchone()[0] #type: ignore
 
@@ -340,15 +340,17 @@ def agregar_cliente_db(nombre, telefono, ubicacion_aproximada, foto_domicilio, c
             cur.execute("""
             INSERT INTO movimientos (
                 cliente_id,
+                fecha_movimiento,
                 tipo_movimiento,
                 monto,
                 saldo_anterior,
                 saldo_final,
                 usuario_sistema_id
-            ) VALUES (%s, %s, %s, %s, %s, %s)
+            ) VALUES (%s, %s, %s, %s, %s, %s, %s)
             """,
             ( # Y aquí le pasamos los valores en una tupla
                 cliente_id,
+                fecha_adquisicion,
                 'deuda_inicial',
                 saldo_inicial,
                 0.00,
@@ -472,7 +474,7 @@ def client_update_db(cliente_id, usuario_sistema_id, **kwargs):
         if conn: conn.close()
 
 #  ACTUALIZAR SALDOS
-def actualizar_saldo_db(cliente_id, usuario_sistema_id, monto):
+def actualizar_saldo_db(cliente_id, usuario_sistema_id, monto, fecha_movimiento=None):
     """ACTUALIZA EL SALDO DE UN CLIENTE ESPECIFICO, FILTRADO POR SU ID Y EL ID DEL PROPIETARIO DEL CLIENTE"""
     conn = db_conection()
     if conn is None: return False
@@ -509,7 +511,7 @@ def actualizar_saldo_db(cliente_id, usuario_sistema_id, monto):
             
             # Paso 3: Determinar el tipo de movimiento
             tipo_movimiento = 'credito' if monto > 0 else 'abono'
-            registrar_movimiento_interno(cur, cliente_id, tipo_movimiento, monto, saldo_anterior, saldo_final, usuario_sistema_id)
+            registrar_movimiento_interno(cur, cliente_id, tipo_movimiento, monto, saldo_anterior, saldo_final, usuario_sistema_id, fecha_movimiento)
             conn.commit() #guardamos los cambios
             logger.info(f"Saldo del cliente ID {cliente_id} actualizado a {saldo_final}")
             return True
@@ -606,10 +608,11 @@ def historial_movimientos_db(cliente_id, usuario_sistema_id, limite=10):
         logger.info("/// CONEXION A LA BASE DE DATOS CERRADA ///")
 
 # FUNCION PARA REGISTRAR UN MOVIMIENTO USANDO UN CURSOS EXISTENTE
-def registrar_movimiento_interno(cursor, cliente_id, tipo, monto, saldo_anterior, saldo_final, user_id):
+def registrar_movimiento_interno(cursor, cliente_id, tipo, monto, saldo_anterior, saldo_final, user_id, fecha_movimiento=None):
+    fecha = fecha_movimiento if fecha_movimiento else date.today()
     cursor.execute(
-        """INSERT INTO movimientos (cliente_id, tipo_movimiento, monto, saldo_anterior, saldo_final, usuario_sistema_id)
-        VALUES (%s, %s, %s, %s, %s, %s)""",
-        (cliente_id, tipo, monto, saldo_anterior, saldo_final, user_id)
+        """INSERT INTO movimientos (cliente_id, fecha_movimiento, tipo_movimiento, monto, saldo_anterior, saldo_final, usuario_sistema_id)
+        VALUES (%s, %s, %s, %s, %s, %s, %s)""",
+        (cliente_id, fecha, tipo, monto, saldo_anterior, saldo_final, user_id)
     )
 
