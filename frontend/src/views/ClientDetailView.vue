@@ -148,6 +148,14 @@ const formatCurrency = (amount) => {
                     <v-divider class="my-2"></v-divider>
 
                     <v-row no-gutters class="py-2 px-4 align-center">
+                        <v-col cols="4" class="font-weight-medium text-subtitle-2 text-grey-darken-2">Saldo Final</v-col>
+                        <v-col cols="8" class="text-h6 font-weight-bold text-right text-warning">
+                            $ {{ formatCurrency(saldoFinalCalculado) }}
+                        </v-col>
+                    </v-row>
+                    <v-divider class="my-2"></v-divider>
+
+                    <v-row no-gutters class="py-2 px-4 align-center">
                         <v-col cols="4" class="font-weight-medium text-subtitle-2 text-grey-darken-2">Abono</v-col>
                         <v-col cols="8">
                             <v-text-field v-model.number="montoAbono" type="number" variant="underlined" density="compact" hide-details prefix="$"></v-text-field>
@@ -158,14 +166,6 @@ const formatCurrency = (amount) => {
                         <v-col cols="4" class="font-weight-medium text-subtitle-2 text-grey-darken-2">Credito</v-col>
                         <v-col cols="8">
                             <v-text-field v-model.number="montoCredito" type="number" variant="underlined" density="compact" hide-details prefix="$"></v-text-field>
-                        </v-col>
-                    </v-row>
-                    <v-divider class="my-2"></v-divider>
-                    
-                    <v-row no-gutters class="py-2 px-4 align-center">
-                        <v-col cols="4" class="font-weight-medium text-subtitle-2 text-grey-darken-2">Saldo Final</v-col>
-                        <v-col cols="8" class="text-h6 font-weight-bold text-right text-warning">
-                            $ {{ formatCurrency(saldoFinalCalculado) }}
                         </v-col>
                     </v-row>
                     <v-divider class="my-2"></v-divider>
