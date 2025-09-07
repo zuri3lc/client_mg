@@ -1,4 +1,4 @@
-<script setup>
+ <script setup>
 // 1. 'computed' es nuevo, para el cálculo en tiempo real
 import { onMounted, ref, computed, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
@@ -223,8 +223,10 @@ const formatCurrency = (amount) => {
                     :key="movimiento.id"
                     >
                     <v-list-item-title>{{ movimiento.tipo_movimiento.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase()) }}</v-list-item-title>
-                    <v-list-item-subtitle>{{ new Date(movimiento.fecha_movimiento).toLocaleDateString() }}</v-list-item-subtitle>
-                    
+                    <v-list-item-subtitle>
+                        <!-- {{ new Date(movimiento.fecha_movimiento).toLocaleDateString() }} -->
+                        {{ new Date(movimiento.fecha_movimiento + 'T00:00:00').toLocaleDateString('es-MX') }}
+                    </v-list-item-subtitle>
                     <template v-slot:append>
                     <span 
                     :class="[
