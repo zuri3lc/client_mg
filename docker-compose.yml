@@ -5,8 +5,6 @@ services:
     image: postgres:16-alpine #imagen oficial de postgreSQL
     restart: unless-stopped
     container_name: postgres_db
-    labels:
-      - "com.centurylinklabs.watchtower.enable=true"
     environment: #variables de entorno
       POSTGRES_DB: ${DB_NAME} #nombre de la base de datos
       POSTGRES_USER: ${DB_USER} #usuario de la BD

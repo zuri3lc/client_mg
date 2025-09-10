@@ -137,7 +137,7 @@ const formatCurrency = (amount) => {
                     <v-divider class="mb-4"></v-divider>
 
                     <v-row no-gutters class="py-2 px-4 align-center">
-                        <v-col cols="4" class="font-weight-medium text-subtitle-2 text-grey-darken-2">Saldo Actual</v-col>
+                        <v-col cols="4" class="font-weight-bold text-subtitle-1 grey-darken-1">Saldo Actual</v-col>
                         <v-col cols="8" class="text-h6 font-weight-bold text-right text-info">
                             $ {{ formatCurrency(clientStore.selectedClient.saldo_actual) }}
                         </v-col>
@@ -145,14 +145,14 @@ const formatCurrency = (amount) => {
                     <v-divider class="my-2"></v-divider>
 
                     <v-row no-gutters class="py-2 px-4 align-center">
-                        <v-col cols="4" class="font-weight-medium text-subtitle-2 text-grey-darken-2">Abono</v-col>
+                        <v-col cols="4" class="font-weight-bold text-subtitle-1 text-success">Abono</v-col>
                         <v-col cols="8">
                             <v-text-field v-model.number="montoAbono" type="number" variant="underlined" density="compact" hide-details prefix="$"></v-text-field>
                         </v-col>
                     </v-row>
                     
                     <v-row no-gutters class="py-2 px-4 align-center">
-                        <v-col cols="4" class="font-weight-medium text-subtitle-2 text-grey-darken-2">Credito</v-col>
+                        <v-col cols="4" class="font-weight-bold text-subtitle-1 text-warning">Credito</v-col>
                         <v-col cols="8">
                             <v-text-field v-model.number="montoCredito" type="number" variant="underlined" density="compact" hide-details prefix="$"></v-text-field>
                         </v-col>
@@ -160,7 +160,7 @@ const formatCurrency = (amount) => {
                     <v-divider class="my-2"></v-divider>
 
                     <v-row no-gutters class="py-2 px-4 align-center">
-                        <v-col cols="4" class="font-weight-medium text-subtitle-2 text-grey-darken-2">Saldo Final</v-col>
+                        <v-col cols="4" class="font-weight-bold text-subtitle-1 grey-darken-1">Saldo Final</v-col>
                         <v-col cols="8" class="text-h6 font-weight-bold text-right text-warning">
                             $ {{ formatCurrency(saldoFinalCalculado) }}
                         </v-col>
@@ -168,7 +168,7 @@ const formatCurrency = (amount) => {
                     <v-divider class="my-2"></v-divider>
 
                     <v-row no-gutters class="pt-4 pb-2 px-4 align-center">
-                    <v-col cols="4" class="font-weight-medium text-subtitle-2 text-grey-darken-2">
+                    <v-col cols="4" class="font-weight-bold text-subtitle-1 grey-darken-1">
                         Ubicacion
                     </v-col>
                     <v-col cols="8" class="text-subtitle-1 text-h7 font-weight-light text-right">
@@ -178,7 +178,7 @@ const formatCurrency = (amount) => {
                     <v-divider class="mb-4"></v-divider>
 
                     <v-row no-gutters class="py-2 px-4 align-center">
-                    <v-col cols="4" class="font-weight-medium text-subtitle-2 text-grey-darken-2">
+                    <v-col cols="4" class="font-weight-bold text-subtitle-1 grey-darken-1">
                         Comentario
                     </v-col>
                     <v-col cols="8" class="text-subtitle-1 text-h7 font-weight-light text-right">
@@ -188,7 +188,7 @@ const formatCurrency = (amount) => {
                     <v-divider class="mb-4"></v-divider>
 
                     <v-row no-gutters class="py-2 px-4 align-center">
-                        <v-col cols="4" class="font-weight-medium text-subtitle-2 text-grey-darken-2">Estado</v-col>
+                        <v-col cols="4" class="font-weight-bold text-subtitle-1 grey-darken-1">Estado</v-col>
                         <v-col cols="8" class="d-flex justify-end">
                             <v-chip 
                             :color="getStatusColor(clientStore.selectedClient.estado_cliente)" 
