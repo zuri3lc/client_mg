@@ -125,15 +125,14 @@ const formatCurrency = (amount) => {
         <v-icon>mdi-pencil</v-icon>
         </v-btn>
         </v-app-bar>
-        <v-main class="pt-0">
+        <v-main>
             <v-container v-if="clientStore.selectedClient">
-                <div class="d-flex flex-column align-center my-4 pt-0 pb-0">
+                <div class="d-flex flex-column align-center my-0 pt-0 pb-0">
                     <div class="text-h5 font-weight-bold">{{ clientStore.selectedClient.nombre }}</div>
                     <div class="text-caption">ID: {{ clientStore.selectedClient.id }}</div>
                 </div>
 
-                <v-card color="background" class="mb-2" elevation="0">
-                    <v-list-item title="Detalles y Saldos"></v-list-item>
+                <v-card color="background" class="mb-0" elevation="0">
 
                     <v-row no-gutters class="py-2 px-4 align-center">
                         <v-col cols="4" class="font-weight-bold text-subtitle-1 grey-darken-1">Saldo Actual</v-col>
