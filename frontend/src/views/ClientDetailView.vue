@@ -165,6 +165,15 @@ const formatCurrency = (amount) => {
                     </v-row>
                     <v-divider class="my-2"></v-divider>
 
+                    <v-card-actions class="pa-4">
+                        <v-spacer></v-spacer>
+                        <v-btn color="primary" variant="flat" @click="handleSaveChanges" :loading="loadingSave" :disabled="!montoAbono && !montoCredito">
+                            Guardar Movimiento
+                        </v-btn>
+                    </v-card-actions>
+                    
+                    <v-divider class="my-2"></v-divider>
+
                     <v-row no-gutters class="pt-4 pb-2 px-4 align-center">
                     <v-col cols="4" class="font-weight-bold text-subtitle-1 grey-darken-1">
                         Ubicacion
@@ -194,14 +203,7 @@ const formatCurrency = (amount) => {
                             </v-chip>
                         </v-col>
                     </v-row>
-                    <v-divider class="my-2"></v-divider>
 
-                    <v-card-actions class="pa-4">
-                        <v-spacer></v-spacer>
-                        <v-btn color="primary" variant="flat" @click="handleSaveChanges" :loading="loadingSave" :disabled="!montoAbono && !montoCredito">
-                            Guardar Movimiento
-                        </v-btn>
-                    </v-card-actions>
 
                 </v-card>
                 <v-card color="background" elevation="0">
