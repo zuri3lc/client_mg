@@ -54,8 +54,8 @@ This project provides a comprehensive solution for managing client data, includi
 1.  Clone the repository:
 
     ```bash
-    git clone <repository_url>
-    cd <repository_directory>
+    git clone https://github.com/zuri3lc/client_mg
+    cd client_mg
     ```
 
 2.  Create a `.env` file in the root directory with the following variables:
