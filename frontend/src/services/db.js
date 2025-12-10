@@ -4,9 +4,9 @@ import Dexie from "dexie";
 export const db = new Dexie("ClientManagementDB");
 
 //Esquema de la DB
-db.version(1).stores({
+db.version(2).stores({
     /**TABLA CLIENTES */
-    clients: 'id, [nombre+usuario_sistema_id], usuario_sistema_id, telefono, needsSync',
+    clients: 'id, nombre, usuario_sistema_id, telefono, needsSync',
     /**TABLA MOVIMIENTOS */
     movimientos: 'id, cliente_id, usuario_sistema_id, fecha_movimiento, needsSync',
 });

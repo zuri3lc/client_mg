@@ -48,11 +48,27 @@ def on_startup():
     logging.info("--> ¡Verificación de tablas completa! El servidor está listo.")
 
 # 1. Creamos una clase de filtro personalizada.
-class No404Filter(logging.Filter):
-    def filter(self, record: logging.LogRecord) -> bool:
-        return 'GET' in record.getMessage() and 'HTTP/1.1" 404' not in record.getMessage()
+# class No404Filter(logging.Filter):
+#     def filter(self, record: logging.LogRecord) -> bool:
+#         return 'GET' in record.getMessage() and 'HTTP/1.1" 404' not in record.getMessage()
 
-logging.getLogger("uvicorn.access").addFilter(No404Filter())
+# logging.getLogger("uvicorn.access").addFilter(No404Filter())
+# class AccessLogFilter(logging.Filter):
+#     def filter(self, record: logging.LogRecord) -> bool:
+#         message = record.getMessage()
+#         # Filtrar 404s
+#         if 'HTTP/1.1" 404' in message:
+#             return False
+#         if 'GET /clients' in message:
+#             return False
+#         if 'GET /movs/all' in message:
+#             return False
+        
+#         return True
+
+# logging.getLogger("uvicorn.access").addFilter(AccessLogFilter())
+
+logging.getLogger("uvicorn.error").setLevel(logging.WARNING)
 
 #"Conectamos" el router de auth a la app principal
 app.include_router(auth_router)

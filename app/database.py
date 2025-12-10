@@ -42,7 +42,7 @@ def db_conection():
     """ESTABLECE Y DEVUELVE UNA NUEVA CONEXIÓN A LA DB"""
     try:
         conn = psycopg.connect(conn_string) #nos conectamos a la DB
-        logger.info("Conexion a la DB establecida con exito")
+        logger.debug("Conexion a la DB establecida con exito")
         return conn
     except psycopg.Error as e: # 'atrapamos' los errores y los guardamos en una variable llamada e
         logger.critical(f"ERROR AL CONECTAR A LA DB: {e}")
@@ -119,7 +119,7 @@ def crear_tablas():
         return False
     finally:
         if conn: conn.close()
-        logger.info("/// CONEXION A LA BASE DE DATOS CERRADA ///")
+        logger.debug("/// CONEXION A LA BASE DE DATOS CERRADA ///")
 
 #========================= FUNCIONES PARA USUARIOS ====================
 
@@ -440,7 +440,7 @@ def list_client_db(cliente_id, usuario_sistema_id):
                             id = %s AND usuario_sistema_id = %s;""",
                         (cliente_id, usuario_sistema_id))
             
-            logger.info(f"\nCliente ID {cliente_id} listado con exito")
+            logger.debug(f"\nCliente ID {cliente_id} listado con exito")
             return cur.fetchone()
     except (Exception, psycopg.Error) as e:
         logger.error(f"ERROR al listar el cliente con ID {cliente_id} (general ERROR): {e}")
@@ -466,7 +466,7 @@ def client_update_db(cliente_id, usuario_sistema_id, **kwargs):
             cur.execute(update_sql, tuple(values)) #type: ignore
             if cur.rowcount > 0:
                 conn.commit() #guardamos
-                logger.info(f"Cliente con id {cliente_id}")
+                logger.info(f"Cliente con id {cliente_id} actualizado con exito")
                 return True
             return False
     except UniqueViolation as e:
@@ -610,7 +610,7 @@ def historial_movimientos_db(cliente_id, usuario_sistema_id, limite=10):
         return None
     finally:
         if conn: conn.close()
-        logger.info("/// CONEXION A LA BASE DE DATOS CERRADA ///")
+        logger.debug("/// CONEXION A LA BASE DE DATOS CERRADA ///")
 
 # FUNCION PARA REGISTRAR UN MOVIMIENTO USANDO UN CURSOS EXISTENTE
 def registrar_movimiento_interno(cursor, cliente_id, tipo, monto, saldo_anterior, saldo_final, user_id, fecha_movimiento=None):
