@@ -113,26 +113,34 @@ const formatCurrency = (amount) => {
 </script>
 
 <template>
-    <v-layout>
-        <v-app-bar density="compact" color="background" elevation="0">
-        <!-- <v-btn icon @click="router.back()"><v-icon>mdi-arrow-left</v-icon></v-btn> -->
-        <v-spacer></v-spacer>
-        <v-btn
-        v-if="clientStore.selectedClient"
-        icon 
-        :to="{ name: 'edit-client', params: { id: clientStore.selectedClient.id } }"
-        >
-        <v-icon>mdi-pencil</v-icon>
-        </v-btn>
+    <div class="h-100 bg-background"> <!-- Contenedor simple -->
+        <v-app-bar  density="compact" color="background" elevation="0" flat>
+            <v-btn icon size="large" @click="router.back()">
+                <v-icon size="large">mdi-arrow-left</v-icon>
+            </v-btn>
+            <v-spacer></v-spacer>
+            <v-btn
+                v-if="clientStore.selectedClient"
+                icon 
+                :to="{ name: 'edit-client', params: { id: clientStore.selectedClient.id } }"
+            >
+                <v-icon size="small">mdi-pencil</v-icon>
+            </v-btn>
         </v-app-bar>
-        <v-main>
-            <v-container v-if="clientStore.selectedClient">
-                <div class="d-flex flex-column align-center my-0 pt-0 pb-0">
-                    <div class="text-h5 font-weight-bold">{{ clientStore.selectedClient.nombre }}</div>
-                    <div class="text-caption">ID: {{ clientStore.selectedClient.id }}</div>
-                </div>
 
-                <v-card color="background" class="mb-0" elevation="0">
+        <v-container v-if="clientStore.selectedClient" class="pt-2">
+            <!-- Título original eliminado de aquí -->
+            
+            <div class="d-flex flex-column flex-grow-1 ml-2 overflow-hidden align-center">
+                <div class="text-h6 font-weight-bold text-truncate">
+                    {{ clientStore.selectedClient?.nombre }}
+                </div>
+                <div class="text-caption text-disabled" style="line-height: 1; margin-top: -2px;">
+                    ID: {{ clientStore.selectedClient?.id }}
+                </div>
+            </div>
+
+                <v-card color="background" class="mb-0 pt-7" elevation="0">
 
                     <v-row no-gutters class="py-2 px-4 align-center">
                         <v-col cols="4" class="font-weight-bold text-subtitle-1 grey-darken-1">Saldo Actual</v-col>
@@ -245,9 +253,10 @@ const formatCurrency = (amount) => {
                 </v-row>
                 <v-divider class="my-2"></v-divider>
 
-            </v-container>
-            <div v-else class="text-center mt-16">
-                </div>
-        </v-main>
-    </v-layout>
+        </v-container>
+        <div v-else class="text-center mt-16">
+            <!-- Loading o Empty state -->
+            <v-progress-circular indeterminate color="primary"></v-progress-circular>
+        </div>
+    </div>
 </template>

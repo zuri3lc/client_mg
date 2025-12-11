@@ -5,11 +5,15 @@ import { useRouter, useRoute } from 'vue-router';
 import { useAuthStore } from '@/stores/auth';
 import { syncData, downloadDataFromServer } from '@/services/sync';
 import { useUIStore } from '@/stores/ui';
+import { useClientStore } from '@/stores/client';
+import { storeToRefs } from 'pinia';
 
 const uiStore = useUIStore();
 const router = useRouter();
 const route = useRoute();
 const authStore = useAuthStore();
+const clientStore = useClientStore();
+const { searchQuery } = storeToRefs(clientStore);
 const selectedTab = ref(route.name);
 
 const isOnline = ref(navigator.onLine);
@@ -69,9 +73,9 @@ const handleDownload = async () => {
 </script>
 
 <template>
-    <v-layout>
-    <v-app-bar density="compact" color="background" elevation="0">
+    <v-app-bar density="compact" color="background" elevation="0" >
         <v-btn
+        v-if="!onHomePage"
         :to="{name: 'home'}"
         variant="plain"
         rounded="lg"
@@ -79,17 +83,32 @@ const handleDownload = async () => {
         >
             Client Manager
         </v-btn>
-        <v-spacer></v-spacer>
+        
+        <v-text-field
+            v-else
+            v-model="searchQuery"
+            placeholder="Buscar..."
+            prepend-inner-icon="mdi-magnify"
+            variant="solo"
+            density="compact"
+            hide-details
+            rounded="xl"
+            class="ml-2 flex-grow-1"
+            bg-color="surface-light"
+            flat
+            clearable
+        ></v-text-field>
+        <v-spacer v-if="!onHomePage"></v-spacer>
 <!--  -->
         <v-btn v-if="onHomePage" icon @click="handleDownload" :disabled="!isOnline">
             <v-icon size="small">mdi-cloud-download-outline</v-icon>
             <v-tooltip activator="parent" location="bottom">{{ isOnline ? 'Descargar Datos' : 'Necesitas conexión' }}</v-tooltip>
         </v-btn>
         
-        <v-btn v-if="onHomePage" icon @click="handleSync" :disabled="!isOnline">
+        <!-- <v-btn v-if="onHomePage" icon @click="handleSync" :disabled="!isOnline">
             <v-icon size="small">mdi-sync</v-icon>
             <v-tooltip activator="parent" location="bottom">{{ isOnline ? 'Sincronizar' : 'Necesitas conexión' }}</v-tooltip>
-        </v-btn>
+        </v-btn> -->
 
         <v-btn icon @click="handleLogout">
         <v-icon size="small">mdi-logout</v-icon>
@@ -98,10 +117,14 @@ const handleDownload = async () => {
     </v-app-bar>
 
     <v-main>
+        <div class="fill-height d-flex flex-column" style="overflow-y: auto;">
         <router-view />
+        </div>
     </v-main>
 
     <v-bottom-navigation 
+        app
+        grow
         bgColor= "background"
         class="justify-center"
         mode="shift"
@@ -127,7 +150,6 @@ const handleDownload = async () => {
             <span>Nuevo</span>
         </v-btn>
     </v-bottom-navigation>
-    </v-layout>
 </template>
 
 <style>
@@ -139,4 +161,9 @@ const handleDownload = async () => {
     color: inherit;
     padding-left: 16px !important;
 }
+.v-bottom-navigation {
+    padding-bottom: env(safe-area-inset-bottom);
+    height: calc(80px + env(safe-area-inset-bottom)) !important;
+}
+
 </style>

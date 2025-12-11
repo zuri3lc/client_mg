@@ -5,11 +5,11 @@ const config: CapacitorConfig = {
   appName: 'Client Manager',
   webDir: 'dist',
 
-  server: { 
-    //URL de VITE
-    url: 'http://192.168.1.113:5173',
-    cleartext: true, //Permite conexiones no seguras
-  },
+  // server: { 
+  //   //URL de VITE
+  //   url: 'http://192.168.1.113:5173',
+  //   cleartext: true, //Permite conexiones no seguras
+  // },
 
   android: {
     buildOptions: {
@@ -30,7 +30,7 @@ const config: CapacitorConfig = {
     Keyboard: {
       resize: 'body' as any,
       style: 'dark' as any,
-      resizeOnFullscreen: true,
+      resizeOnFullScreen: true,
     },
     StatusBar: {
       style: 'DARK' as any,

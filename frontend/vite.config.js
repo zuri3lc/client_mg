@@ -87,9 +87,17 @@ export default defineConfig({
       }
     })
   ],
+  // server: {
+  //   host: '0.0.0.0',
+  //   port: 5173,
+  // },
   server: {
     host: '0.0.0.0',
     port: 5173,
+    hmr: {
+        host: '192.168.1.113', // Forzar IP del Server
+        // port: 5173, // Opcional, por defecto es el mismo
+    }
   },
   resolve: {
     alias: {
