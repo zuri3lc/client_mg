@@ -2,11 +2,19 @@ import { useAuthStore } from "@/stores/auth";
 import axios from "axios";
 
 //Creando una instancia de axios con la configuracion base
+// const apiClient = axios.create({
+//     baseURL: 'https://api.techz.bid',
+//     headers: {
+//         'Content-Type': 'application/json',    
+//     }
+// });
+
+const API_BASE_URL =  import.meta.env.VITE_API_URL || 'https://api.techz.bid'
+
 const apiClient = axios.create({
-    baseURL: 'https://api.techz.bid',
+    baseURL: API_BASE_URL,
     headers: {
-        'Content-Type': 'application/json',
-    
+        'Content-Type': 'application/json',    
     }
 });
 

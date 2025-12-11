@@ -3,6 +3,7 @@ import logging
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware # 1. middleware de CORS
+import re
 
 logging.basicConfig(
     level=logging.INFO, 
@@ -24,21 +25,46 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# 2. Definimos las conexiones
-origins = [
-    # "http://localhost:5173",
-    # "http://127.0.0.1:5173",
-    # "http://192.168.1.87:5173",
-    "https://manage.techz.bid" 
-]
+# # 2. Definimos las conexiones
+# origins = [
+#     "http://localhost:5173",
+#     "http://127.0.0.1:5173",
+#     "http://192.168.1.113:5173",
+#     "http://192.168.1.98:5173",
+#     "https://manage.techz.bid" 
+# ]
 
+# # 3. Añadimos el middleware
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=origins,
+#     allow_credentials=True,
+#     allow_methods=["*"], # Permite todos los métodos (GET, POST, etc.)
+#     allow_headers=["*"], # Permite todas las cabeceras
+# )
+
+origins = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "https://manage.techz.bid",
+]
+# 🆕 Función para validar orígenes dinámicamente
+def is_allowed_origin(origin: str) -> bool:
+    # Permitir localhost y 127.0.0.1
+    if origin in origins:
+        return True
+    # Permitir cualquier IP 192.168.x.x en puerto 5173
+    if re.match(r'http://192\.168\.\d+\.\d+:5173', origin):
+        return True
+    return False
 # 3. Añadimos el middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origin_regex=r'http://(localhost|127\.0\.0\.1|192\.168\.\d+\.\d+):5173',  # 🆕 Regex para IPs locales
+    allow_origins=["https://manage.techz.bid"],  # Producción
     allow_credentials=True,
-    allow_methods=["*"], # Permite todos los métodos (GET, POST, etc.)
-    allow_headers=["*"], # Permite todas las cabeceras
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 @app.on_event("startup")
