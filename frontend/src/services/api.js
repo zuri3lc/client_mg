@@ -1,3 +1,4 @@
+import router from '@/router'; // Importar router
 import { useAuthStore } from "@/stores/auth";
 import axios from "axios";
 
@@ -70,7 +71,8 @@ apiClient.interceptors.response.use(
         const authStore = useAuthStore();
         console.log('Token no válido o expirado. Se cerrará la sesión.');
         await authStore.logout();
-        window.location.href = '/login';
+        // Redirección suave
+        router.push('/login');
         }
     } else {
         console.error('Error de red detectado:', error.message);

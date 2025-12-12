@@ -35,6 +35,28 @@ export const useUIStore = defineStore("ui", () => {
         showLogoutConfirm.value = false
         logoutConfirmResolve = null
     }
+
+    // --- NOTIFICACIONES ---
+    const snackbar = ref({
+        show: false,
+        message: '',
+        color: 'inverse-surface', // Color por defecto (negro suave en temas claros)
+        timeout: 3000
+    })
+
+    const showSnackbar = (message, type = 'info') => {
+        snackbar.value.message = message
+        snackbar.value.show = true
+        
+        // Asignar colores según el tipo
+        switch(type) {
+            case 'success': snackbar.value.color = 'success'; break;
+            case 'error': snackbar.value.color = 'error'; break;
+            case 'warning': snackbar.value.color = 'warning'; break;
+            default: snackbar.value.color = 'inverse-surface'; 
+        }
+    }
+
     return {
         isLoading,
         loadingMessage,
@@ -42,6 +64,8 @@ export const useUIStore = defineStore("ui", () => {
         startLoading,
         stopLoading,
         confirmLogout,
-        resolveLogoutConfirm
+        resolveLogoutConfirm,
+        snackbar,
+        showSnackbar
     }
 })

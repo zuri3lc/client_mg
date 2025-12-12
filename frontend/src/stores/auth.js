@@ -3,6 +3,7 @@ import { ref } from "vue";
 import api from "@/services/api";
 import { db } from "@/services/db";
 import { useUIStore } from "./ui";
+import router from '@/router'; // Importamos la instancia del router
 
 // defineStore crea el almacen
 export const useAuthStore = defineStore("auth", () => {
@@ -109,10 +110,16 @@ export const useAuthStore = defineStore("auth", () => {
                 localStorage.removeItem('accessToken');
                 localStorage.removeItem('user');
                 
-                window.location.href = '/login';
+                router.push({ name: 'login' });
             }
         } catch (error) {
             console.error("Error durante el proceso de logout:", error);
+            // En caso de error, también limpiamos la sesión y redirigimos
+            accessToken.value = null;
+            user.value = null;
+            localStorage.removeItem('accessToken');
+            localStorage.removeItem('user');
+            router.push({ name: 'login' });
         }
     };
 

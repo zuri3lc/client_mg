@@ -100,10 +100,10 @@ const handleDownload = async () => {
         ></v-text-field>
         <v-spacer v-if="!onHomePage"></v-spacer>
 <!--  -->
-        <v-btn v-if="onHomePage" icon @click="handleDownload" :disabled="!isOnline">
+        <!-- <v-btn v-if="onHomePage" icon @click="handleDownload" :disabled="!isOnline">
             <v-icon size="small">mdi-cloud-download-outline</v-icon>
             <v-tooltip activator="parent" location="bottom">{{ isOnline ? 'Descargar Datos' : 'Necesitas conexión' }}</v-tooltip>
-        </v-btn>
+        </v-btn> -->
         
         <!-- <v-btn v-if="onHomePage" icon @click="handleSync" :disabled="!isOnline">
             <v-icon size="small">mdi-sync</v-icon>
