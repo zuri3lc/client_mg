@@ -11,8 +11,12 @@ import EditClientView from "@/views/EditClientView.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
 
-  scrollBehavior(to, from, savedPosition) {
-    return { el: 'main', top: 0 };
+scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    } else {
+      return { top: 0 };
+    }
   },
 
   routes: [

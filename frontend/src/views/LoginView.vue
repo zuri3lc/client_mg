@@ -5,6 +5,9 @@ import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/auth';
 import { syncData } from '@/services/sync';
 import { useUIStore } from '@/stores/ui';
+import biometricService from '@/services/biometric'; // Importar servicio biométrico
+import { onMounted } from 'vue';
+
 
 const uiStore = useUIStore();
 const router = useRouter(); // instancia del router a redirigir
@@ -16,6 +19,8 @@ const password = ref('');
 const loading = ref(false); //muestra un estado de carga en el boton 
 const errorMessage = ref(null);
 const syncMessage = ref(null);
+const showBiometricBtn = ref(false); // Controlar visibilidad del botón de huella
+
 
 // 2. Funcion que se ejecuta al hacer clic al boton
 const handleLogin = async() => {
@@ -34,6 +39,9 @@ const handleLogin = async() => {
         syncMessage.value = 'Sincronizando clientes y movimientos: Remoto => Local...';
 
         await syncData();
+
+        // Guardar credenciales para acceso biométrico futuro
+        await biometricService.saveCredentials(username.value, password.value);
 
         //redireccion
         router.push({name: 'home'});
@@ -56,6 +64,31 @@ const handleSync = () => {
     console.log('Forzando sincronización manual...');
     syncData();
 };
+
+const handleBiometricLogin = async () => {
+    try {
+        const credentials = await biometricService.getCredentials();
+        if (credentials) {
+            username.value = credentials.username;
+            password.value = credentials.password;
+            // Login Automático
+            handleLogin();
+        }
+    } catch (error) {
+        console.log('Cancelado o error biométrico');
+    }
+};
+
+onMounted(async () => {
+    // Verificamos si podemos usar huella
+    const available = await biometricService.checkBiometry();
+    if (available) {
+        showBiometricBtn.value = true;
+        // Opcional: Intentar login inmediato al abrir
+        // handleBiometricLogin(); 
+    }
+});
+
 </script>
 
 <template>
@@ -116,6 +149,18 @@ const handleSync = () => {
                     >
                         REGISTRO NUEVO
                     </v-btn>
+
+                    <!-- Botón Biométrico -->
+                    <v-btn
+                        v-if="showBiometricBtn"
+                        icon="mdi-fingerprint"
+                        variant="text"
+                        size="x-large"
+                        color="primary"
+                        class="mt-8"
+                        @click="handleBiometricLogin"
+                    ></v-btn>
+
                 </div>
                 
             </div>
@@ -133,6 +178,5 @@ const handleSync = () => {
     align-items: center;
     justify-content: center;
     height: 100vh;
-    /* mas estilos */
 }
 </style>

@@ -226,24 +226,24 @@ export const syncData = async () => {
     }
 };
 
-export const initSyncService = () => {
-    // Listener del evento 'online' como primer intento
-    window.addEventListener('online', () => {
-        console.log('Evento "online" detectado. Intentando sincronizar...');
-        syncData();
-    });
-    window.addEventListener('offline', () => {
-        console.log('Modo offline detectado.');
-    });
+// export const initSyncService = () => {
+//     // Listener del evento 'online' como primer intento
+//     window.addEventListener('online', () => {
+//         console.log('Evento "online" detectado. Intentando sincronizar...');
+//         syncData();
+//     });
+//     window.addEventListener('offline', () => {
+//         console.log('Modo offline detectado.');
+//     });
 
-    const startPeriodicSync = () => {
-        if (syncIntervalId) return;
-        console.log('Iniciando verificación periódica de sincronización (cada 30 segundos)...');
-        syncIntervalId = setInterval(syncData, 30000); 
-    };
+//     const startPeriodicSync = () => {
+//         if (syncIntervalId) return;
+//         console.log('Iniciando verificación periódica de sincronización (cada 30 segundos)...');
+//         syncIntervalId = setInterval(syncData, 30000); 
+//     };
     
-    startPeriodicSync();
-    syncData();
-    console.log('Servicio de Sincronización Inicializado.');
-};
+//     startPeriodicSync();
+//     syncData();
+//     console.log('Servicio de Sincronización Inicializado.');
+// };
 

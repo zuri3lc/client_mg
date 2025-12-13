@@ -1,12 +1,21 @@
+import router from '@/router'; // Importar router
 import { useAuthStore } from "@/stores/auth";
 import axios from "axios";
 
 //Creando una instancia de axios con la configuracion base
+// const apiClient = axios.create({
+//     baseURL: 'https://api.techz.bid',
+//     headers: {
+//         'Content-Type': 'application/json',    
+//     }
+// });
+
+const API_BASE_URL =  import.meta.env.VITE_API_URL || 'https://api.techz.bid'
+
 const apiClient = axios.create({
-    baseURL: 'https://api.techz.bid',
+    baseURL: API_BASE_URL,
     headers: {
-        'Content-Type': 'application/json',
-    
+        'Content-Type': 'application/json',    
     }
 });
 
@@ -62,7 +71,8 @@ apiClient.interceptors.response.use(
         const authStore = useAuthStore();
         console.log('Token no válido o expirado. Se cerrará la sesión.');
         await authStore.logout();
-        window.location.href = '/login';
+        // Redirección suave
+        router.push('/login');
         }
     } else {
         console.error('Error de red detectado:', error.message);

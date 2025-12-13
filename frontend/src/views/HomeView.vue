@@ -61,21 +61,7 @@ const getStatusColor = (status) => {
 </script>
 
 <template>
-    <v-container>
-        <v-text-field
-        v-model="searchQuery"
-        label="Buscar clientes..."
-        prepend-inner-icon="mdi-magnify"
-        variant="solo"
-        rounded="pill"
-        density="compact"
-        hide-details
-        single-line
-        class="mb-4"
-        clearable
-        clear-icon="mdi-close-circle"
-        >
-        </v-text-field>
+    <v-container class="pt-2">
 
         <div v-if="clientStore.clients.length === 0" class="text-center mt-16 ">
             <p>No hay clientes para mostrar.</p>

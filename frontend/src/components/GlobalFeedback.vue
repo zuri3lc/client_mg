@@ -32,4 +32,24 @@ const uiStore = useUIStore()
         </v-card-actions>
     </v-card>
     </v-dialog>
+
+    <!-- Notificaciones Globales (Snackbar) -->
+    <v-snackbar
+        v-model="uiStore.snackbar.show"
+        :color="uiStore.snackbar.color"
+        :timeout="uiStore.snackbar.timeout"
+        location="bottom"
+        elevation="2"
+    >
+        {{ uiStore.snackbar.message }}
+
+        <template v-slot:actions>
+            <v-btn
+                variant="text"
+                icon="mdi-close"
+                @click="uiStore.snackbar.show = false"
+            ></v-btn>
+        </template>
+    </v-snackbar>
+    
 </template>
