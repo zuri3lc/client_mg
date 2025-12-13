@@ -65,15 +65,11 @@ export default defineConfig({
       }
     })
   ],
-  // server: {
-  //   host: '0.0.0.0',
-  //   port: 5173,
-  // },
   server: {
     host: '0.0.0.0',
     port: 5173,
     // hmr: {
-    //     host: '192.168.1.113', // Forzar IP del Server para hot-reload
+    //     host: '192.168.0.192', // Forzar IP del Server para hot-reload
     //     // port: 5173,
     // }
   },

@@ -1,14 +1,15 @@
-// src/services/sync.js
 import { db } from './db';
 import api from './api';
 import { useClientStore } from '@/stores/client';
 import { useMovimientoStore } from '@/stores/movimiento';
+import { Network } from '@capacitor/network'; // Importar Network
 
 let isSyncing = false;
 let syncIntervalId = null;
 
 //--- Descarga de datos desde el servidor ---
 export const downloadDataFromServer = async () => {
+    // ... (sin cambios en downloadDataFromServer)
     const clientStore = useClientStore();
     const movimientoStore = useMovimientoStore();
 
@@ -36,25 +37,44 @@ export const downloadDataFromServer = async () => {
         console.log('✅ Datos descargados con éxito desde el servidor.');
     }catch(error){
         console.error('Error al descargar datos desde el servidor:', error);
+        throw error; // Re-lanzar error para manejo superior
     }
 };
 
 //--- Sincronizacion completa ---
-export const syncData = async () => {
+// Agregamos parametro force para evitar chequeos redundantes si ya sabemos que hay red (ej. login)
+export const syncData = async (force = false) => {
     const clientStore = useClientStore();
     const movimientoStore = useMovimientoStore();
 
-    if (isSyncing || !navigator.onLine) {
-        if (!navigator.onLine) console.log('Offline, se omite el intento de sincronización.');
+    if (isSyncing) {
+        console.log('⚠️ Sincronización en curso, se omite nueva solicitud.');
+        return;
+    }
+
+    // Verificación de red más robusta con Capacitor
+    const networkStatus = await Network.getStatus();
+    const isOnline = force ? true : (networkStatus.connected && navigator.onLine);
+
+    if (!isOnline) {
+        console.log('📴 Offline detectado (Network plugin o navigator), se omite sincronización.');
         return;
     }
 
     try {
-        await api.pingServer();
-        console.log('✅ Conexión con el servidor confirmada.');
+        if (!force) {
+            await api.pingServer();
+            console.log('✅ Conexión con el servidor confirmada.');
+        } else {
+            console.log('⏩ Modo forzado: Saltando ping de verificación.');
+        }
     } catch (error) {
         console.log('⚠️ No se pudo conectar con el servidor. Se aborta la sincronización.');
-        return;
+        // Si es forzado (login), tal vez deberíamos intentar igual o lanzar error, 
+        // pero por seguridad abortamos si el ping falla salvo que queramos arriesgarnos.
+        // En este caso, si falla el ping, es mejor abortar para no bloquear la UI con timeouts largos
+        if (!force) return;
+        console.warn('⚠️ Ping falló pero se fuerza la sincronización...');
     }
 
     isSyncing = true;
@@ -220,6 +240,7 @@ export const syncData = async () => {
         await downloadDataFromServer();
     } catch (error) {
         console.error('Error durante el ciclo de sincronización:', error);
+        throw error; // Re-lanzar para que autoSync maneje el estado de error
     } finally {
         isSyncing = false;
         console.log('✅ Proceso de sincronización terminado.');

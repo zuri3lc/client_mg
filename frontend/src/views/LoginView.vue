@@ -6,7 +6,8 @@ import { useAuthStore } from '@/stores/auth';
 import { syncData } from '@/services/sync';
 import { useUIStore } from '@/stores/ui';
 import biometricService from '@/services/biometric'; // Importar servicio biométrico
-import { onMounted } from 'vue';
+import { onMounted, onUnmounted } from 'vue';
+import { Keyboard } from '@capacitor/keyboard';
 
 
 const uiStore = useUIStore();
@@ -20,6 +21,7 @@ const loading = ref(false); //muestra un estado de carga en el boton
 const errorMessage = ref(null);
 const syncMessage = ref(null);
 const showBiometricBtn = ref(false); // Controlar visibilidad del botón de huella
+const keyboardPadding = ref(0); // Padding para el teclado
 
 
 // 2. Funcion que se ejecuta al hacer clic al boton
@@ -38,7 +40,7 @@ const handleLogin = async() => {
         uiStore.loadingMessage = 'Sincronizando clientes y movimientos: Remoto => Local...'
         syncMessage.value = 'Sincronizando clientes y movimientos: Remoto => Local...';
 
-        await syncData();
+        await syncData(true);
 
         // Guardar credenciales para acceso biométrico futuro
         await biometricService.saveCredentials(username.value, password.value);
@@ -87,13 +89,25 @@ onMounted(async () => {
         // Opcional: Intentar login inmediato al abrir
         // handleBiometricLogin(); 
     }
+
+    // Listeners de teclado para ajustar scroll
+    Keyboard.addListener('keyboardWillShow', info => {
+        keyboardPadding.value = info.keyboardHeight;
+    });
+    Keyboard.addListener('keyboardWillHide', () => {
+        keyboardPadding.value = 0;
+    });
+});
+
+onUnmounted(() => {
+    Keyboard.removeAllListeners();
 });
 
 </script>
 
 <template>
     
-    <v-container class="fill-height">
+    <v-container class="fill-height" :style="{ paddingBottom: keyboardPadding + 'px', transition: 'padding 0.3s' }">
         <v-responsive class="d-flex align-center text-center fill-height">
 
             <div class="mx-auto" style="max-width: 380px;">

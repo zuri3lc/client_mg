@@ -125,7 +125,7 @@ export default {
         return apiClient.post(`/clients/${clientId}/movements`, movementData);
     },
     pingServer(){
-        return apiClient.get('/');
+        return apiClient.get('/', { timeout: 5000 }); // 5 segundos maximo de espera
     }
     // Aqui se añaden las demas llamadas
 }

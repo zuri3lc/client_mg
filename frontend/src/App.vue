@@ -70,7 +70,7 @@ onMounted(async () => {
     }
     .v-application {
     padding-top: calc(env(safe-area-inset-top) + 20px); 
-    padding-bottom: env(safe-area-inset-bottom);
+    /* padding-bottom: env(safe-area-inset-bottom); */
     height: 100%; 
     display: flex;
     flex-direction: column;

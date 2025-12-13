@@ -1,13 +1,13 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.techz.clientmanager',
+  appId: 'com.techz.client.manager',
   appName: 'Client Manager',
   webDir: 'dist',
 
   // server: { 
   //   //URL de VITE
-  //   url: 'http://192.168.1.113:5173',
+  //   url: 'http://192.168.0.192:5173',
   //   cleartext: true, //Permite conexiones no seguras
   // },
 
@@ -28,9 +28,9 @@ const config: CapacitorConfig = {
       splashImmersive: true,
     },
     Keyboard: {
-      resize: 'body' as any,
+      resize: 'none' as any,
       style: 'dark' as any,
-      resizeOnFullScreen: true,
+      resizeOnFullScreen: false,
     },
     StatusBar: {
       style: 'DARK' as any,
