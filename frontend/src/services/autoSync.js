@@ -35,8 +35,8 @@ async function checkServerStatus() {
     // Si no hay red física, ni intentamos ping (ahorramos batería y errores feos)
     const netStatus = await Network.getStatus();
     if (!netStatus.connected) {
-         if (connStore) connStore.setOnlineStatus(false);
-         return false;
+        if (connStore) connStore.setOnlineStatus(false);
+        return false;
     }
 
     try {

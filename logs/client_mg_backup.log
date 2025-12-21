@@ -843,3 +843,12 @@ INFO: Creando backup de la base de datos 'db_clients'...
 INFO: Realizando limpieza de backups antiguos...
 INFO: Limpieza completada. Se conservan los 20 backups más recientes.
 --- Proceso de backup finalizado ---
+/bin/sh: 1: /home/zuko/nasdata/client_mg/backup.sh: Permission denied
+/bin/sh: 1: /home/zuko/nasdata/client_mg/backup.sh: Permission denied
+/bin/sh: 1: /home/zuko/nasdata/client_mg/backup.sh: Permission denied
+/bin/sh: 1: /home/zuko/nasdata/client_mg/backup.sh: Permission denied
+/bin/sh: 1: /home/zuko/nasdata/client_mg/backup.sh: Permission denied
+/bin/sh: 1: /home/zuko/nasdata/client_mg/backup.sh: Permission denied
+/bin/sh: 1: /home/zuko/nasdata/client_mg/backup.sh: Permission denied
+/bin/sh: 1: /home/zuko/nasdata/client_mg/backup.sh: Permission denied
+/bin/sh: 1: /home/zuko/nasdata/client_mg/backup.sh: Permission denied

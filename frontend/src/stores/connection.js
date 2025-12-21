@@ -87,7 +87,7 @@ export const useConnectionStore = defineStore('connection', () => {
         // 7. Fallback para 'unknown' pero con internet detectado (Verde o Gris)
         // A veces PC o emuladores dan 'unknown'. Si isOnline es true y el servidor responde, asumimos verde.
         if (connectionType.value === 'unknown' && isOnline.value && serverReachable.value) {
-             return {
+            return {
                 color: '#4CAF50', // Verde (Asumimos cable/ethernet)
                 pulse: isSyncing.value,
                 type: 'unknown_online',
