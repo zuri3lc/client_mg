@@ -7,8 +7,8 @@ android {
         applicationId "com.techz.clientmanager"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode 4
+        versionName "1.4"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
@@ -20,6 +20,14 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    // Personalización automática del nombre del APK (Ej: ClientManager_v1.4.apk o ClientManager_v1.4_debug.apk)
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            def suffix = variant.buildType.name == "debug" ? "_debug" : ""
+            outputFileName = "ClientManager_v${variant.versionName}${suffix}.apk"
         }
     }
 }
