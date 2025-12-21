@@ -47,7 +47,7 @@ async function checkServerStatus() {
         }
         return true;
     } catch (error) {
-        // console.warn('💔 Heartbeat: Servidor no responde'); // Comentar para menos ruido si se desea
+        console.warn('💔 Heartbeat: Servidor no responde'); // Comentar para menos ruido si se desea
         if (connStore) connStore.setServerReachable(false);
         return false;
     }
@@ -79,35 +79,37 @@ function startHeartbeat() {
 async function tryToSync() {
     if (isSyncing) return; 
 
-    const connStore = getConnectionStore();
-    let authStore;
-    try {
-        authStore = useAuthStore();
-    } catch (e) {
-        return; 
-    }
-
-    if (!authStore.accessToken) {
-        return; 
-    }
-    
-    // Primero, verificamos conexión física
-    const status = await Network.getStatus();
-
-    if (!status.connected) {
-        console.log('No hay internet, saltando sync.');
-        // El store se actualiza vía listener, pero forzamos por si acaso
-        if (connStore) connStore.setOnlineStatus(false);
-        return;
-    }
-
-    // Segundo, verificamos si el servidor "realmente" está ahí
-    const serverAlive = await checkServerStatus();
-    
-    if (!serverAlive) return;
+    isSyncing = true; // 🔒 Bloqueamos inmediatamente para evitar condiciones de carrera
 
     try {
-        isSyncing = true;
+        const connStore = getConnectionStore();
+        let authStore;
+        try {
+            authStore = useAuthStore();
+        } catch (e) {
+            return; 
+        }
+
+        if (!authStore.accessToken) {
+            return; 
+        }
+        
+        // Primero, verificamos conexión física
+        const status = await Network.getStatus();
+
+        if (!status.connected) {
+            console.log('No hay internet, saltando sync.');
+            // El store se actualiza vía listener, pero forzamos por si acaso
+            if (connStore) connStore.setOnlineStatus(false);
+            return;
+        }
+
+        // Segundo, verificamos si el servidor "realmente" está ahí
+        const serverAlive = await checkServerStatus();
+        
+        if (!serverAlive) return;
+
+        // Si llegamos aquí, vamos a sincronizar
         if (connStore) connStore.startSync();
         
         console.log('--- AutoSync Iniciado ---');
@@ -120,10 +122,11 @@ async function tryToSync() {
         console.error('Error en AutoSync:', error);
         
         // Determinar gravedad
+        const connStore = getConnectionStore();
         const isCatastrophic = error.response?.status >= 500 || error.code === 'ERR_NETWORK';
         if (connStore) connStore.syncError(error.message, isCatastrophic);
     } finally {
-        isSyncing = false;
+        isSyncing = false; // 🔓 Liberamos el lock siempre, pase lo que pase
     }
 }
 

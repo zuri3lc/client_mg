@@ -52,35 +52,32 @@ export const syncData = async (force = false) => {
         return;
     }
 
-    // Verificación de red más robusta con Capacitor
-    const networkStatus = await Network.getStatus();
-    const isOnline = force ? true : (networkStatus.connected && navigator.onLine);
-
-    if (!isOnline) {
-        console.log('📴 Offline detectado (Network plugin o navigator), se omite sincronización.');
-        return;
-    }
+    isSyncing = true; // 🔒 Lock inmediato
 
     try {
-        if (!force) {
-            await api.pingServer();
-            console.log('✅ Conexión con el servidor confirmada.');
-        } else {
-            console.log('⏩ Modo forzado: Saltando ping de verificación.');
+        // Verificación de red más robusta con Capacitor
+        const networkStatus = await Network.getStatus();
+        const isOnline = force ? true : (networkStatus.connected && navigator.onLine);
+
+        if (!isOnline) {
+            console.log('📴 Offline detectado (Network plugin o navigator), se omite sincronización.');
+            return; // Irá al finally para desbloquear
         }
-    } catch (error) {
-        console.log('⚠️ No se pudo conectar con el servidor. Se aborta la sincronización.');
-        // Si es forzado (login), tal vez deberíamos intentar igual o lanzar error, 
-        // pero por seguridad abortamos si el ping falla salvo que queramos arriesgarnos.
-        // En este caso, si falla el ping, es mejor abortar para no bloquear la UI con timeouts largos
-        if (!force) return;
-        console.warn('⚠️ Ping falló pero se fuerza la sincronización...');
-    }
 
-    isSyncing = true;
-    console.log('🚀 Iniciando proceso de sincronización...');
+        try {
+            if (!force) {
+                await api.pingServer();
+                console.log('✅ Conexión con el servidor confirmada.');
+            } else {
+                console.log('⏩ Modo forzado: Saltando ping de verificación.');
+            }
+        } catch (error) {
+            console.log('⚠️ No se pudo conectar con el servidor. Se aborta la sincronización.');
+            if (!force) return; // Irá al finally
+            console.warn('⚠️ Ping falló pero se fuerza la sincronización...');
+        }
 
-    try {
+        console.log('🚀 Iniciando proceso de sincronización...');
 
         const clientsToCreateCount = await db.clients.where('needsSync').equals(1).count();
         const clientsToUpdateCount = await db.clients.where('needsSync').equals(2).count();
@@ -206,44 +203,17 @@ export const syncData = async (force = false) => {
 
         
         // --- PASO 3: Descargar los datos actualizados del servidor (Sync Down) ---
-            console.log('Sincronización Local->Remoto completada. Actualizando datos desde el servidor...');
-            try {
-                const selectedClientId = clientStore.selectedClient ? clientStore.selectedClient.id : null;
-
-                const [clientsResponse, movementsResponse] = await Promise.all([
-                    api.getClients(),
-                    api.getAllMoves(),
-                ]);
-
-                await db.transaction('rw', db.clients, db.movimientos, async () => {
-                    await db.clients.clear();
-                    await db.clients.bulkPut(clientsResponse.data);
-                    await db.movimientos.clear();
-                    await db.movimientos.bulkPut(movementsResponse.data);
-                });
-                
-                await clientStore.loadClients();
-
-                if (selectedClientId) {
-                    await clientStore.fetchClientById(selectedClientId);
-                    if (clientStore.selectedClient) {
-                        await movimientoStore.loadMovimientosFromDB(selectedClientId);
-                    }
-                }
-                console.log('Datos locales actualizados con la información del servidor.');
-
-            } catch (error) {
-                console.error('Error al refrescar los datos desde el servidor:', error);
-            }
+        console.log('Sincronización Local->Remoto completada. Actualizando datos desde el servidor...');
         
-        console.log('Actualizando datos locales desde el servidor...')
+        // Usamos la lógica centralizada de descarga para evitar duplicidad de código y ejecución
         await downloadDataFromServer();
+
     } catch (error) {
         console.error('Error durante el ciclo de sincronización:', error);
         throw error; // Re-lanzar para que autoSync maneje el estado de error
     } finally {
-        isSyncing = false;
-        console.log('✅ Proceso de sincronización terminado.');
+        isSyncing = false; // 🔓 Unlock siempre
+        console.log('✅ Proceso de sincronización terminado (Lock liberado).');
     }
 };
 
