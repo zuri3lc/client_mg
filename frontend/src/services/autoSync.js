@@ -11,7 +11,7 @@ const REMINDER_ID = 1001;
 
 const INTERVALO_WIFI = 5 * 60 * 1000;      
 const INTERVALO_DATOS = 30 * 60 * 1000;    
-const INTERVALO_HEARTBEAT = 20 * 1000; // 20 segundos para detección rápida
+const INTERVALO_HEARTBEAT = 30 * 1000; // 30 segundos para detección rápida
 
 let intervaloActivo = null; 
 let heartbeatId = null; // ID para el intervalo del latido

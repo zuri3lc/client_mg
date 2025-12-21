@@ -64,6 +64,14 @@ def on_startup():
 
 logging.getLogger("uvicorn.error").setLevel(logging.WARNING)
 
+# Filtro para silenciar los logs del heartbeat (GET /) en la consola de la API
+class EndpointFilter(logging.Filter):
+    def filter(self, record: logging.LogRecord) -> bool:
+        return record.getMessage().find("GET / HTTP") == -1
+
+# Aplicamos el filtro al logger de acceso de Uvicorn
+logging.getLogger("uvicorn.access").addFilter(EndpointFilter())
+
 #"Conectamos" el router de auth a la app principal
 app.include_router(auth_router)
 app.include_router(clients_router)
