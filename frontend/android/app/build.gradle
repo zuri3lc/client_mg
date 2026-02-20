@@ -7,8 +7,8 @@ android {
         applicationId "com.techz.clientmanager"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 4
-        versionName "1.4"
+        versionCode 5
+        versionName "1.4.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
@@ -30,13 +30,15 @@ android {
             outputFileName = "ClientManager_v${variant.versionName}${suffix}.apk"
         }
     }
-}
 
-repositories {
-    flatDir{
-        dirs '../capacitor-cordova-android-plugins/src/main/libs', 'libs'
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 }
+
+// El bloque flatDir se eliminó para evitar advertencias de Gradle 8+ 
+// ya que las carpetas de librerías locales no están presentes o no son necesarias.
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')

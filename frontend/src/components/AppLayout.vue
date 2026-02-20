@@ -123,10 +123,10 @@ const handleDownload = async () => {
             <v-tooltip activator="parent" location="bottom">{{ isOnline ? 'Sincronizar' : 'Necesitas conexión' }}</v-tooltip>
         </v-btn> -->
         
-        <v-btn icon @click="handleLogout">
+        <!-- <v-btn icon @click="handleLogout">
         <v-icon size="small">mdi-logout</v-icon>
         <v-tooltip activator="parent" location="bottom">{{'Cerrar Sesion'}}</v-tooltip>
-        </v-btn>
+        </v-btn> -->
     </v-app-bar>
 
     <v-main>
@@ -163,6 +163,10 @@ const handleDownload = async () => {
         >
             <v-icon size="large">mdi-plus-circle</v-icon>
             <span>Nuevo</span>
+        </v-btn>
+        <v-btn icon @click="handleLogout">
+        <v-icon size="small">mdi-logout</v-icon>
+        <v-tooltip activator="parent" location="bottom">{{'Cerrar Sesion'}}</v-tooltip>
         </v-btn>
     </v-bottom-navigation>
 </template>
