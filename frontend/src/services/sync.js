@@ -1,14 +1,15 @@
-// src/services/sync.js
 import { db } from './db';
 import api from './api';
 import { useClientStore } from '@/stores/client';
 import { useMovimientoStore } from '@/stores/movimiento';
+import { Network } from '@capacitor/network'; // Importar Network
 
 let isSyncing = false;
 let syncIntervalId = null;
 
 //--- Descarga de datos desde el servidor ---
 export const downloadDataFromServer = async () => {
+    // ... (sin cambios en downloadDataFromServer)
     const clientStore = useClientStore();
     const movimientoStore = useMovimientoStore();
 
@@ -36,31 +37,47 @@ export const downloadDataFromServer = async () => {
         console.log('✅ Datos descargados con éxito desde el servidor.');
     }catch(error){
         console.error('Error al descargar datos desde el servidor:', error);
+        throw error; // Re-lanzar error para manejo superior
     }
 };
 
 //--- Sincronizacion completa ---
-export const syncData = async () => {
+// Agregamos parametro force para evitar chequeos redundantes si ya sabemos que hay red (ej. login)
+export const syncData = async (force = false) => {
     const clientStore = useClientStore();
     const movimientoStore = useMovimientoStore();
 
-    if (isSyncing || !navigator.onLine) {
-        if (!navigator.onLine) console.log('Offline, se omite el intento de sincronización.');
+    if (isSyncing) {
+        console.log('⚠️ Sincronización en curso, se omite nueva solicitud.');
         return;
     }
 
-    try {
-        await api.pingServer();
-        console.log('✅ Conexión con el servidor confirmada.');
-    } catch (error) {
-        console.log('⚠️ No se pudo conectar con el servidor. Se aborta la sincronización.');
-        return;
-    }
-
-    isSyncing = true;
-    console.log('🚀 Iniciando proceso de sincronización...');
+    isSyncing = true; // 🔒 Lock inmediato
 
     try {
+        // Verificación de red más robusta con Capacitor
+        const networkStatus = await Network.getStatus();
+        const isOnline = force ? true : (networkStatus.connected && navigator.onLine);
+
+        if (!isOnline) {
+            console.log('📴 Offline detectado (Network plugin o navigator), se omite sincronización.');
+            return; // Irá al finally para desbloquear
+        }
+
+        try {
+            if (!force) {
+                await api.pingServer();
+                console.log('✅ Conexión con el servidor confirmada.');
+            } else {
+                console.log('⏩ Modo forzado: Saltando ping de verificación.');
+            }
+        } catch (error) {
+            console.log('⚠️ No se pudo conectar con el servidor. Se aborta la sincronización.');
+            if (!force) return; // Irá al finally
+            console.warn('⚠️ Ping falló pero se fuerza la sincronización...');
+        }
+
+        console.log('🚀 Iniciando proceso de sincronización...');
 
         const clientsToCreateCount = await db.clients.where('needsSync').equals(1).count();
         const clientsToUpdateCount = await db.clients.where('needsSync').equals(2).count();
@@ -186,64 +203,38 @@ export const syncData = async () => {
 
         
         // --- PASO 3: Descargar los datos actualizados del servidor (Sync Down) ---
-            console.log('Sincronización Local->Remoto completada. Actualizando datos desde el servidor...');
-            try {
-                const selectedClientId = clientStore.selectedClient ? clientStore.selectedClient.id : null;
-
-                const [clientsResponse, movementsResponse] = await Promise.all([
-                    api.getClients(),
-                    api.getAllMoves(),
-                ]);
-
-                await db.transaction('rw', db.clients, db.movimientos, async () => {
-                    await db.clients.clear();
-                    await db.clients.bulkPut(clientsResponse.data);
-                    await db.movimientos.clear();
-                    await db.movimientos.bulkPut(movementsResponse.data);
-                });
-                
-                await clientStore.loadClients();
-
-                if (selectedClientId) {
-                    await clientStore.fetchClientById(selectedClientId);
-                    if (clientStore.selectedClient) {
-                        await movimientoStore.loadMovimientosFromDB(selectedClientId);
-                    }
-                }
-                console.log('Datos locales actualizados con la información del servidor.');
-
-            } catch (error) {
-                console.error('Error al refrescar los datos desde el servidor:', error);
-            }
+        console.log('Sincronización Local->Remoto completada. Actualizando datos desde el servidor...');
         
-        console.log('Actualizando datos locales desde el servidor...')
+        // Usamos la lógica centralizada de descarga para evitar duplicidad de código y ejecución
         await downloadDataFromServer();
+
     } catch (error) {
         console.error('Error durante el ciclo de sincronización:', error);
+        throw error; // Re-lanzar para que autoSync maneje el estado de error
     } finally {
-        isSyncing = false;
-        console.log('✅ Proceso de sincronización terminado.');
+        isSyncing = false; // 🔓 Unlock siempre
+        console.log('✅ Proceso de sincronización terminado (Lock liberado).');
     }
 };
 
-export const initSyncService = () => {
-    // Listener del evento 'online' como primer intento
-    window.addEventListener('online', () => {
-        console.log('Evento "online" detectado. Intentando sincronizar...');
-        syncData();
-    });
-    window.addEventListener('offline', () => {
-        console.log('Modo offline detectado.');
-    });
+// export const initSyncService = () => {
+//     // Listener del evento 'online' como primer intento
+//     window.addEventListener('online', () => {
+//         console.log('Evento "online" detectado. Intentando sincronizar...');
+//         syncData();
+//     });
+//     window.addEventListener('offline', () => {
+//         console.log('Modo offline detectado.');
+//     });
 
-    const startPeriodicSync = () => {
-        if (syncIntervalId) return;
-        console.log('Iniciando verificación periódica de sincronización (cada 30 segundos)...');
-        syncIntervalId = setInterval(syncData, 30000); 
-    };
+//     const startPeriodicSync = () => {
+//         if (syncIntervalId) return;
+//         console.log('Iniciando verificación periódica de sincronización (cada 30 segundos)...');
+//         syncIntervalId = setInterval(syncData, 30000); 
+//     };
     
-    startPeriodicSync();
-    syncData();
-    console.log('Servicio de Sincronización Inicializado.');
-};
+//     startPeriodicSync();
+//     syncData();
+//     console.log('Servicio de Sincronización Inicializado.');
+// };
 

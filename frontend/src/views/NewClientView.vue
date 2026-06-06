@@ -68,13 +68,15 @@ const saldoRules = [
 </script>
 
 <template>
-<v-layout style="max-width: 970px;">
-    <v-app-bar color="background" elevation="0">
-    <v-app-bar-title align="center">Nuevo Cliente</v-app-bar-title>
-    </v-app-bar>
+    <div class="h-100 bg-background">
+        <v-app-bar density="compact" color="background" elevation="0" flat>
+            <v-btn icon @click="router.back()">
+                <v-icon>mdi-arrow-left</v-icon>
+            </v-btn>
+            <v-app-bar-title @click="router.back()" class="ml-n2">Nuevo Cliente</v-app-bar-title>
+        </v-app-bar>
 
-    <v-main>
-    <v-container>
+        <v-container class="pt-12">
         <v-alert
         v-if="errorMessage"
         type="error"
@@ -85,8 +87,6 @@ const saldoRules = [
         {{ errorMessage }}
         </v-alert>
 
-    <v-form @submit.prevent="handleSaveClient">
-        </v-form>
         <v-form @submit.prevent="handleSaveClient">
         <v-text-field
             v-model="nombre"
@@ -152,6 +152,5 @@ const saldoRules = [
         </div>
         </v-form>
     </v-container>
-    </v-main>
-</v-layout>
+    </div>
 </template>

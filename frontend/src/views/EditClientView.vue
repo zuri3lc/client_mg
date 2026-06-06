@@ -68,14 +68,13 @@ const handleUpdateClient = async () => {
 </script>
 
 <template>
-    <v-layout>
-    <v-app-bar class="text-end pr-4" density="compact" color="background" elevation="0">
-        <v-btn icon @click="router.back()"><v-icon>mdi-arrow-left</v-icon></v-btn>
-        <v-app-bar-title>Editar Cliente</v-app-bar-title>
-    </v-app-bar>
+    <div class="h-100 bg-background">
+        <v-app-bar density="compact" color="background" elevation="0" flat>
+            <v-btn icon @click="router.back()"><v-icon>mdi-arrow-left</v-icon></v-btn>
+            <v-app-bar-title @click="router.back()" class="ml-n2">Editar Cliente</v-app-bar-title>
+        </v-app-bar>
 
-    <v-main>
-        <v-container v-if="clientStore.selectedClient">
+        <v-container v-if="clientStore.selectedClient" class="pt-16">
         <v-form @submit.prevent="handleUpdateClient">
             <v-text-field v-model="nombre" label="Nombre completo" variant="underlined" class="mb-4" required></v-text-field>
             <v-text-field v-model="telefono" label="Teléfono" variant="underlined" class="mb-4"></v-text-field>
@@ -107,7 +106,7 @@ const handleUpdateClient = async () => {
             </v-btn>
 
         </v-container>
-    </v-main>
+
 
     <v-dialog v-model="deleteDialog" persistent max-width="400px">
             <v-card color="background" elevation="0">
@@ -131,6 +130,5 @@ const handleUpdateClient = async () => {
                 </v-card-actions>
             </v-card>
         </v-dialog>
-
-    </v-layout>
+    </div>
 </template>
